@@ -3,7 +3,7 @@ package sliding_puzzle.io;
 import sliding_puzzle.core.Cell;
 
 public class Output{
-    
+
     private void printLineHelper(int colCount, int spacing){
         System.out.print("\n ");
         for(int i = 0 ; i < colCount  ; i++){
@@ -49,6 +49,20 @@ public class Output{
             printLineHelper(colCount,spacing);
         }
 
+    }
+
+    public void printWelcomeMessage(){
+        System.out.println("Welcome to the Sliding Puzzle Game!");
+        System.out.println("You can swap adjacent cells to solve the puzzle.");
+    }
+
+    public void printPromptInput(){
+        System.out.println("\nPlease enter the coordinates of the cells you want to swap (row1 col1 row2 col2):");
+        System.out.println("For example, to swap cells at (0, 0) and (0, 1), enter: 0 0 0 1");
+    }
+    public void displayNextScene(Cell[][] board){
+        printBoard(board);
+        printPromptInput();
     }
 
 }

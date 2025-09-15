@@ -53,6 +53,25 @@ public class SlidingPuzzleBoard implements Board{
         }
         return newBoard;
     }
+    public SlidingPuzzleCell getCell(int row, int col) {
+        return board[row][col];
+    }
+
+    public boolean swapCells(SlidingPuzzleCell cell1, SlidingPuzzleCell cell2) {
+        if (!areAdjacent(cell1, cell2)) {
+            return false;
+        }
+        String tempValue = cell1.getValue();
+        cell1.setValue(cell2.getValue());
+        cell2.setValue(tempValue);
+        return true;
+    }
+
+    public boolean areAdjacent(SlidingPuzzleCell cell1, SlidingPuzzleCell cell2){
+        int rowDiff = Math.abs(cell1.getRowIndex() - cell2.getRowIndex());
+        int colDiff = Math.abs(cell1.getColIndex() - cell2.getColIndex());
+        return (rowDiff == 0 || colDiff == 0);
+    }
 
     @Override
     public int getHeight() { return rowCount; }
@@ -61,7 +80,7 @@ public class SlidingPuzzleBoard implements Board{
     public int getWidth() { return colCount; }
 
     @Override
-    public Cell[][] getCells() { 
+    public Cell[][] getBoard() { 
         return board; 
     }
 
