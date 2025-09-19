@@ -68,7 +68,7 @@ public class Input{
             move = scanner.nextInt();
 
             if (move < 1 || move > maxValue) {
-                System.out.printf("❌ Invalid input! Please try again.");
+                System.out.printf("Invalid input! Please try again.");
                 System.out.printf("Values must be between 1 and %d (both inclusive)\n", maxValue);
                 continue;
             } 
