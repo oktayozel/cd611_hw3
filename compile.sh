@@ -1,1 +1,1 @@
-javac sliding_puzzle/app/*.java sliding_puzzle/core/*.java sliding_puzzle/io/*.java sliding_puzzle/sliding_puzzle_components/*.java
+javac -d out sliding_puzzle/app/*.java sliding_puzzle/core/*.java sliding_puzzle/io/*.java sliding_puzzle/components/*.java

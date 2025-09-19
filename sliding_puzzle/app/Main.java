@@ -1,14 +1,20 @@
 package sliding_puzzle.app;
 
-import sliding_puzzle.sliding_puzzle_components.SlidingPuzzleBoard;
+import sliding_puzzle.components.SlidingPuzzleBoard;
 import sliding_puzzle.core.Board;
 import sliding_puzzle.io.Output;
-import sliding_puzzle.sliding_puzzle_components.SlidingPuzzleGameManager;
+import sliding_puzzle.components.SlidingPuzzleGameManager;
 
 public class Main{
     public static void main(String[] args){
         SlidingPuzzleGameManager gameManager = new SlidingPuzzleGameManager();
-        gameManager.initGame();
-        gameManager.runGame();
+        boolean gameFirstOpen = true;
+        while(true){
+            gameManager.initGame(gameFirstOpen);
+            gameFirstOpen = false;
+            if(gameManager.runGame() == false){
+                break;
+            }
+        }
     }
 }

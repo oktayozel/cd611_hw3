@@ -12,7 +12,8 @@ public abstract class GameManager{
         return moveCount;
     }
 
-    public abstract boolean isGameOver();
-
+    public abstract void initGame(boolean gameFirstOpen);
+    public abstract boolean runGame();
+    public abstract boolean isGameEnd();
 
 }

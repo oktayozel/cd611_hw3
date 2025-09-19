@@ -1,4 +1,4 @@
-package sliding_puzzle.sliding_puzzle_components;
+package sliding_puzzle.components;
 
 import sliding_puzzle.core.Cell;
 

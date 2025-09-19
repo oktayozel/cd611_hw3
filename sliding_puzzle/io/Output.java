@@ -33,7 +33,7 @@ public class Output{
         }
     }
 
-    public void printBoard(Cell[][] board){
+    public void printBoard(Cell[][] board, int moveCount){
         int rowCount = board.length;
         int colCount = board[0].length;
         
@@ -48,21 +48,54 @@ public class Output{
             }
             printLineHelper(colCount,spacing);
         }
-
+        System.out.printf("                                    move count = %d",moveCount);
+        System.out.printf("\n\n");
     }
 
     public void printWelcomeMessage(){
+        clearScreen();
         System.out.println("Welcome to the Sliding Puzzle Game!");
-        System.out.println("You can swap adjacent cells to solve the puzzle.");
+        System.out.println("You can swap adjacent cells to solve the puzzle. Press any key to start...");
+        Input.getAnyKey();
     }
 
     public void printPromptInput(){
-        System.out.println("\nPlease enter the coordinates of the cells you want to swap (row1 col1 row2 col2):");
-        System.out.println("For example, to swap cells at (0, 0) and (0, 1), enter: 0 0 0 1");
+        System.out.println("\nWhich cell do you want to move?");
     }
-    public void displayNextScene(Cell[][] board){
-        printBoard(board);
+    public void displayNextScene(Cell[][] board, int moveCount){
+        clearScreen();
+        printBoard(board,moveCount);
         printPromptInput();
+    }
+    public void displayCongratulations(int moveCount){
+        clearScreen();
+        System.out.printf("!!!!!               Congratulations             !!!!!\n\n You solved the puzzle in %d moves!\n\n", moveCount);             
+    }
+    public static void clearScreen(){
+        for(int i = 0 ; i < 100 ; i++){
+            System.out.printf("\n");
+        }
+        System.out.printf("----------------------------------------Adjust your window size till it you don't see the this line------------------------------------------------");
+        for(int i = 0 ; i < 10 ; i++){
+            System.out.printf("\n");
+        }
+
+        System.out.printf("############################################################################################################################################\n");
+        System.out.printf("#                                                                                                                                          #\n");
+        System.out.printf("#                                                                                                                                          #\n");
+        System.out.printf("#     ######    #        #####       ####    #####  #    #    ######         ######    #     #   #######   #######   #         #######     #\n"); 
+        System.out.printf("#     #         #          #         #    #    #    ##   #   #               #     #   #     #        #          #   #         #           #\n"); 
+        System.out.printf("#     #         #          #         #    #    #    # #  #   #               #     #   #     #       #          #    #         #           #\n"); 
+        System.out.printf("#     #####     #          #         #    #    #    #  # #   #   ###         ######    #     #      #          #     #         #####       #\n"); 
+        System.out.printf("#          #    #          #         #    #    #    #   ##   #     #         #         #     #     #          #      #         #           #\n"); 
+        System.out.printf("#          #    #          #         #    #    #    #    #   #     #         #         #     #    #          #       #         #           #\n"); 
+        System.out.printf("#     ######    #######   ###        ####     ###   #    #    #####          #          #####    #######    #######  ######    #######     #\n"); 
+        System.out.printf("#                                                                                                                                          #\n");
+        System.out.printf("#                                                                                                                                          #\n");
+        System.out.printf("############################################################################################################################################\n");
+        for(int i = 0 ; i < 20 ; i++){
+            System.out.printf("\n");
+        }
     }
 
 }
