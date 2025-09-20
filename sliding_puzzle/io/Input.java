@@ -4,21 +4,26 @@ import sliding_puzzle.components.SlidingPuzzleBoard;
 import sliding_puzzle.components.SlidingPuzzleCell;
 import sliding_puzzle.io.Output;
 
+/*
+ * This class handles user input for the sliding puzzle game.
+ * It provides methods to input username, puzzle size, moves, and new game prompts.
+ */
 public class Input{
 
     public Scanner scanner;
 
-
+    // Constructor to initialize the scanner for user input.
     public Input() {
         scanner = new Scanner(System.in);
     }
+    // Method to input the username from the user.
     public String inputUsername(){
         Output.clearScreen();
         System.out.print("Enter a username >>> ");
         return scanner.nextLine();
     }
     
-
+    // Method to input the puzzle size (rows and columns) from the user.
     public int[] inputPuzzleSize(boolean gameFirstOpen, String username){
         Output.clearScreen();
         if(gameFirstOpen){
@@ -32,7 +37,20 @@ public class Input{
         int rows = 0;
         int cols = 0;
         while( true){
+
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input! Please enter a number.");
+                System.out.print(">>> ");
+                scanner.next(); 
+            }
             rows = scanner.nextInt();
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input! Please enter a number.");
+                System.out.print(">>> ");
+                scanner.next();
+            }
             cols = scanner.nextInt();
 
             if (rows < SlidingPuzzleBoard.MIN_ROWS || cols < SlidingPuzzleBoard.MIN_COLS) {
@@ -57,7 +75,7 @@ public class Input{
 
         return new int[] { rows, cols };
     }
-
+    // Method to read the user's move input and return the selected cell and the empty cell.
     public SlidingPuzzleCell[] readMove(SlidingPuzzleBoard board){
         int move;
         int maxValue = (board.getHeight()) * (board.getWidth())-1;
@@ -65,7 +83,14 @@ public class Input{
         while(true){
             System.out.print(">>> ");
 
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input! Please enter a number.");
+                System.out.printf("Values must be between 1 and %d (both inclusive)\n", maxValue);
+                System.out.print(">>> ");
+                scanner.next();
+            }
             move = scanner.nextInt();
+
 
             if (move < 1 || move > maxValue) {
                 System.out.printf("Invalid input! Please try again.");
@@ -92,12 +117,11 @@ public class Input{
             return new SlidingPuzzleCell[]{cell,emptyCell};
         }
     }
-
+    // Method to prompt the user for starting a new game or exiting.
     public boolean inputNewGame(){
         scanner.nextLine();
         System.out.print("To play a new game type y/Y, to exit press any key >>> ");
         String newGame = scanner.nextLine();
-        System.out.printf("newGame value = %s", newGame);
         if(newGame.equals("y") || newGame.equals("Y")){
             return true;
         }
@@ -105,6 +129,7 @@ public class Input{
             return false;
         }
     }
+    // Method to wait for the user to press any key.
     public static void getAnyKey(){
         new java.util.Scanner(System.in).nextLine();
     }

@@ -7,7 +7,10 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+/*
+ * This class implements the Board interface for a sliding puzzle game.
+ * It initializes a board with numbered cells and one empty cell, and provides methods to manipulate the board.
+ */
 
 public class SlidingPuzzleBoard implements Board{
     private final int rowCount;
@@ -20,6 +23,7 @@ public class SlidingPuzzleBoard implements Board{
     private final SlidingPuzzleCell[][] board;
     private Random rnd = new Random();
 
+    // Constructor to initialize the board with given dimensions and shuffle it.
     public SlidingPuzzleBoard(int rowCount, int colCount) {
         this.rowCount = rowCount;
         this.colCount = colCount;
@@ -27,10 +31,11 @@ public class SlidingPuzzleBoard implements Board{
 
         this.board = initializeBoard();
         shuffleBoard();
+
         
     }
 
-
+    // Initialize the board with numbered cells and one empty cell.
     private SlidingPuzzleCell[][] initializeBoard(){
         SlidingPuzzleCell[][] newBoard = new SlidingPuzzleCell[rowCount][colCount];
         int totalCellCount = rowCount*colCount;
@@ -52,6 +57,7 @@ public class SlidingPuzzleBoard implements Board{
         }
         return newBoard;
     }
+    // Shuffle the board by making random valid moves from the solved state ensuring solvability.
     private void shuffleBoard() {
         Random rnd = new Random();
 
@@ -84,12 +90,13 @@ public class SlidingPuzzleBoard implements Board{
             emptyCell = neighbor;
         }
     }
-
+    // Get the cell at the specified row and column.
     public SlidingPuzzleCell getCell(int row, int col) {
         return board[row][col];
     }
-
-    public boolean swapCells(SlidingPuzzleCell cell1, SlidingPuzzleCell cell2) {
+    // Swap the values of two adjacent cells.
+    @Override
+    public boolean swapCells(Cell cell1, Cell cell2) {
         if (!areAdjacent(cell1, cell2)) {
             return false;
         }
@@ -98,8 +105,9 @@ public class SlidingPuzzleBoard implements Board{
         cell2.setValue(tempValue);
         return true;
     }
-
-    public boolean areAdjacent(SlidingPuzzleCell cell1, SlidingPuzzleCell cell2){
+    // Check if two cells are adjacent (horizontally or vertically).
+    @Override
+    public boolean areAdjacent(Cell cell1, Cell cell2){
         int rowDiff = Math.abs(cell1.getRowIndex() - cell2.getRowIndex());
         int colDiff = Math.abs(cell1.getColIndex() - cell2.getColIndex());
         return (rowDiff + colDiff) == 1;

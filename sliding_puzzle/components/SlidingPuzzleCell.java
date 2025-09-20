@@ -2,11 +2,31 @@ package sliding_puzzle.components;
 
 import sliding_puzzle.core.Cell;
 
+/*
+ * This class represents a cell in the sliding puzzle game.
+ * It extends the abstract Cell class and provides constructors for initializing the cell with specific values.
+ */
 
 public class SlidingPuzzleCell extends Cell {
+    // Constructors to initialize the cell with row, column, and optional value.
     public SlidingPuzzleCell(int row, int col, String value) {
         super(row, col, value);
     }
+    // Constructor to initialize the cell with row and column, defaulting value to a space.
+    public SlidingPuzzleCell(int row, int col) {
+        super(row, col, " ");
+    }
+    // Constructor to initialize the cell with a single index for both row and column, defaulting value to a space.
+    public SlidingPuzzleCell(int row) {
+        super(row, row, " ");
+    }
+
+
+
+
 }
+
+
+
 
 

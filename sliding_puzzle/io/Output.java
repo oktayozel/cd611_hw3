@@ -1,9 +1,14 @@
 package sliding_puzzle.io;
 
 import sliding_puzzle.core.Cell;
+import sliding_puzzle.core.LeaderBoard;
 
+/*
+ * This class handles output for the sliding puzzle game.
+ * It provides methods to print the board, welcome message, prompts, and leaderboard.
+ */
 public class Output{
-
+    // Helper method to print a line separator based on column count and spacing.
     private void printLineHelper(int colCount, int spacing){
         System.out.print("\n ");
         for(int i = 0 ; i < colCount  ; i++){
@@ -15,6 +20,7 @@ public class Output{
         }
         System.out.print(" ");
     }
+    // Helper method to print the value of a cell with appropriate spacing.
     public void printCellValue(Cell c,int spacing){
         String toPrint = c.getValue();
         
@@ -32,7 +38,7 @@ public class Output{
             System.out.printf(" ");
         }
     }
-
+    // Method to print the entire board along with the move count.
     public void printBoard(Cell[][] board, int moveCount){
         int rowCount = board.length;
         int colCount = board[0].length;
@@ -51,26 +57,39 @@ public class Output{
         System.out.printf("                                    move count = %d",moveCount);
         System.out.printf("\n\n");
     }
-
+    // Method to print the welcome message at the start of the game.
     public void printWelcomeMessage(){
         clearScreen();
         System.out.println("Welcome to the Sliding Puzzle Game!");
         System.out.println("You can swap adjacent cells to solve the puzzle. Press any key to start...");
         Input.getAnyKey();
     }
-
+    // Method to print the prompt asking which cell to move.
     public void printPromptInput(){
         System.out.println("\nWhich cell do you want to move?");
     }
+    // Method to display the next scene after a move, showing the updated board and move count.
     public void displayNextScene(Cell[][] board, int moveCount){
         clearScreen();
         printBoard(board,moveCount);
         printPromptInput();
     }
-    public void displayCongratulations(int moveCount){
+    // Method to display the congratulations message upon solving the puzzle and show the leaderboard.
+    public void displayCongratulations(int moveCount, LeaderBoard leaderBoard){
         clearScreen();
-        System.out.printf("!!!!!               Congratulations             !!!!!\n\n You solved the puzzle in %d moves!\n\n", moveCount);             
+        System.out.printf("!!!!!               Congratulations             !!!!!\n\n You solved the puzzle in %d moves!\n\n", moveCount); 
+        for(int i = 0 ; i < 10 ; i++){
+            System.out.printf("\n");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        printLeaderBoard(leaderBoard);
+        
     }
+    // Static method to clear the console screen by printing new lines and a decorative header.
     public static void clearScreen(){
         for(int i = 0 ; i < 100 ; i++){
             System.out.printf("\n");
@@ -96,6 +115,13 @@ public class Output{
         for(int i = 0 ; i < 20 ; i++){
             System.out.printf("\n");
         }
+    }
+    // Method to print the leaderboard by loading it and waiting for user input to continue.
+    public void printLeaderBoard(LeaderBoard leaderBoard){
+        clearScreen();
+        leaderBoard.printLeaderBoard();
+        System.out.print("\nPress any key to continue...");
+        Input.getAnyKey();
     }
 
 }

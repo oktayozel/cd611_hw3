@@ -6,7 +6,12 @@ import sliding_puzzle.io.Input;
 import sliding_puzzle.core.Board;
 import sliding_puzzle.core.GameManager;
 import sliding_puzzle.core.User;
+import sliding_puzzle.core.LeaderBoard;
 
+/*
+ * This class manages the sliding puzzle game.
+ * It handles game initialization, the main game loop, and checking for game completion.
+ */
 
 public class SlidingPuzzleGameManager extends GameManager {
     private SlidingPuzzleBoard board;
@@ -16,19 +21,27 @@ public class SlidingPuzzleGameManager extends GameManager {
     private int rows;
     private int cols;
     private String username;
+    private LeaderBoard leaderBoard;
 
-
+    // Constructor to initialize the game manager and its components.
     public SlidingPuzzleGameManager() {
         super();
         this.output = new Output();
         this.input  = new Input();
-        
+        this.leaderBoard = new LeaderBoard();
     }
+
+
+    // Initialize the game by loading the leaderboard, getting user input, and setting up the board.
     @Override
     public void initGame(boolean gameFirstOpen) {
+
+        leaderBoard.loadLeaderBoard();
+
         if(gameFirstOpen == true){
             output.printWelcomeMessage();
             username = input.inputUsername();
+
         }
         int[] dimensions = input.inputPuzzleSize(gameFirstOpen,username);
 
@@ -45,6 +58,7 @@ public class SlidingPuzzleGameManager extends GameManager {
         }
     }
 
+    // Run the main game loop, handling user moves and checking for game completion.
     @Override
     public boolean runGame() {
         while(!isGameEnd()){
@@ -53,10 +67,14 @@ public class SlidingPuzzleGameManager extends GameManager {
             board.swapCells(cellsToSwap[0], cellsToSwap[1]);
             user.incrementMoveCount();
         }
-        output.displayCongratulations(user.getMoveCount());
+        leaderBoard.incrementUser(user.getUsername());
+        leaderBoard.saveLeaderBoard();
+        output.displayCongratulations(user.getMoveCount(),leaderBoard);
+        user.resetMoveCount();
         return input.inputNewGame();
     }
 
+    // Check if the game has ended by verifying if the board is in the solved state.
     @Override
     public boolean isGameEnd() {
         int k = 1;

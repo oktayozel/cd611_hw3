@@ -8,7 +8,9 @@
 ## Files 
 ---------------------------------------------------------------------------
 assignment_1/ 
-├── out/ (Compiled class files are going into this folder.)                          
+├── out/ (Compiled class files are going into this folder.)  
+├── data/
+│   └── leaderboard.txt (Serves as a database for the leaderboard.)                        
 ├── sliding_puzzle/
 │   ├── app/ (Entry point of the program)
 │   │   └── Main.java (Initializes the game and starts the program)
@@ -22,8 +24,6 @@ assignment_1/
 │   │   ├── GameManager.java (This is an abstract class defining the basic methods of a game manager like initialize the game, run the game.x)
 │   │   ├── LeaderBoard.java (This class has been placed however not implemented in the game. Helps keeping track of the leaderboard)
 │   │   └── User.java (This class holds the user details like username and move count.)
-│   ├── data/
-│   │   └── leaderboard.txt (Serves as a database for the leaderboard.)
 │   └── io/
 │        ├── Input.java (This class handles all input operations in the game.)
 │        └── Output.java (This class handles all output operations in the game. )
@@ -38,10 +38,19 @@ assignment_1/
 Please explain the cool features of your program. Anything that you feel like you did a good job at or were creative about, explain it in bullets here. Additionally, any design decisions should be made here.
 
 Example.
-1. I did a nice job seperating the components into subdirectories app, components, core, data, io. 
-2. Input and Output are completely seperated from the program flow.
+1. I have implement a Leaderboard and a mock database in a txt file which keeps track of how many games played by users.
+2. I have implemented the movecount feature which holds the move count of the user and displays it real time.
 3. I have implemeted a UI like visual so that game screen clears after every move.
-4. I have implemented the movecount feature which holds the move count of the user and displays it real time.
+4. Input and Output are completely seperated from the program flow.
+5. I did a nice job seperating the components into subdirectories app, components, core, data, io. 
+
+
+## Source and Citations
+https://datawookie.dev/blog/2019/04/sliding-puzzle-solvable/
+
+I have used the "build it (by randomly moving tiles from a known solvable configuration)"approach and got this idea from this blog.
+
+
 
 ## How to compile and run
 ---------------------------------------------------------------------------
@@ -63,133 +72,205 @@ Please give us a full execution of what we should see on the screen. Label each 
 
 ```
 Output:
-[+] Hello there! Let's play a game!
-[+] Enter a number for the following options:
-[+] 1. Tic Tac Toe
-[+] 2. Connect Four
-[+] 3. Order and Chaos: 
+
+Welcome to the Sliding Puzzle Game!
+You can swap adjacent cells to solve the puzzle. Press any key to start...
+
 Input:
+x
+
+Output:
+Enter a username >>> 
+
+Input:
+oktay
+
+Output:
+
+Alright oktay, let's customize your puzzle
+Prompt your puzzle size.(example: 3 4 creates a 3 row 4 column puzzle for you.)
+>>> 
+
+Input:
+
+2 2
+
+Output:
+
+ - -  
+|2| |
+ - -  
+|1|3|
+ - -                                      move count = 0
+
+
+Which cell do you want to move?
+>>> 
+Input:
+
+2
+
+Output:
+
+ - -  
+| |2|
+ - -  
+|1|3|
+ - -                                      move count = 1
+
+
+Which cell do you want to move?
+>>> 
+
+Input:
+
 1
+
 Output:
-[+] Welcome to Tic Tac Toe!
-[+] Enter the number of teams: 
+
+ - -  
+|1|2|
+ - -  
+| |3|
+ - -                                      move count = 2
+
+
+Which cell do you want to move?
+>>> 
+
 Input:
-2
+
+3
+
 Output:
-[+] Team 1 , please enter your team name: 
+
+!!!!!               Congratulations             !!!!!
+
+ You solved the puzzle in 3 moves!
+
+To play a new game type y/Y, to exit press any key >>> 
+
 Input:
-East
+
+y
+
 Output:
-[+] Enter the number of players for team East: 
+
+Good to see you again oktay. Let's customize your new puzzle
+Prompt your puzzle size.(example 3 4 creates a 3 row 4 column puzzle for you.)
+>>> 
+
 Input:
-2
+1 1 
 Output:
-[+] Team 1 , please enter your team color: 
+Invalid input!
+The dimensions of the puzzle must be at least 2 x 2.
+>>> 
 Input:
-Red
+
+10 11
+
 Output:
-[+] Team East, Player 1 , please enter your name: 
+
+Invalid input!
+The puzzle size must not exceed 10 rows and 10 columns.
+>>> 
+
 Input:
-Biggie
+2 2 
 Output:
-[+] Team East, Player 1 , please enter your symbol: 
+
+ - -  
+|2|3|
+ - -  
+| |1|
+ - -                                      move count = 0
+
+
+Which cell do you want to move?
+>>> 
+
 Input:
-X
+
+1
+
 Output:
-[+] Team East, Player 2 , please enter your name: 
-Input:
-Nas
-Output:
-[+] Team East, Player 2 , please enter your symbol: 
-Input:
-O
-Output:
-[+] Team 2 , please enter your team name: 
-Input:
-West
-Output:
-[+] Enter the number of players for team West: 
-Input:
-1  
-Output:
-[+] Team 2 , please enter your team color: 
-Input:
-Blue
-Output:
-[+] Team West, Player 1 , please enter your name: 
-Input:
-Pac
-Output:
-[+] Team West, Player 1 , please enter your symbol: 
-Input:
-X
-Output:
-[+] Would you like to change the board size? (y/n):
-Input:
-Y
-Output:
-[+] Enter the number of columns for the board: 
-Input:
-4
-Output:
-[+] Enter the number of rows for the board: 
+
+ - -  
+|2|3|
+ - -  
+|1| |
+ - -                                      move count = 1
+
+
+Which cell do you want to move?
+>>> 
+
 Input:
 3
 Output:
-[+] Would you like to change number of symbols in a row to win? (y/n): 
+
+ - -  
+|2| |
+ - -  
+|1|3|
+ - -                                      move count = 2
+
 Input:
-N
+
+2
+
 Output:
-+---------------+---------------+---------------+---------------+
-|         1         |         2         |         3        |       4       |
-+---------------+---------------+---------------+---------------+
-|         5         |         6         |         7        |       8       |
-+---------------+---------------+---------------+---------------+
-|         9         |         10       |         11      |       12      |
-+---------------+---------------+---------------+---------------+
-[+] Biggie, it's your turn! Please enter a valid position: 
+
+
+Which cell do you want to move?
+>>> 
+
+
+
+ - -  
+| |2|
+ - -  
+|1|3|
+ - -                                      move count = 3
+
+
+Which cell do you want to move?
+>>> 
 Input:
 1
-+---------------+---------------+---------------+---------------+
-|         X         |         2       |         3         |         4         |
-+---------------+---------------+---------------+---------------+
-|         5         |         6        |         7        |         8         |
-+---------------+---------------+---------------+---------------+
-|         9         |        10       |        11       |         12        |
-+---------------+---------------+---------------+---------------+
-[Omitted because Kevin is Lazy]
-Output:
-TEAM: East, PLAYER: Biggie played X's.
-WINS: 1
-LOSSES: 0
-GAMES PLAYED: 1
 
-TEAM: East, PLAYER: Nas played O's.
-WINS: 1
-LOSSES: 0
-GAMES PLAYED: 1
+Output:
 
-TEAM: West, PLAYER: Pac played X's.
-WINS: 0
-LOSSES: 1
-GAMES PLAYED: 1
+ - -  
+|1|2|
+ - -  
+| |3|
+ - -                                      move count = 4
 
-[+] Would you like to play again? (y/n):
+
+Which cell do you want to move?
+>>> 
+
+
 Input:
-N
+
+3
+
+
 Output:
-[+] Would you like to play a different game? (y/n):
+
+!!!!!               Congratulations             !!!!!
+
+ You solved the puzzle in 5 moves!
+
+To play a new game type y/Y, to exit press any key >>> 
+
 Input:
-Y
+q
+
 Output:
-[+] Hello there! Let's play a game!
-[+] Enter a number for the following options:
-[+] 1. Tic Tac Toe
-[+] 2. Connect Four
-[+] 3. Order and Chaos:
-Input:
-Quit
-Output:
-[+] Goodbye!
+end of program
+
 ```
 

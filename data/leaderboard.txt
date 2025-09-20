@@ -1,0 +1,6 @@
+michael:2
+jackson:5
+alperen:1
+sengun:3
+john:2
+oktay:5
