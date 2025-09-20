@@ -22,7 +22,7 @@ assignment_1/
 │   │   ├── Board.java (This is an interface defining the must have functions of a board.)
 │   │   ├── Cell.java (This is an abstract class which has the basic methods and fields that a board game would have.)
 │   │   ├── GameManager.java (This is an abstract class defining the basic methods of a game manager like initialize the game, run the game.x)
-│   │   ├── LeaderBoard.java (This class has been placed however not implemented in the game. Helps keeping track of the leaderboard)
+│   │   ├── LeaderBoard.java (This class has been placed to hold the leaderboard storing the data in leaderboard.txt. Helps keeping track of the leaderboard)
 │   │   └── User.java (This class holds the user details like username and move count.)
 │   └── io/
 │        ├── Input.java (This class handles all input operations in the game.)
@@ -58,6 +58,7 @@ Your directions on how to run the code. Make sure to be as thorough as possible!
 
 1. Navigate to the directory "assignment_1" after unzipping the files
 2. Run the following instructions:
+
 javac -d out sliding_puzzle/app/*.java sliding_puzzle/core/*.java sliding_puzzle/io/*.java sliding_puzzle/components/*.java
 java -cp out sliding_puzzle.app.Main        
 
@@ -264,6 +265,23 @@ Output:
 !!!!!               Congratulations             !!!!!
 
  You solved the puzzle in 5 moves!
+
+Leaderboard:
+Username |  Games Played
+---------------------
+jackson         5
+oktay           5
+sengun          3
+michael         2
+john            2
+okt             1
+alperen         1
+
+Press enter to continue...
+
+Input:
+\n
+Output:
 
 To play a new game type y/Y, to exit press any key >>> 
 

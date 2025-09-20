@@ -66,7 +66,7 @@ public class Output{
     }
     // Method to print the prompt asking which cell to move.
     public void printPromptInput(){
-        System.out.println("\nWhich cell do you want to move?");
+        System.out.println("\nWhich cell do you want to move?(example : 2)");
     }
     // Method to display the next scene after a move, showing the updated board and move count.
     public void displayNextScene(Cell[][] board, int moveCount){
@@ -120,7 +120,7 @@ public class Output{
     public void printLeaderBoard(LeaderBoard leaderBoard){
         clearScreen();
         leaderBoard.printLeaderBoard();
-        System.out.print("\nPress any key to continue...");
+        System.out.print("\nPress enter to continue...");
         Input.getAnyKey();
     }
 

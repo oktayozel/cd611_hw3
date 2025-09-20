@@ -1,6 +1,7 @@
 michael:2
 jackson:5
-alperen:1
 sengun:3
+okt:1
+alperen:1
 john:2
 oktay:5
