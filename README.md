@@ -61,6 +61,7 @@ Your directions on how to run the code. Make sure to be as thorough as possible!
 javac -d out sliding_puzzle/app/*.java sliding_puzzle/core/*.java sliding_puzzle/io/*.java sliding_puzzle/components/*.java
 java -cp out sliding_puzzle.app.Main        
 
+NOTE: You need to create an empty directory /out next to /sliding_puzzle
 
 NOTE: Instead you can simply run ./compile.sh and then ./run.sh
 
