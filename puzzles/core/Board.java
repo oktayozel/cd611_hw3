@@ -1,4 +1,4 @@
-package sliding_puzzle.core;
+package puzzles.core;
 
 /*
  * This interface defines the structure and behavior of a board in the sliding puzzle game.

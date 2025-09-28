@@ -1,1 +1,1 @@
-java -cp out sliding_puzzle.app.Main        
+java -cp out puzzles.app.Main

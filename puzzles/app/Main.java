@@ -1,9 +1,9 @@
-package sliding_puzzle.app;
+package puzzles.app;
 
-import sliding_puzzle.components.SlidingPuzzleBoard;
-import sliding_puzzle.core.Board;
-import sliding_puzzle.io.Output;
-import sliding_puzzle.components.SlidingPuzzleGameManager;
+import puzzles.core.Board;
+import puzzles.games.sliding_puzzle_components.SlidingPuzzleBoard;
+import puzzles.games.sliding_puzzle_components.SlidingPuzzleGameManager;
+import puzzles.io.Output;
 /*
  * This is the entry point of the program.
  * It initializes the game manager and starts the game loop.

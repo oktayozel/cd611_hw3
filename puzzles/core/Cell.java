@@ -1,4 +1,4 @@
-package sliding_puzzle.core;
+package puzzles.core;
 /*
  * This abstract class represents a cell in the sliding puzzle game.
  * It contains properties for the cell's row and column indices, as well as its value.

@@ -1,6 +1,6 @@
-package sliding_puzzle.components;
+package puzzles.games.sliding_puzzle_components;
 
-import sliding_puzzle.core.Cell;
+import puzzles.core.Cell;
 
 /*
  * This class represents a cell in the sliding puzzle game.

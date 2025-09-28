@@ -1,12 +1,12 @@
-package sliding_puzzle.components;
+package puzzles.games.sliding_puzzle_components;
 import java.util.Objects;
-import sliding_puzzle.io.Output;
-import sliding_puzzle.io.Input;
 
-import sliding_puzzle.core.Board;
-import sliding_puzzle.core.GameManager;
-import sliding_puzzle.core.User;
-import sliding_puzzle.core.LeaderBoard;
+import puzzles.core.Board;
+import puzzles.core.GameManager;
+import puzzles.core.LeaderBoard;
+import puzzles.core.User;
+import puzzles.io.Input;
+import puzzles.io.Output;
 
 /*
  * This class manages the sliding puzzle game.

@@ -1,8 +1,9 @@
-package sliding_puzzle.io;
+package puzzles.io;
 import java.util.Scanner;
-import sliding_puzzle.components.SlidingPuzzleBoard;
-import sliding_puzzle.components.SlidingPuzzleCell;
-import sliding_puzzle.io.Output;
+
+import puzzles.games.sliding_puzzle_components.SlidingPuzzleBoard;
+import puzzles.games.sliding_puzzle_components.SlidingPuzzleCell;
+import puzzles.io.Output;
 
 /*
  * This class handles user input for the sliding puzzle game.

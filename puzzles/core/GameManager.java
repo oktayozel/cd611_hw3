@@ -1,4 +1,4 @@
-package sliding_puzzle.core;
+package puzzles.core;
 
 /*
  * This abstract class manages the game state, including the move count.

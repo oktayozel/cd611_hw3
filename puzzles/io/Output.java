@@ -1,7 +1,7 @@
-package sliding_puzzle.io;
+package puzzles.io;
 
-import sliding_puzzle.core.Cell;
-import sliding_puzzle.core.LeaderBoard;
+import puzzles.core.Cell;
+import puzzles.core.LeaderBoard;
 
 /*
  * This class handles output for the sliding puzzle game.

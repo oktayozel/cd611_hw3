@@ -1,4 +1,4 @@
-package sliding_puzzle.core;
+package puzzles.core;
 /*
  * This class represents a user in the sliding puzzle game.
  * It contains properties for the username and move count, along with methods to manage these properties.

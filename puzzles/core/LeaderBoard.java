@@ -1,4 +1,4 @@
-package sliding_puzzle.core;
+package puzzles.core;
 
 import java.io.*;
 import java.util.HashMap;

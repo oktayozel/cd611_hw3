@@ -1,8 +1,6 @@
-package sliding_puzzle.components;
+package puzzles.games.sliding_puzzle_components;
 
 
-import sliding_puzzle.core.Cell;
-import sliding_puzzle.core.Board;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +9,9 @@ import java.util.Random;
  * This class implements the Board interface for a sliding puzzle game.
  * It initializes a board with numbered cells and one empty cell, and provides methods to manipulate the board.
  */
+
+import puzzles.core.Board;
+import puzzles.core.Cell;
 
 public class SlidingPuzzleBoard implements Board{
     private final int rowCount;
