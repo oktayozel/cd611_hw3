@@ -135,4 +135,17 @@ public class Input{
         new java.util.Scanner(System.in).nextLine();
     }
 
+
+    // ------------------------------------------------------------------------------------------------------------------------------------------
+    // GameSelectionManager methods 
+    // ------------------------------------------------------------------------------------------------------------------------------------------
+
+    public String readGameSelection(){
+        //TODO : implement error handling 
+        System.out.print("Which game would you like to play? (Type 'sliding_puzzle' or 'dots_and_boxes') >>> ");
+        return scanner.nextLine();
+    }
+
+
+
 }
