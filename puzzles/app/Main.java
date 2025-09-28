@@ -1,6 +1,8 @@
 package puzzles.app;
 
 import puzzles.core.Board;
+import puzzles.core.GameSelectionManager;
+import puzzles.games.dots_and_boxes_components.DotsAndBoxesGameManager;
 import puzzles.games.sliding_puzzle_components.SlidingPuzzleBoard;
 import puzzles.games.sliding_puzzle_components.SlidingPuzzleGameManager;
 import puzzles.io.Output;
@@ -9,15 +11,13 @@ import puzzles.io.Output;
  * It initializes the game manager and starts the game loop.
  */
 public class Main{
+
     public static void main(String[] args){
-        SlidingPuzzleGameManager gameManager = new SlidingPuzzleGameManager();
-        boolean gameFirstOpen = true;
-        while(true){
-            gameManager.initGame(gameFirstOpen);
-            gameFirstOpen = false;
-            if(gameManager.runGame() == false){
-                break;
-            }
-        }
+
+
+        GameSelectionManager gameSelectionManager = new GameSelectionManager();
+    
+        gameSelectionManager.runSelectedGame();
+   
     }
 }
