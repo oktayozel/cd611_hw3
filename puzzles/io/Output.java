@@ -1,5 +1,6 @@
 package puzzles.io;
 
+import java.util.Scanner;
 import puzzles.core.Cell;
 import puzzles.core.LeaderBoard;
 
@@ -62,7 +63,7 @@ public class Output{
         clearScreen();
         System.out.println("Welcome to the Sliding Puzzle Game!");
         System.out.println("You can swap adjacent cells to solve the puzzle. Press any key to start...");
-        Input.getAnyKey();
+        InputCheck.readLineOrExit(new Scanner(System.in));
     }
     // Method to print the prompt asking which cell to move.
     public void printPromptInput(){
@@ -121,7 +122,7 @@ public class Output{
         clearScreen();
         leaderBoard.printLeaderBoard();
         System.out.print("\nPress enter to continue...");
-        Input.getAnyKey();
+        InputCheck.readLineOrExit(new Scanner(System.in));
     }
 
 }
