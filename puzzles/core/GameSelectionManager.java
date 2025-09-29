@@ -4,14 +4,20 @@ import java.util.Scanner;
 import puzzles.games.dots_and_boxes_components.DotsAndBoxesGameManager;
 import puzzles.games.sliding_puzzle_components.SlidingPuzzleGameManager;
 import puzzles.io.Input;
+import puzzles.io.Output;
+
 public class GameSelectionManager {
     private DotsAndBoxesGameManager dotsAndBoxesGameManager;
     private SlidingPuzzleGameManager slidingPuzzleGameManager;
     private Input input;
+    private Output output;
+    private Settings settings;
     public GameSelectionManager(){
         this.dotsAndBoxesGameManager = new DotsAndBoxesGameManager();
         this.slidingPuzzleGameManager = new SlidingPuzzleGameManager();
         this.input = new Input();
+        this.output = new Output(this.input);
+        this.settings = new Settings();
     }
     public DotsAndBoxesGameManager getDotsAndBoxesGameManager(){
         return this.dotsAndBoxesGameManager;
@@ -23,7 +29,8 @@ public class GameSelectionManager {
 
     public void runSelectedGame(){
 
-        int _selected_game = input.readIntOrExit("Which game would you like to play? (\n [1] for sliding_puzzle \n [2] for dots_and_boxes) \n >>> ", 1, 2);
+        output.displaySupportedGames(settings.getSupportedGames());
+        int _selected_game = input.readIntOrExit("Which game would you like to play? \n >>> ", 1, 2);
   
         if( _selected_game == 1  ){
             boolean gameFirstOpen = true;

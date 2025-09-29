@@ -1,5 +1,6 @@
 package puzzles.io;
 
+import java.util.List;
 import java.util.Scanner;
 import puzzles.core.Cell;
 import puzzles.core.LeaderBoard;
@@ -128,6 +129,12 @@ public class Output{
         clearScreen();
         leaderBoard.printLeaderBoard();
         input.readLineOrExit("Press enter to continue...");
+    }
+    public void displaySupportedGames(List<String> games) {
+        System.out.println("Available games:");
+        for (int i = 0; i < games.size(); i++) {
+            System.out.println("[" + (i + 1) + "] " + games.get(i));
+        }
     }
 
 }
