@@ -1,5 +1,6 @@
 package puzzles.core;
 
+import java.util.Scanner;
 import puzzles.games.dots_and_boxes_components.DotsAndBoxesGameManager;
 import puzzles.games.sliding_puzzle_components.SlidingPuzzleGameManager;
 import puzzles.io.Input;
@@ -8,7 +9,9 @@ public class GameSelectionManager {
     private SlidingPuzzleGameManager slidingPuzzleGameManager;
     private Input input;
     public GameSelectionManager(){
-        this.dotsAndBoxesGameManager = new DotsAndBoxesGameManager();
+        Scanner scanner = new Scanner(System.in); // ✅ 建立 Scanner
+        //this.input = new Input(scanner);
+        this.dotsAndBoxesGameManager = new DotsAndBoxesGameManager(scanner);
         this.slidingPuzzleGameManager = new SlidingPuzzleGameManager();
         this.input = new Input();
     }
@@ -40,15 +43,18 @@ public class GameSelectionManager {
         }
 
         if( _selected_game.equals("dots_and_boxes")  ){
-            System.out.printf("This game has not been implemented yet! ");
+            boolean gameFirstOpen = true;
+            while (true) {
+                dotsAndBoxesGameManager.initGame(gameFirstOpen);
+                gameFirstOpen = false;
+                if (!dotsAndBoxesGameManager.runGame()) {
+                    break;
+                }
+            }
+
         }
 
 
     }
-
-
-
-
-
 
 }
