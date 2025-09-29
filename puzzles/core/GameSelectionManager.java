@@ -27,23 +27,23 @@ public class GameSelectionManager {
     }
 
 
-    public void runSelectedGame(){
+    public void runSelectedGame() {
 
         output.displaySupportedGames(settings.getSupportedGames());
         int _selected_game = input.readIntOrExit("Which game would you like to play? \n >>> ", 1, 2);
   
-        if( _selected_game == 1  ){
+        if (_selected_game == 1) {
             boolean gameFirstOpen = true;
-            while(true){
+            while (true) {
                 slidingPuzzleGameManager.initGame(gameFirstOpen);
                 gameFirstOpen = false;
-                if(slidingPuzzleGameManager.runGame() == false){
+                if (!slidingPuzzleGameManager.runGame()) {
                     break;
                 }
             }
         }
 
-        if( _selected_game == 2 ){
+        if (_selected_game == 2) {
             boolean gameFirstOpen = true;
             while (true) {
                 dotsAndBoxesGameManager.initGame(gameFirstOpen);
@@ -52,7 +52,6 @@ public class GameSelectionManager {
                     break;
                 }
             }
-
         }
 
 

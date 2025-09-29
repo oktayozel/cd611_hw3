@@ -16,7 +16,7 @@ public class DotsAndBoxesGameManager {
 
     public DotsAndBoxesGameManager() {
         this.input  = new Input();
-        this.output = new Output(input);
+        this.output = new Output(this.input, "dots_and_boxes");
     }
 
     public void initGame(boolean firstTime) {
