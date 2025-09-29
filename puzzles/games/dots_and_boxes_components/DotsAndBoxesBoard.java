@@ -19,40 +19,39 @@ public class DotsAndBoxesBoard {
     }
 
     public void display() {
-    // 顯示欄編號
-    System.out.print("    ");
-    for (int c = 0; c <= cols; c++) {
-        System.out.printf("%-3d", c);
-    }
-    System.out.println();
+        System.out.print("    ");
+        for (int c = 0; c <= cols; c++) {
+            System.out.printf("%-3d", c); //col num
+        }
+        System.out.println();
 
-    for (int r = 0; r < rows; r++) {
-        // 第一層：上邊線
-        System.out.printf("%-3d ", r);
+        for (int r = 0; r < rows; r++) {
+            // upper line
+            System.out.printf("%-3d ", r); //row num
+            for (int c = 0; c < cols; c++) {
+                System.out.print("○");
+                System.out.print(boxes[r][c].hasTop() ? "──" : "  ");
+            }
+            System.out.println("○");
+
+            // left line and box
+            System.out.print("    ");
+            for (int c = 0; c < cols; c++) {
+                System.out.print(boxes[r][c].hasLeft() ? "│" : " ");
+                String owner = boxes[r][c].getOwnerName();
+                System.out.print(owner == null ? "  " : owner.substring(0, Math.min(2, owner.length())));
+            }
+            System.out.println(boxes[r][cols - 1].hasRight() ? "│" : " ");
+        }
+
+        // lowest line
+        System.out.printf("%-3d ", rows);
         for (int c = 0; c < cols; c++) {
             System.out.print("○");
-            System.out.print(boxes[r][c].hasTop() ? "──" : "  ");
+            System.out.print(boxes[rows - 1][c].hasBottom() ? "──" : "  ");
         }
         System.out.println("○");
-
-        // 第二層：左邊線與格子內容
-        System.out.print("    ");
-        for (int c = 0; c < cols; c++) {
-            System.out.print(boxes[r][c].hasLeft() ? "│" : " ");
-            String owner = boxes[r][c].getOwnerName();
-            System.out.print(owner == null ? "  " : owner.substring(0, Math.min(2, owner.length())));
-        }
-        System.out.println(boxes[r][cols - 1].hasRight() ? "│" : " ");
     }
-
-    // 最底邊線
-    System.out.printf("%-3d ", rows);
-    for (int c = 0; c < cols; c++) {
-        System.out.print("○");
-        System.out.print(boxes[rows - 1][c].hasBottom() ? "──" : "  ");
-    }
-    System.out.println("○");
-}
 
 
     public boolean claimEdge(int row, int col, String direction, DotsAndBoxesPlayer player) {
