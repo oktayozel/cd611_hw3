@@ -9,7 +9,7 @@ public class GameSelectionManager {
     private SlidingPuzzleGameManager slidingPuzzleGameManager;
     private Input input;
     public GameSelectionManager(){
-        Scanner scanner = new Scanner(System.in); // ✅ 建立 Scanner
+        Scanner scanner = new Scanner(System.in);                // Scanner
         //this.input = new Input(scanner);
         this.dotsAndBoxesGameManager = new DotsAndBoxesGameManager(scanner);
         this.slidingPuzzleGameManager = new SlidingPuzzleGameManager();
