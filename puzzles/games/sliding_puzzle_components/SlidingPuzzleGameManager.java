@@ -1,7 +1,5 @@
 package puzzles.games.sliding_puzzle_components;
 import java.util.Objects;
-
-import puzzles.core.Board;
 import puzzles.core.GameManager;
 import puzzles.core.LeaderBoard;
 import puzzles.core.User;
@@ -25,7 +23,7 @@ public class SlidingPuzzleGameManager extends GameManager {
     public SlidingPuzzleGameManager() {
         super();
         this.input  = new Input();
-        this.output = new Output(this.input);
+        this.output = new Output(this.input, "sliding_puzzle");
         this.leaderBoard = new LeaderBoard();
     }
 

@@ -1,6 +1,5 @@
 package puzzles.io;
 
-import java.util.Scanner;
 import puzzles.core.Cell;
 import puzzles.core.LeaderBoard;
 
@@ -10,9 +9,15 @@ import puzzles.core.LeaderBoard;
  */
 public class Output{
     private Input input;
+    private String gameName;
 
     public Output(Input input) {
+        this.input = input;
+    }
+
+    public Output(Input input, String gameName) {
         this.input =  input;
+        this.gameName = gameName.toLowerCase();
     }
 
     // Helper method to print a line separator based on column count and spacing.
@@ -97,7 +102,7 @@ public class Output{
         
     }
     // Static method to clear the console screen by printing new lines and a decorative header.
-    public static void clearScreen( ){
+    public void clearScreen(){
         for(int i = 0 ; i < 100 ; i++){
             System.out.printf("\n");
         }
@@ -106,20 +111,39 @@ public class Output{
             System.out.printf("\n");
         }
 
-        System.out.printf("############################################################################################################################################\n");
-        System.out.printf("#                                                                                                                                          #\n");
-        System.out.printf("#                                                                                                                                          #\n");
-        System.out.printf("#     ######    #        #####       ####    #####  #    #    ######         ######    #     #   #######   #######   #         #######     #\n"); 
-        System.out.printf("#     #         #          #         #    #    #    ##   #   #               #     #   #     #        #          #   #         #           #\n"); 
-        System.out.printf("#     #         #          #         #    #    #    # #  #   #               #     #   #     #       #          #    #         #           #\n"); 
-        System.out.printf("#     #####     #          #         #    #    #    #  # #   #   ###         ######    #     #      #          #     #         #####       #\n"); 
-        System.out.printf("#          #    #          #         #    #    #    #   ##   #     #         #         #     #     #          #      #         #           #\n"); 
-        System.out.printf("#          #    #          #         #    #    #    #    #   #     #         #         #     #    #          #       #         #           #\n"); 
-        System.out.printf("#     ######    #######   ###        ####     ###   #    #    #####          #          #####    #######    #######  ######    #######     #\n"); 
-        System.out.printf("#                                                                                                                                          #\n");
-        System.out.printf("#                                                                                                                                          #\n");
-        System.out.printf("############################################################################################################################################\n");
-        for(int i = 0 ; i < 20 ; i++){
+        if (gameName.equals("sliding_puzzle")) {
+            System.out.printf("############################################################################################################################################\n");
+            System.out.printf("#                                                                                                                                          #\n");
+            System.out.printf("#                                                                                                                                          #\n");
+            System.out.printf("#     ######    #        #####       ####    #####  #    #    ######         ######    #     #   #######   #######   #         #######     #\n"); 
+            System.out.printf("#     #         #          #         #    #    #    ##   #   #               #     #   #     #        #          #   #         #           #\n"); 
+            System.out.printf("#     #         #          #         #    #    #    # #  #   #               #     #   #     #       #          #    #         #           #\n"); 
+            System.out.printf("#     #####     #          #         #    #    #    #  # #   #   ###         ######    #     #      #          #     #         #####       #\n"); 
+            System.out.printf("#          #    #          #         #    #    #    #   ##   #     #         #         #     #     #          #      #         #           #\n"); 
+            System.out.printf("#          #    #          #         #    #    #    #    #   #     #         #         #     #    #          #       #         #           #\n"); 
+            System.out.printf("#     ######    #######   ###        ####     ###   #    #    #####          #          #####    #######    #######  ######    #######     #\n"); 
+            System.out.printf("#                                                                                                                                          #\n");
+            System.out.printf("#                                                                                                                                          #\n");
+            System.out.printf("############################################################################################################################################\n");
+        }
+
+        else if(gameName.equals("dots_and_boxes")) {
+            System.out.printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+            System.out.printf("X                                                                                  X\n");
+            System.out.printf("X  XXXX                                             X    XXXXXX                    X\n");
+            System.out.printf("X  X   X                                            X    X    XX                   X\n");
+            System.out.printf("X  X    X           X    XXX                        X    X    XX                   X\n");
+            System.out.printf("X  X     X  XXXX  XXXXX X   X     XXXX   X XXX    XXX    XXXXXXXX    XXX   X    X  X\n");
+            System.out.printf("X  X     X XX  XX   X   X        XX X    XX  XX XX  X    XX     XX  XX XX   X  X   X\n");
+            System.out.printf("X  X     X X    X   X   XXXXX    X  XX   X    X X   X    X      XX  X   X    XX    X\n");
+            System.out.printf("X  X    X  XX  XX   X       X    X XXXX  X    X X   X    X     XX   XX  X   X  X   X\n");
+            System.out.printf("X  XXXXX    XXXX    X   XX XX    XXX  XX X    X  XXXX    XXXXXXX     XXX   X    X  X\n");
+            System.out.printf("X                        XXX                                                       X\n");
+            System.out.printf("X                                                                                  X\n");
+            System.out.printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");    
+        }
+        
+        for(int i = 0 ; i < 10 ; i++){
             System.out.printf("\n");
         }
     }
