@@ -18,16 +18,14 @@ public class SlidingPuzzleGameManager extends GameManager {
     private Output output;  
     private Input input;
     private User user;
-    private int rows;
-    private int cols;
     private String username;
     private LeaderBoard leaderBoard;
 
     // Constructor to initialize the game manager and its components.
     public SlidingPuzzleGameManager() {
         super();
-        this.output = new Output();
         this.input  = new Input();
+        this.output = new Output(this.input);
         this.leaderBoard = new LeaderBoard();
     }
 
@@ -40,13 +38,13 @@ public class SlidingPuzzleGameManager extends GameManager {
 
         if(gameFirstOpen == true){
             output.printWelcomeMessage();
-            username = input.inputUsername();
+            username = input.readStringOrExit("Enter a username >>> ");
 
         }
-        int[] dimensions = input.inputPuzzleSize(gameFirstOpen,username);
+        int rows = input.readIntOrExit(String.format("Hey %s Enter number of rows: ", username), 0, 10);
+        int cols = input.readIntOrExit(String.format("Hey %s Enter number of columns: ", username), 0, 10);
 
-        this.rows = dimensions[0];
-        this.cols = dimensions[1];
+
         if(gameFirstOpen == true){
             this.user = new User(username);
         }
@@ -63,7 +61,7 @@ public class SlidingPuzzleGameManager extends GameManager {
     public boolean runGame() {
         while(!isGameEnd()){
             output.displayNextScene(board.getBoard(),user.getMoveCount());
-            SlidingPuzzleCell[] cellsToSwap = input.readMove(board);
+            SlidingPuzzleCell[] cellsToSwap = input.readSlidingPuzzleMove(board);
             board.swapCells(cellsToSwap[0], cellsToSwap[1]);
             user.incrementMoveCount();
         }
@@ -71,7 +69,7 @@ public class SlidingPuzzleGameManager extends GameManager {
         leaderBoard.saveLeaderBoard();
         output.displayCongratulations(user.getMoveCount(),leaderBoard);
         user.resetMoveCount();
-        return input.inputNewGame();
+        return input.inputYesOrExit("To play a new game type y/Y, to exit press any key >>> ");
     }
 
     // Check if the game has ended by verifying if the board is in the solved state.

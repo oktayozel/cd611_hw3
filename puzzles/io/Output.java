@@ -9,6 +9,12 @@ import puzzles.core.LeaderBoard;
  * It provides methods to print the board, welcome message, prompts, and leaderboard.
  */
 public class Output{
+    private Input input;
+
+    public Output(Input input) {
+        this.input =  input;
+    }
+
     // Helper method to print a line separator based on column count and spacing.
     private void printLineHelper(int colCount, int spacing){
         System.out.print("\n ");
@@ -62,8 +68,8 @@ public class Output{
     public void printWelcomeMessage(){
         clearScreen();
         System.out.println("Welcome to the Sliding Puzzle Game!");
-        System.out.println("You can swap adjacent cells to solve the puzzle. Press any key to start...");
-        InputCheck.readLineOrExit(new Scanner(System.in));
+        System.out.println("You can swap adjacent cells to solve the puzzle.");
+        input.readLineOrExit(" Press enter to start...");
     }
     // Method to print the prompt asking which cell to move.
     public void printPromptInput(){
@@ -91,7 +97,7 @@ public class Output{
         
     }
     // Static method to clear the console screen by printing new lines and a decorative header.
-    public static void clearScreen(){
+    public static void clearScreen( ){
         for(int i = 0 ; i < 100 ; i++){
             System.out.printf("\n");
         }
@@ -121,8 +127,7 @@ public class Output{
     public void printLeaderBoard(LeaderBoard leaderBoard){
         clearScreen();
         leaderBoard.printLeaderBoard();
-        System.out.print("\nPress enter to continue...");
-        InputCheck.readLineOrExit(new Scanner(System.in));
+        input.readLineOrExit("Press enter to continue...");
     }
 
 }

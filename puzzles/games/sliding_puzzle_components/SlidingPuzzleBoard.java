@@ -1,7 +1,6 @@
 package puzzles.games.sliding_puzzle_components;
 
 
-import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -60,7 +59,6 @@ public class SlidingPuzzleBoard implements Board{
     }
     // Shuffle the board by making random valid moves from the solved state ensuring solvability.
     private void shuffleBoard() {
-        Random rnd = new Random();
 
         int randomBackIterationCount = rnd.nextInt(1000) + 100;
 

@@ -9,67 +9,90 @@ import puzzles.games.sliding_puzzle_components.SlidingPuzzleCell;
  */
 public class Input{
 
-    public Scanner scanner;
+    private final Scanner scanner;
 
     // Constructor to initialize the scanner for user input.
     public Input() {
         scanner = new Scanner(System.in);
     }
-    // Method to input the username from the user.
-    public String inputUsername(){
-        Output.clearScreen();
-        System.out.print("Enter a username >>> ");
-        return InputCheck.readLineOrExit(scanner);
-    }
-    
-    // Method to input the puzzle size (rows and columns) from the user.
-    public int[] inputPuzzleSize(boolean gameFirstOpen, String username){
-        Output.clearScreen();
-        if(gameFirstOpen){
-            System.out.printf("Alright %s, let's customize your puzzle\n", username);
-        } else {
-            System.out.printf("Good to see you again %s. Let's customize your new puzzle\n", username);
+
+    public  String readLineOrExit() {
+        String input = scanner.nextLine().trim();
+        if (input.equalsIgnoreCase("exit")) {
+            System.out.println("Exiting game. Goodbye!");
+            System.exit(0);
         }
+        return input;
+    }
+    // function overloading
+    public  String readLineOrExit(String prompt) {
+        System.out.print(prompt);
+        String input = scanner.nextLine().trim();
+        if (input.equalsIgnoreCase("exit")) {
+            System.out.println("Exiting game. Goodbye!");
+            System.exit(0);
+        }
+        return input;
+    }
 
-        int rows = 0;
-        int cols = 0;
+    // Overloading the method
+    public int readIntOrExit(String prompt) {
+        return readIntOrExit(prompt, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
 
+    public  int readIntOrExit( String prompt, int min_value, int max_value) {
+        int value;
         while (true) {
-            rows = InputCheck.readIntOrExit(scanner, "Enter number of rows >>> ");
-            cols = InputCheck.readIntOrExit(scanner, "Enter number of columns >>> ");
-
-            if (rows < SlidingPuzzleBoard.MIN_ROWS || cols < SlidingPuzzleBoard.MIN_COLS) {
-                System.out.println("Invalid input!");
-                System.out.printf("The dimensions of the puzzle must be at least %d x %d.%n", SlidingPuzzleBoard.MIN_ROWS, SlidingPuzzleBoard.MIN_COLS);
+            System.out.print(prompt);
+            String input = readLineOrExit();
+            try {
+                value = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
                 continue;
             }
-
-            if (rows > SlidingPuzzleBoard.MAX_ROWS || cols > SlidingPuzzleBoard.MAX_COLS) {
+            if (value < min_value || value > max_value) {
                 System.out.println("Invalid input!");
-                System.out.printf("The puzzle size must not exceed %d rows and %d columns.%n", SlidingPuzzleBoard.MAX_ROWS, SlidingPuzzleBoard.MAX_COLS);
+                System.out.printf("The input should be between %d and %d.%n", min_value, max_value);
                 continue;
             }
-
             break;
         }
-
-        return new int[] { rows, cols };
-
+        return value;
     }
+
+    public  String readDirectionOrExit(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input = readLineOrExit().toUpperCase();
+            if (input.equals("H") || input.equals("V")) {
+                return input;
+            }
+            System.out.println("Invalid direction. Please enter H or V.");
+        }
+    }
+
+    public String readStringOrExit(String prompt){
+            while (true) {
+                System.out.print(prompt);
+                String input = readLineOrExit();
+                if (!input.isEmpty()) {
+                    return input;
+                }
+                System.out.printf("Input cannot be empty. Please enter a valid string.");
+            }
+    }
+
+    
 
 
     // Method to read the user's move input and return the selected cell and the empty cell.
-    public SlidingPuzzleCell[] readMove(SlidingPuzzleBoard board){
+    public SlidingPuzzleCell[] readSlidingPuzzleMove(SlidingPuzzleBoard board){
         // int move;
         int maxValue = (board.getHeight()) * (board.getWidth())-1;
 
         while(true){
-            int move = InputCheck.readIntOrExit(scanner, String.format("Enter cell to move (1 to %d) >>> ", maxValue));
-
-            if (move < 1 || move > maxValue) {
-                System.out.printf("Invalid input! Values must be between 1 and %d (inclusive)\n", maxValue);
-                continue;
-            }
+            int move = readIntOrExit(String.format("Enter cell to move (1 to %d) >>> ", maxValue), 1, maxValue);
 
             SlidingPuzzleCell cell = null;
             SlidingPuzzleCell emptyCell = null;
@@ -95,34 +118,24 @@ public class Input{
     }
     
     // Method to prompt the user for starting a new game or exiting.
-    public boolean inputNewGame(){
+    public boolean inputYesOrExit(String prompt){
         //scanner.nextLine();
-        System.out.print("To play a new game type y/Y, to exit press any key >>> ");
-        //String newGame = scanner.nextLine();
-        String newGame = InputCheck.readLineOrExit(scanner);
-        if(newGame.equals("y") || newGame.equals("Y")){
+
+        System.out.print(prompt);
+        String input = readLineOrExit().toUpperCase();
+        if (input.equals("Y") ) {
             return true;
         }
-        else{
-            return false;
-        }
+        System.out.println("Exiting game. Goodbye!");
+        System.exit(0);
+
+        return false;
     }
+
 
     // Method to wait for the user to press any key.
-    public static void getAnyKey(){
-        new java.util.Scanner(System.in).nextLine();
-    }
-
-
-    // ------------------------------------------------------------------------------------------------------------------------------------------
-    // GameSelectionManager methods 
-    // ------------------------------------------------------------------------------------------------------------------------------------------
-
-    public String readGameSelection(){
-        //TODO : implement error handling 
-        System.out.print("Which game would you like to play? (Type 'sliding_puzzle' or 'dots_and_boxes') >>> ");
-        //return scanner.nextLine();
-        return InputCheck.readLineOrExit(scanner);
+    public void getAnyKey(){
+        scanner.nextLine();
     }
 
 

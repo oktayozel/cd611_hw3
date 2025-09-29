@@ -9,9 +9,7 @@ public class GameSelectionManager {
     private SlidingPuzzleGameManager slidingPuzzleGameManager;
     private Input input;
     public GameSelectionManager(){
-        Scanner scanner = new Scanner(System.in);                // Scanner
-        //this.input = new Input(scanner);
-        this.dotsAndBoxesGameManager = new DotsAndBoxesGameManager(scanner);
+        this.dotsAndBoxesGameManager = new DotsAndBoxesGameManager();
         this.slidingPuzzleGameManager = new SlidingPuzzleGameManager();
         this.input = new Input();
     }
@@ -21,17 +19,13 @@ public class GameSelectionManager {
     public SlidingPuzzleGameManager getSlidingPuzzleGameManager(){
         return this.slidingPuzzleGameManager;
     }
-    public String readGameSelection(){
-        return input.readGameSelection();
-    }
+
 
     public void runSelectedGame(){
 
-        String _selected_game = this.readGameSelection();
-
-        
-        if( _selected_game.equals("sliding_puzzle")  ){
-
+        int _selected_game = input.readIntOrExit("Which game would you like to play? (\n [1] for sliding_puzzle \n [2] for dots_and_boxes) \n >>> ", 1, 2);
+  
+        if( _selected_game == 1  ){
             boolean gameFirstOpen = true;
             while(true){
                 slidingPuzzleGameManager.initGame(gameFirstOpen);
@@ -42,7 +36,7 @@ public class GameSelectionManager {
             }
         }
 
-        if( _selected_game.equals("dots_and_boxes")  ){
+        if( _selected_game == 2 ){
             boolean gameFirstOpen = true;
             while (true) {
                 dotsAndBoxesGameManager.initGame(gameFirstOpen);

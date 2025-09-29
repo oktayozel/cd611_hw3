@@ -1,19 +1,21 @@
 package puzzles.games.dots_and_boxes_components;
 
 import java.util.Scanner;
-import puzzles.io.InputCheck;
+import puzzles.io.Input;
 
 // import puzzles.core.Board;
 
 public class DotsAndBoxesStart {
-    private Scanner scanner;
+    private Input input;
     private DotsAndBoxesPlayer player1;
     private DotsAndBoxesPlayer player2;
     private DotsAndBoxesBoard board;
     private DotsAndBoxesPlayer currentPlayer;
+    private int rows;
+    private int cols;
 
-    public DotsAndBoxesStart(Scanner scanner) {
-        this.scanner = scanner;
+    public DotsAndBoxesStart(Input input) {
+        this.input = input;
     }
 
     public void setup() {
@@ -24,19 +26,19 @@ public class DotsAndBoxesStart {
 
     private void initializePlayers() {
         System.out.print("Enter Player 1 name: ");
-        String name1 = InputCheck.readLineOrExit(scanner);
+        String name1 = input.readLineOrExit();
         player1 = new DotsAndBoxesPlayer(name1);
 
         System.out.print("Enter Player 2 name: ");
-        String name2 = InputCheck.readLineOrExit(scanner);
+        String name2 = input.readLineOrExit();
         player2 = new DotsAndBoxesPlayer(name2);
     }
 
     private void initializeBoard() {
-        //System.out.print("Enter number of rows: ");
-        int rows = InputCheck.readIntOrExit(scanner, "Enter number of rows: ");
-        //System.out.print("Enter number of columns: ");
-        int cols = InputCheck.readIntOrExit(scanner, "Enter number of columns: ");
+        int rows = input.readIntOrExit("Enter number of rows: ", 0, 10);
+        int cols = input.readIntOrExit("Enter number of columns: ", 0,10);
+        this.rows = rows;
+        this.cols = cols;
         board = new DotsAndBoxesBoard(rows, cols);
         currentPlayer = player1;
     }
@@ -49,14 +51,10 @@ public class DotsAndBoxesStart {
 
             boolean validMove = false;
             while (!validMove) {
-                //System.out.print("Enter row: ");
-                int row = InputCheck.readIntOrExit(scanner, "Enter row: ");
-
-                //System.out.print("Enter column: ");
-                int col = InputCheck.readIntOrExit(scanner, "Enter column: ");
-
-                System.out.print("Enter direction (H for horizontal right line, V for vertical down line): ");
-                String dir = InputCheck.readDirectionOrExit(scanner);
+                int row = input.readIntOrExit( "Enter row: ",0,this.rows );
+                int col = input.readIntOrExit( "Enter column: ",0,this.cols);
+                
+                String dir = input.readDirectionOrExit("Enter direction (H for horizontal right line, V for vertical down line): ");
 
                 validMove = board.claimEdge(row, col, dir, currentPlayer);
                 if (!validMove) {

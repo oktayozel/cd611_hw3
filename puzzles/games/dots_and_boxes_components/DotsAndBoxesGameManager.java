@@ -1,11 +1,17 @@
 package puzzles.games.dots_and_boxes_components;
 
-import java.util.Scanner;
+import puzzles.io.Input;
+import puzzles.io.Output;
 
 public class DotsAndBoxesGameManager {
-    private Scanner scanner;
     private boolean isRunning = true;
     private DotsAndBoxesStart game;
+    private Input input;
+
+
+    public DotsAndBoxesGameManager() {
+        this.input  = new Input();
+    }
 
     public void initGame(boolean firstTime) {
         if (firstTime) {
@@ -14,13 +20,9 @@ public class DotsAndBoxesGameManager {
         else {
             System.out.println("\n Starting a new round...");
         }
-        game = new DotsAndBoxesStart(scanner);
+        game = new DotsAndBoxesStart(input);
         game.reset(); 
         isRunning = true; //ensure game reload every time
-    }
-
-    public DotsAndBoxesGameManager(Scanner scanner) {
-        this.scanner = scanner;
     }
 
     public void startDotsAndBoxes(DotsAndBoxesStart game) {
@@ -37,15 +39,7 @@ public class DotsAndBoxesGameManager {
         System.out.println("1. Play again");
         System.out.println("2. Quit");
 
-        int choice = -1;
-        while (choice < 1 || choice > 2) {
-            System.out.print("Enter your choice (1 or 2): ");
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter 1 or 2.");
-            }
-        }
+        int choice = input.readIntOrExit("Enter your choice (1 or 2):", 1,2);
 
         if (choice == 1) {
             game.reset();
@@ -53,7 +47,6 @@ public class DotsAndBoxesGameManager {
             isRunning = false;
             System.out.println("Thanks for playing! Goodbye! ");
         }
-
     }
 
     public boolean runGame() {
@@ -71,15 +64,7 @@ public class DotsAndBoxesGameManager {
         System.out.println("1. Yes");
         System.out.println("2. No");
 
-        int choice = -1;
-        while (choice < 1 || choice > 2) {
-            System.out.print("Enter your choice (1 or 2): ");
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter 1 or 2.");
-            }
-        }
+        int choice = input.readIntOrExit("Enter your choice (1 or 2):", 1,2);
         return choice == 1;
     }
 
