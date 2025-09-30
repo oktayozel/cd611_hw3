@@ -1,8 +1,1 @@
-michael:2
-jackson:5
-sengun:3
-okt:1
-alperen:1
-john:2
-asfas:1
-oktay:8
+oktay,2,1,1,1,1

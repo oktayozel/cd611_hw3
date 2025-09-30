@@ -5,6 +5,7 @@ import puzzles.core.LeaderBoard;
 import puzzles.core.User;
 import puzzles.io.Input;
 import puzzles.io.Output;
+import puzzles.core.Settings;
 
 /*
  * This class manages the sliding puzzle game.
@@ -18,13 +19,15 @@ public class SlidingPuzzleGameManager extends GameManager {
     private User user;
     private String username;
     private LeaderBoard leaderBoard;
+    private Settings settings;
 
     // Constructor to initialize the game manager and its components.
-    public SlidingPuzzleGameManager() {
+    public SlidingPuzzleGameManager(Settings settings) {
         super();
         this.input  = new Input();
         this.output = new Output(this.input, "sliding_puzzle");
         this.leaderBoard = new LeaderBoard();
+        this.settings = settings;
     }
 
 
@@ -39,8 +42,8 @@ public class SlidingPuzzleGameManager extends GameManager {
             username = input.readStringOrExit("Enter a username >>> ");
 
         }
-        int rows = input.readIntOrExit(String.format("Hey %s Enter number of rows: ", username), 0, 10);
-        int cols = input.readIntOrExit(String.format("Hey %s Enter number of columns: ", username), 0, 10);
+        int rows = input.readIntOrExit(String.format("Hey %s Enter number of rows: ", username), settings.getMinBoardSize("SlidingPuzzle"), settings.getMaxBoardSize("SlidingPuzzle"));
+        int cols = input.readIntOrExit(String.format("Hey %s Enter number of columns: ", username), settings.getMinBoardSize("SlidingPuzzle"), settings.getMaxBoardSize("SlidingPuzzle"));
 
 
         if(gameFirstOpen == true){
@@ -63,7 +66,7 @@ public class SlidingPuzzleGameManager extends GameManager {
             board.swapCells(cellsToSwap[0], cellsToSwap[1]);
             user.incrementMoveCount();
         }
-        leaderBoard.incrementUser(user.getUsername());
+        leaderBoard.incrementTotal(user.getUsername());
         leaderBoard.saveLeaderBoard();
         output.displayCongratulations(user.getMoveCount(),leaderBoard);
         user.resetMoveCount();
