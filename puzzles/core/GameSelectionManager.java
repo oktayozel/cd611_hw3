@@ -13,11 +13,11 @@ public class GameSelectionManager {
     private Output output;
     private Settings settings;
     public GameSelectionManager(){
-        this.dotsAndBoxesGameManager = new DotsAndBoxesGameManager();
-        this.slidingPuzzleGameManager = new SlidingPuzzleGameManager();
+        this.settings = new Settings();
+        this.dotsAndBoxesGameManager = new DotsAndBoxesGameManager(settings);
+        this.slidingPuzzleGameManager = new SlidingPuzzleGameManager(settings);
         this.input = new Input();
         this.output = new Output(this.input);
-        this.settings = new Settings();
     }
     public DotsAndBoxesGameManager getDotsAndBoxesGameManager(){
         return this.dotsAndBoxesGameManager;

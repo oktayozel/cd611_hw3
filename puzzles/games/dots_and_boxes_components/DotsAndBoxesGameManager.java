@@ -2,10 +2,12 @@ package puzzles.games.dots_and_boxes_components;
 
 import puzzles.io.Input;
 import puzzles.io.Output;
+import puzzles.core.Settings;
 
 public class DotsAndBoxesGameManager {
     private boolean isRunning = true;
     private Input input;
+    private Settings settings;
     private Output output;
     private DotsAndBoxesPlayer player1;
     private DotsAndBoxesPlayer player2;
@@ -14,9 +16,10 @@ public class DotsAndBoxesGameManager {
     private int rows;
     private int cols;
 
-    public DotsAndBoxesGameManager() {
+    public DotsAndBoxesGameManager(Settings settings) {
         this.input  = new Input();
         this.output = new Output(this.input, "dots_and_boxes");
+        this.settings = settings;
     }
 
     public void initGame(boolean firstTime) {
@@ -90,8 +93,8 @@ public class DotsAndBoxesGameManager {
     }
 
     private void initializeBoard() {
-        int rows = input.readIntOrExit("Enter number of rows: ", 0, 10);
-        int cols = input.readIntOrExit("Enter number of columns: ", 0,10);
+        int rows = input.readIntOrExit("Enter number of rows: ", settings.getMinBoardSize("DotsAndBoxes"), settings.getMaxBoardSize("DotsAndBoxes"));
+        int cols = input.readIntOrExit("Enter number of columns: ", settings.getMinBoardSize("DotsAndBoxes"), settings.getMaxBoardSize("DotsAndBoxes"));
         this.rows = rows;
         this.cols = cols;
         board = new DotsAndBoxesBoard(rows, cols);

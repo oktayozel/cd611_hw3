@@ -5,6 +5,10 @@ package puzzles.core;
  */
 public class User{
     private String username;
+    private String email;
+    private int age;
+    private String name;
+    private String surname;
     private int moveCount;
 
     // Constructor to initialize the user with a username and zero move count.
