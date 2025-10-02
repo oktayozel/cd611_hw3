@@ -1,13 +1,17 @@
 package puzzles.games.dots_and_boxes_components;
 
+
+import puzzles.core.GameManager;
 import puzzles.core.Settings;
 import puzzles.io.Input;
 import puzzles.io.Output;
+import puzzles.core.LeaderBoard;
 
-public class DotsAndBoxesGameManager {
-    private boolean isRunning = true;
+
+public class DotsAndBoxesGameManager extends GameManager{
     private Input input;
     private Settings settings;
+
     private Output output;
     private DotsAndBoxesUser player1;
     private DotsAndBoxesUser player2;
@@ -17,71 +21,33 @@ public class DotsAndBoxesGameManager {
     private int cols;
 
     public DotsAndBoxesGameManager(Settings settings) {
-        //super();
         this.input  = new Input();
         this.output = new Output(this.input, "dots_and_boxes");
         this.settings = settings;
+        this.leaderBoard = new LeaderBoard();
+
     }
 
-    public void initGame(boolean firstTime) {
-        if (firstTime) {
-            output.printWelcomeMessage();
-            System.out.println("Welcome to Dots and Boxes!");
-        } 
-        else {
-            System.out.println("\n Starting a new round...");
-        }
+    @Override
+    public void initGame(boolean gameFirstOpen) {
+        leaderBoard.loadLeaderBoard();
         reset(); 
-        isRunning = true; //ensure game reload every time
-    }
-
-    public void startDotsAndBoxes() {
-        while (isRunning) {
-            setup();
-            play();
-            showResult();
-            promptNextAction();
-        }
-    }
-
-    private void promptNextAction() {
-        System.out.println("\nWhat would you like to do next?");
-        System.out.println("1. Play again with same size board");
-        System.out.println("2. Quit");
-
-        int choice = input.readIntOrExit("Enter your choice (1 or 2):", 1,2);
-
-        if (choice == 1) {
-            reset();
-        } else {
-            isRunning = false;
-            System.out.println("Thanks for playing! Goodbye! ");
-        }
-    }
-
-    public boolean runGame() {
-        while (isRunning) {
-            setup();
-            play();
-            showResult();
-            promptNextAction();
-        }
-        return askReplay(); // check play again
-    }
-
-    private boolean askReplay() {
-        System.out.println("Would you like to play another round?");
-        System.out.println("1. Yes");
-        System.out.println("2. No");
-
-        int choice = input.readIntOrExit("Enter your choice (1 or 2):", 1,2);
-        return choice == 1;
-    }
-
-    public void setup() {
-        System.out.println("\n Setting up Dots and Boxes...");
         initializePlayers();
         initializeBoard();
+    }
+
+
+    @Override
+    public boolean runGame() {
+        play();
+        showResult();
+        
+        return input.inputYesOrExit("Would you like to play another round? type y/Y to do so? to exit type exit ");
+    }
+
+     @Override
+    public boolean isGameEnd() {
+        return board.isFull(); 
     }
 
     private void initializePlayers() {
@@ -137,6 +103,7 @@ public class DotsAndBoxesGameManager {
         }
     }
 
+
     public void showResult() {
         board.display();
         int score1 = player1.getScore();
@@ -162,7 +129,10 @@ public class DotsAndBoxesGameManager {
     public void reset() {
         if (player1 != null) player1.resetScore();
         if (player2 != null) player2.resetScore();
-        if (player1 != null) initializeBoard(); 
+        board = null;
+        currentPlayer = null;
+        rows = 0;
+        cols = 0;
     }
 
     
