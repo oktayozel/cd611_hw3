@@ -16,8 +16,8 @@ public class DotsAndBoxesBox {
         this.owner = player;
     }
 
-    public String getOwnerName() {
-        return owner == null ? null : owner.getName();
+    public DotsAndBoxesPlayer getOwner() {
+        return owner;
     }
 
     public boolean hasTop() {

@@ -38,8 +38,8 @@ public class DotsAndBoxesBoard {
             System.out.print("    ");
             for (int c = 0; c < cols; c++) {
                 System.out.print(boxes[r][c].hasLeft() ? "│" : " ");
-                String owner = boxes[r][c].getOwnerName();
-                System.out.print(owner == null ? "  " : owner.substring(0, Math.min(2, owner.length())));
+                DotsAndBoxesPlayer owner = boxes[r][c].getOwner();
+                System.out.print(owner == null ? "  " : owner.getShortName());    
             }
             System.out.println(boxes[r][cols - 1].hasRight() ? "│" : " ");
         }
@@ -102,7 +102,7 @@ public class DotsAndBoxesBoard {
         // check finish the cube
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
-                if (boxes[r][c].isComplete() && boxes[r][c].getOwnerName() == null) {
+                if (boxes[r][c].isComplete() && boxes[r][c].getOwner() == null) {
                     boxes[r][c].setOwner(player);
                     player.addPoint();
                     lastMoveCompletedBox = true;

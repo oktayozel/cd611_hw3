@@ -2,10 +2,10 @@ package puzzles.games.sliding_puzzle_components;
 import java.util.Objects;
 import puzzles.core.GameManager;
 import puzzles.core.LeaderBoard;
+import puzzles.core.Settings;
 import puzzles.core.User;
 import puzzles.io.Input;
 import puzzles.io.Output;
-import puzzles.core.Settings;
 
 /*
  * This class manages the sliding puzzle game.
@@ -44,8 +44,6 @@ public class SlidingPuzzleGameManager extends GameManager {
         }
         int rows = input.readIntOrExit(String.format("Hey %s Enter number of rows: ", username), settings.getMinBoardSize("SlidingPuzzle"), settings.getMaxBoardSize("SlidingPuzzle"));
         int cols = input.readIntOrExit(String.format("Hey %s Enter number of columns: ", username), settings.getMinBoardSize("SlidingPuzzle"), settings.getMaxBoardSize("SlidingPuzzle"));
-
-
         if(gameFirstOpen == true){
             this.user = new User(username);
         }

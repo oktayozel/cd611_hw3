@@ -1,8 +1,6 @@
 package puzzles.io;
 
 import java.util.List;
-import java.util.Scanner;
-
 import puzzles.core.Cell;
 import puzzles.core.LeaderBoard;
 
@@ -75,9 +73,11 @@ public class Output{
     // Method to print the welcome message at the start of the game.
     public void printWelcomeMessage(){
         clearScreen();
-        System.out.println("Welcome to the Sliding Puzzle Game!");
-        System.out.println("You can swap adjacent cells to solve the puzzle.");
-        input.readLineOrExit(" Press enter to start...");
+        if (gameName.equals("sliding_puzzle")) {
+            System.out.println("Welcome to the Sliding Puzzle Game!");
+            System.out.println("You can swap adjacent cells to solve the puzzle.");
+            input.readLineOrExit(" Press enter to start...");
+        }
     }
     // Method to print the prompt asking which cell to move.
     public void printPromptInput(){
@@ -131,19 +131,19 @@ public class Output{
         }
 
         else if(gameName.equals("dots_and_boxes")) {
-            System.out.printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
-            System.out.printf("X                                                                                  X\n");
-            System.out.printf("X  XXXX                                             X    XXXXXX                    X\n");
-            System.out.printf("X  X   X                                            X    X    XX                   X\n");
-            System.out.printf("X  X    X           X    XXX                        X    X    XX                   X\n");
-            System.out.printf("X  X     X  XXXX  XXXXX X   X     XXXX   X XXX    XXX    XXXXXXXX    XXX   X    X  X\n");
-            System.out.printf("X  X     X XX  XX   X   X        XX X    XX  XX XX  X    XX     XX  XX XX   X  X   X\n");
-            System.out.printf("X  X     X X    X   X   XXXXX    X  XX   X    X X   X    X      XX  X   X    XX    X\n");
-            System.out.printf("X  X    X  XX  XX   X       X    X XXXX  X    X X   X    X     XX   XX  X   X  X   X\n");
-            System.out.printf("X  XXXXX    XXXX    X   XX XX    XXX  XX X    X  XXXX    XXXXXXX     XXX   X    X  X\n");
-            System.out.printf("X                        XXX                                                       X\n");
-            System.out.printf("X                                                                                  X\n");
-            System.out.printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");    
+            System.out.printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+            System.out.printf("X                                                                                                     X\n");
+            System.out.printf("X   XXXX                                             X     XXXXXX                                     X\n");
+            System.out.printf("X   X   X                                            X     X    XX                                    X\n");
+            System.out.printf("X   X    X          X    XXX                         X     X    XX                             XXX    X\n");
+            System.out.printf("X   X     X  XXX  XXXXX X   X      XXXX   X XXX    XXX     XXXXXXXX    XXX   X    X   XXXXX   X   X   X\n");
+            System.out.printf("X   X     X X   X   X   X         X   x   XX  XX XX  X     XX     XX  X   X   X  X   X     X  X       X\n");
+            System.out.printf("X   X     X X   X   X   XXXXX     X   X   X    X X   X     X      XX  X   X    XX    XXXXXXX  XXXXX   X\n");
+            System.out.printf("X   X    X  X   X   X       X     X   XX  X    X X   X     X     XX   X   X   X  X   X            X   X\n");
+            System.out.printf("X   XXXXX    XXX    X   X   X      XXX XX X    X  XXXX     XXXXXXX     XXX   X    X   XXXXX   X   X   X\n");
+            System.out.printf("X                        XXX                                                                   XXX    X\n");
+            System.out.printf("X                                                                                                     X\n");
+            System.out.printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");    
         }
         
         for(int i = 0 ; i < 10 ; i++){

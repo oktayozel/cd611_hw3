@@ -1,8 +1,8 @@
 package puzzles.games.dots_and_boxes_components;
 
+import puzzles.core.Settings;
 import puzzles.io.Input;
 import puzzles.io.Output;
-import puzzles.core.Settings;
 
 public class DotsAndBoxesGameManager {
     private boolean isRunning = true;
@@ -17,6 +17,7 @@ public class DotsAndBoxesGameManager {
     private int cols;
 
     public DotsAndBoxesGameManager(Settings settings) {
+        //super();
         this.input  = new Input();
         this.output = new Output(this.input, "dots_and_boxes");
         this.settings = settings;
@@ -24,6 +25,7 @@ public class DotsAndBoxesGameManager {
 
     public void initGame(boolean firstTime) {
         if (firstTime) {
+            output.printWelcomeMessage();
             System.out.println("Welcome to Dots and Boxes!");
         } 
         else {
@@ -44,7 +46,7 @@ public class DotsAndBoxesGameManager {
 
     private void promptNextAction() {
         System.out.println("\nWhat would you like to do next?");
-        System.out.println("1. Play again");
+        System.out.println("1. Play again with same size board");
         System.out.println("2. Quit");
 
         int choice = input.readIntOrExit("Enter your choice (1 or 2):", 1,2);
@@ -85,16 +87,20 @@ public class DotsAndBoxesGameManager {
     private void initializePlayers() {
         System.out.print("Enter Player 1 name: ");
         String name1 = input.readLineOrExit();
-        player1 = new DotsAndBoxesPlayer(name1);
+        player1 = new DotsAndBoxesPlayer(name1, "P1");
 
         System.out.print("Enter Player 2 name: ");
         String name2 = input.readLineOrExit();
-        player2 = new DotsAndBoxesPlayer(name2);
+        player2 = new DotsAndBoxesPlayer(name2, "P2");
     }
 
     private void initializeBoard() {
         int rows = input.readIntOrExit("Enter number of rows: ", settings.getMinBoardSize("DotsAndBoxes"), settings.getMaxBoardSize("DotsAndBoxes"));
         int cols = input.readIntOrExit("Enter number of columns: ", settings.getMinBoardSize("DotsAndBoxes"), settings.getMaxBoardSize("DotsAndBoxes"));
+        System.out.println("-------------------------------------------------------------------------------- ");
+        System.out.println("Hint: Each time you enter a point, you will be asked to choose H or V. ");
+        System.out.println("H places a horizontal line to the right of that point. ");
+        System.out.println("V places a vertical line below that point. ");
         this.rows = rows;
         this.cols = cols;
         board = new DotsAndBoxesBoard(rows, cols);
@@ -105,8 +111,12 @@ public class DotsAndBoxesGameManager {
     public void play() {
         while (!board.isFull()) {
             board.display();
-            System.out.println(currentPlayer.getName() + "'s turn. Score: " + currentPlayer.getScore());
-
+            if (currentPlayer == player1){
+                System.out.println("Player1 " + currentPlayer.getName() + "'s turn. Score: " + currentPlayer.getScore());
+            }
+            else{
+                System.out.println("Player2 " + currentPlayer.getName() + "'s turn. Score: " + currentPlayer.getScore());
+            }
             boolean validMove = false;
             while (!validMove) {
                 int row = input.readIntOrExit( "Enter row: ",0,this.rows );
@@ -121,6 +131,7 @@ public class DotsAndBoxesGameManager {
             }
 
             if (!board.lastMoveCompletedBox()) {
+                System.out.println(" ");
                 switchPlayer();
             }
         }
