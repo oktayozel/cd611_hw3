@@ -1,4 +1,7 @@
 package puzzles.core;
+
+import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
+
 /*
  * This abstract class represents a cell in the sliding puzzle game.
  * It contains properties for the cell's row and column indices, as well as its value.
@@ -8,6 +11,8 @@ public abstract class Cell{
     private final int rowIndex;
     private final int colIndex;
     private String value;
+    private DotsAndBoxesUser owner = null;
+
     // Constructor to initialize the cell with row index, column index, and value.
     public Cell(int rowIndex, int colIndex, String value){
         this.rowIndex = rowIndex;
@@ -37,4 +42,13 @@ public abstract class Cell{
     public String toString() {
         return value == null ? " " :value.toString();
     }
+    public void setOwner(DotsAndBoxesUser player) {
+        this.owner = player;
+        setValue(player.getShortName());
+    }
+
+    public DotsAndBoxesUser getOwner() {
+        return owner;
+    }
+
 }   
