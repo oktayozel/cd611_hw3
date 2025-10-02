@@ -9,10 +9,10 @@ public class DotsAndBoxesGameManager {
     private Input input;
     private Settings settings;
     private Output output;
-    private DotsAndBoxesPlayer player1;
-    private DotsAndBoxesPlayer player2;
+    private DotsAndBoxesUser player1;
+    private DotsAndBoxesUser player2;
     private DotsAndBoxesBoard board;
-    private DotsAndBoxesPlayer currentPlayer;
+    private DotsAndBoxesUser currentPlayer;
     private int rows;
     private int cols;
 
@@ -87,11 +87,11 @@ public class DotsAndBoxesGameManager {
     private void initializePlayers() {
         System.out.print("Enter Player 1 name: ");
         String name1 = input.readLineOrExit();
-        player1 = new DotsAndBoxesPlayer(name1, "P1");
+        player1 = new DotsAndBoxesUser(name1, "P1");
 
         System.out.print("Enter Player 2 name: ");
         String name2 = input.readLineOrExit();
-        player2 = new DotsAndBoxesPlayer(name2, "P2");
+        player2 = new DotsAndBoxesUser(name2, "P2");
     }
 
     private void initializeBoard() {
@@ -112,10 +112,10 @@ public class DotsAndBoxesGameManager {
         while (!board.isFull()) {
             board.display();
             if (currentPlayer == player1){
-                System.out.println("Player1 " + currentPlayer.getName() + "'s turn. Score: " + currentPlayer.getScore());
+                System.out.println("Player1 " + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
             }
             else{
-                System.out.println("Player2 " + currentPlayer.getName() + "'s turn. Score: " + currentPlayer.getScore());
+                System.out.println("Player2 " + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
             }
             boolean validMove = false;
             while (!validMove) {
@@ -143,13 +143,13 @@ public class DotsAndBoxesGameManager {
         int score2 = player2.getScore();
 
         System.out.println("\nGame Over!");
-        System.out.println(player1.getName() + ": " + score1 + " points");
-        System.out.println(player2.getName() + ": " + score2 + " points");
+        System.out.println(player1.getUsername() + ": " + score1 + " points");
+        System.out.println(player2.getUsername() + ": " + score2 + " points");
 
         if (score1 > score2) {
-            System.out.println(player1.getName() + " wins!");
+            System.out.println(player1.getUsername() + " wins!");
         } else if (score2 > score1) {
-            System.out.println(player2.getName() + " wins!");
+            System.out.println(player2.getUsername() + " wins!");
         } else {
             System.out.println("It's a tie!");
         }
