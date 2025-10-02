@@ -1,23 +1,19 @@
 package puzzles.games.dots_and_boxes_components;
 
-public class DotsAndBoxesBox {
+import puzzles.core.Cell;
 
+public class DotsAndBoxesCell extends Cell {
     private boolean top = false;
     private boolean bottom = false;
     private boolean left = false;
     private boolean right = false;
-    private DotsAndBoxesPlayer owner = null;
+
+    public DotsAndBoxesCell(int rowIndex, int colIndex) {
+        super(rowIndex, colIndex, null); 
+    }
 
     public boolean isComplete() {
         return top && bottom && left && right;
-    }
-
-    public void setOwner(DotsAndBoxesPlayer player) {
-        this.owner = player;
-    }
-
-    public DotsAndBoxesPlayer getOwner() {
-        return owner;
     }
 
     public boolean hasTop() {
@@ -51,5 +47,4 @@ public class DotsAndBoxesBox {
     public void setRight(boolean value) {
         this.right = value;
     }
-    
 }

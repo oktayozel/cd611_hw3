@@ -10,6 +10,7 @@ public class User{
     private String name;
     private String surname;
     private int moveCount;
+    private int score;
 
     // Constructor to initialize the user with a username and zero move count.
     public User(String username){
@@ -32,4 +33,14 @@ public class User{
     public String getUsername(){
         return username;
     }
+    public int getScore() {
+        return score;
+    }
+    public void addPoint() {
+        score++;
+    }
+    public void resetScore() {
+        score = 0;
+    }
+
 }

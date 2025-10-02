@@ -3,17 +3,17 @@ package puzzles.games.dots_and_boxes_components;
 // Board.java
 public class DotsAndBoxesBoard {
     private int rows, cols;
-    private DotsAndBoxesBox[][] boxes;
+    private DotsAndBoxesCell[][] boxes;
     private boolean lastMoveCompletedBox;
 
     public DotsAndBoxesBoard(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
-        boxes = new DotsAndBoxesBox[rows][cols];
+        boxes = new DotsAndBoxesCell[rows][cols];
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
-                boxes[r][c] = new DotsAndBoxesBox();
+                boxes[r][c] = new DotsAndBoxesCell(r, c);
             }
         }
     }
@@ -38,7 +38,7 @@ public class DotsAndBoxesBoard {
             System.out.print("    ");
             for (int c = 0; c < cols; c++) {
                 System.out.print(boxes[r][c].hasLeft() ? "│" : " ");
-                DotsAndBoxesPlayer owner = boxes[r][c].getOwner();
+                DotsAndBoxesUser owner = boxes[r][c].getOwner();
                 System.out.print(owner == null ? "  " : owner.getShortName());    
             }
             System.out.println(boxes[r][cols - 1].hasRight() ? "│" : " ");
@@ -54,7 +54,7 @@ public class DotsAndBoxesBoard {
     }
 
 
-    public boolean claimEdge(int row, int col, String direction, DotsAndBoxesPlayer player) {
+    public boolean claimEdge(int row, int col, String direction, DotsAndBoxesUser player) {
         lastMoveCompletedBox = false;
 
         if(direction.equals("H")) {
