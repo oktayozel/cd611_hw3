@@ -125,4 +125,10 @@ public class DotsAndBoxesBoard {
     public boolean lastMoveCompletedBox() {
         return lastMoveCompletedBox;
     }
+    public int getRows(){
+        return this.rows;
+    }
+    public int getCols(){
+        return this.cols;
+    }
 }

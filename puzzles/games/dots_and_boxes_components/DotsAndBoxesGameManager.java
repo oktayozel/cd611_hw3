@@ -40,32 +40,17 @@ public class DotsAndBoxesGameManager extends GameManager{
     @Override
     public boolean runGame() {
         while (!board.isFull()) {
-            output.clearScreen();
-            board.display();
-            if (currentPlayer == player1){
-                System.out.println("Player1 " + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
-            }
-            else{
-                System.out.println("Player2 " + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
-            }
-            boolean validMove = false;
-            while (!validMove) {
-                int row = input.readIntOrExit( "Enter row: ",0,this.rows );
-                int col = input.readIntOrExit( "Enter column: ",0,this.cols);
-                
-                String dir = input.readDirectionOrExit("Enter direction (H for horizontal right line, V for vertical down line): ");
+            output.displayNextScene(board ,currentPlayer,(currentPlayer == player1) ? "player1" : "player2");
 
-                validMove = board.claimEdge(row, col, dir, currentPlayer);
-                if (!validMove) {
-                    System.out.println("Invalid move. Try again.");
-                }
-            }
+            input.readDotsAndBoxesMove(board, currentPlayer);
+
             if (!board.lastMoveCompletedBox()) {
                 System.out.println(" ");
                 switchPlayer();
             }
-        }
 
+        }
+        
         String result = showResult();
         if(result.equals("player1") ){
             leaderBoard.recordDotsAndBoxesResult(player1.getUsername(),true);
