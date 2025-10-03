@@ -3,6 +3,8 @@ package puzzles.io;
 import java.util.List;
 import puzzles.core.Cell;
 import puzzles.core.LeaderBoard;
+import puzzles.games.dots_and_boxes_components.DotsAndBoxesBoard;
+import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
 
 /*
  * This class handles output for the sliding puzzle game.
@@ -89,17 +91,28 @@ public class Output{
     // Method to print the prompt asking which cell to move.
 
 
-    public void printPromptInput(){
-        System.out.println("\nWhich cell do you want to move?(example : 2)");
-    }
 
 
+
+    
     // Method to display the next scene after a move, showing the updated board and move count.
     public void displayNextScene(Cell[][] board, int moveCount){
         clearScreen();
         printBoard(board,moveCount);
-        printPromptInput();
     }
+
+
+    public void displayNextScene(DotsAndBoxesBoard board, DotsAndBoxesUser currentPlayer  , String turn){
+        clearScreen();
+        board.display();
+        if (turn.equals("player1")){
+                System.out.println("Player1 " + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
+        }
+        else{
+            System.out.println("Player2 " + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
+        }
+    }
+
     // Method to display the congratulations message upon solving the puzzle and show the leaderboard.
     public void displayCongratulations(int moveCount, LeaderBoard leaderBoard){
         clearScreen();
