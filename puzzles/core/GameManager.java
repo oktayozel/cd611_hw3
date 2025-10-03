@@ -16,6 +16,10 @@ public abstract class GameManager{
     }
 
     public abstract void initGame(boolean gameFirstOpen);
+    protected abstract void initializeBoard();
+    
+    protected abstract void initializePlayers(boolean gameFirstOpen);
+
     public abstract boolean runGame();
     public abstract boolean isGameEnd();
 

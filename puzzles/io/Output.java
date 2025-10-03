@@ -21,6 +21,7 @@ public class Output{
         this.gameName = gameName.toLowerCase();
     }
 
+
     // Helper method to print a line separator based on column count and spacing.
     private void printLineHelper(int colCount, int spacing){
         System.out.print("\n ");
@@ -33,6 +34,7 @@ public class Output{
         }
         System.out.print(" ");
     }
+
     // Helper method to print the value of a cell with appropriate spacing.
     public void printCellValue(Cell c,int spacing){
         String toPrint = c.getValue();
@@ -75,14 +77,23 @@ public class Output{
         clearScreen();
         if (gameName.equals("sliding_puzzle")) {
             System.out.println("Welcome to the Sliding Puzzle Game!");
-            System.out.println("You can swap adjacent cells to solve the puzzle.");
+            System.out.println("Swap adjacent cells to order them.");
+            input.readLineOrExit(" Press enter to start...");
+        }
+        if (gameName.equals("dots_and_boxes")) {
+            System.out.println("Welcome to the Dots and Boxes Game!");
+            System.out.println("Be the one who puts the last piece to conquer as much boxes as you can. Enjoy! ");
             input.readLineOrExit(" Press enter to start...");
         }
     }
     // Method to print the prompt asking which cell to move.
+
+
     public void printPromptInput(){
         System.out.println("\nWhich cell do you want to move?(example : 2)");
     }
+
+
     // Method to display the next scene after a move, showing the updated board and move count.
     public void displayNextScene(Cell[][] board, int moveCount){
         clearScreen();

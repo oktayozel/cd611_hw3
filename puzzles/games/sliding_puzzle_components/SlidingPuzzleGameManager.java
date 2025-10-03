@@ -37,22 +37,25 @@ public class SlidingPuzzleGameManager extends GameManager {
 
         leaderBoard.loadLeaderBoard();
 
+        initializePlayers(gameFirstOpen);
+        initializeBoard();
+
+    }
+
+    @Override
+    protected void initializePlayers(boolean gameFirstOpen) {
         if(gameFirstOpen == true){
             output.printWelcomeMessage();
             username = input.readStringOrExit("Enter a username >>> ");
-
-        }
-        int rows = input.readIntOrExit(String.format("Hey %s Enter number of rows: ", username), settings.getMinBoardSize("SlidingPuzzle"), settings.getMaxBoardSize("SlidingPuzzle"));
-        int cols = input.readIntOrExit(String.format("Hey %s Enter number of columns: ", username), settings.getMinBoardSize("SlidingPuzzle"), settings.getMaxBoardSize("SlidingPuzzle"));
-        if(gameFirstOpen == true){
             this.user = new User(username);
         }
-        while(true){
-            this.board = new SlidingPuzzleBoard(rows, cols);
-            if(isGameEnd() == false){
-                break;
-            }
-        }
+    }
+
+    @Override
+    protected void initializeBoard(){
+        int rows = input.readIntOrExit(String.format("Hey %s Enter number of rows: ", username), settings.getMinBoardSize("SlidingPuzzle"), settings.getMaxBoardSize("SlidingPuzzle"));
+        int cols = input.readIntOrExit(String.format("Hey %s Enter number of columns: ", username), settings.getMinBoardSize("SlidingPuzzle"), settings.getMaxBoardSize("SlidingPuzzle"));
+        this.board = new SlidingPuzzleBoard(rows, cols);
     }
 
     // Run the main game loop, handling user moves and checking for game completion.
