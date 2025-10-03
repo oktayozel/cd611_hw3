@@ -1,7 +1,13 @@
 package puzzles.io;
 import java.util.Scanner;
+
+import puzzles.games.dots_and_boxes_components.DotsAndBoxesBoard;
+import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
 import puzzles.games.sliding_puzzle_components.SlidingPuzzleBoard;
 import puzzles.games.sliding_puzzle_components.SlidingPuzzleCell;
+import puzzles.games.dots_and_boxes_components.DotsAndBoxesBoard;
+import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
+
 
 /*
  * This class handles user input for the sliding puzzle game.
@@ -88,6 +94,7 @@ public class Input{
 
     // Method to read the user's move input and return the selected cell and the empty cell.
     public SlidingPuzzleCell[] readSlidingPuzzleMove(SlidingPuzzleBoard board){
+        System.out.println("\nWhich cell do you want to move?(example : 2)");
         // int move;
         int maxValue = (board.getHeight()) * (board.getWidth())-1;
 
@@ -115,6 +122,20 @@ public class Input{
             return new SlidingPuzzleCell[]{cell, emptyCell};
         }
 
+    }
+    public void  readDotsAndBoxesMove(DotsAndBoxesBoard board, DotsAndBoxesUser currentPlayer ){
+        boolean validMove = false;
+        while (!validMove) {
+            int row = readIntOrExit( "Enter row: ",0,board.getRows() );
+            int col = readIntOrExit( "Enter column: ",0,board.getCols());
+            
+            String dir = readDirectionOrExit("Enter direction (H for horizontal right line, V for vertical down line): ");
+
+            validMove = board.claimEdge(row, col, dir, currentPlayer);
+            if (!validMove) {
+                System.out.println("Invalid move. Try again.");
+            }
+        }
     }
     
     // Method to prompt the user for starting a new game or exiting.

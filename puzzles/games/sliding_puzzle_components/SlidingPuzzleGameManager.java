@@ -34,7 +34,6 @@ public class SlidingPuzzleGameManager extends GameManager {
     // Initialize the game by loading the leaderboard, getting user input, and setting up the board.
     @Override
     public void initGame(boolean gameFirstOpen) {
-
         leaderBoard.loadLeaderBoard();
 
         initializePlayers(gameFirstOpen);
