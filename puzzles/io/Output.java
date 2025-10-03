@@ -96,10 +96,13 @@ public class Output{
 
     // Method to display the next scene after a move, showing the updated board and move count.
     public void displayNextScene(Cell[][] board, int moveCount){
-        clearScreen();
-        printBoard(board,moveCount);
-        printPromptInput();
+        if(gameName.equals("sliding_puzzle")){
+            clearScreen();
+            printBoard(board,moveCount);
+            printPromptInput();
+        } 
     }
+
     // Method to display the congratulations message upon solving the puzzle and show the leaderboard.
     public void displayCongratulations(int moveCount, LeaderBoard leaderBoard){
         clearScreen();

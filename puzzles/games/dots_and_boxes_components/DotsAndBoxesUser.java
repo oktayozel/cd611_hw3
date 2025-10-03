@@ -13,7 +13,7 @@ public class DotsAndBoxesUser extends User {
     public String getShortName() {
         return id;
     }
-
+    
     @Override
     public String toString() {
         return getUsername() + " (" + getScore() + " points)";

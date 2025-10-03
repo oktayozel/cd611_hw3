@@ -3,49 +3,65 @@ package puzzles.games.dots_and_boxes_components;
 import puzzles.core.Cell;
 
 public class DotsAndBoxesCell extends Cell {
-    private boolean top = false;
-    private boolean bottom = false;
-    private boolean left = false;
-    private boolean right = false;
+    private Edge top = new Edge();
+    private Edge bottom = new Edge();
+    private Edge left = new Edge();
+    private Edge right = new Edge();
 
     public DotsAndBoxesCell(int rowIndex, int colIndex) {
         super(rowIndex, colIndex, null); 
     }
 
     public boolean isComplete() {
-        return top && bottom && left && right;
+        return top.isClaimed() && bottom.isClaimed() && left.isClaimed() && right.isClaimed();
     }
 
     public boolean hasTop() {
-        return top;
+        return top.isClaimed();
     }
 
-    public void setTop(boolean value) {
-        this.top = value;
+    public void setTop(DotsAndBoxesUser player) {
+        top.claim(player);
     }
 
     public boolean hasBottom() {
-        return bottom;
+        return bottom.isClaimed();
     }
 
-    public void setBottom(boolean value) {
-        this.bottom = value;
+    public void setBottom(DotsAndBoxesUser player) {
+        bottom.claim(player);
     }
 
     public boolean hasLeft() {
-        return left;
+        return left.isClaimed();
     }
 
-    public void setLeft(boolean value) {
-        this.left = value;
+    public void setLeft(DotsAndBoxesUser player) {
+        left.claim(player);
     }
 
     public boolean hasRight() {
-        return right;
+        return right.isClaimed();
     }
 
-    public void setRight(boolean value) {
-        this.right = value;
+    public void setRight(DotsAndBoxesUser player) {
+        right.claim(player);
+    }
+
+    public DotsAndBoxesUser getTopOwner() {
+        return top.getOwner();
+    }
+
+    public DotsAndBoxesUser getBottomOwner() {
+        return bottom.getOwner();
+    }
+
+    public DotsAndBoxesUser getLeftOwner() {
+        return left.getOwner();
+    }
+
+    public DotsAndBoxesUser getRightOwner() {
+        return right.getOwner();
     }
 
     private static class Edge {
