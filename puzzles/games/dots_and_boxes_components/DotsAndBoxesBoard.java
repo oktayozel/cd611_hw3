@@ -52,7 +52,7 @@ public class DotsAndBoxesBoard {
                 System.out.print(owner == null ? "  " : owner.getShortName());    
             }
             System.out.printf("%s", getColoredLine(boxes[r][cols - 1].hasRight(), boxes[r][cols - 1].getRightOwner(), "V"));
-
+            System.out.println();
         }
 
         // lowest line
