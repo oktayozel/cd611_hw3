@@ -66,9 +66,16 @@ public class DotsAndBoxesGameManager extends GameManager{
             }
         }
 
-        showResult();
-        
-        return input.inputYesOrExit("Would you like to play another round? type y/Y to do so? to exit type exit ");
+        String result = showResult();
+        if(result.equals("player1") ){
+            leaderBoard.recordDotsAndBoxesResult(player1.getUsername(),true);
+            leaderBoard.recordDotsAndBoxesResult(player2.getUsername(),false);
+        }
+        else if(result.equals("player2") ){
+            leaderBoard.recordDotsAndBoxesResult(player1.getUsername(),false);
+            leaderBoard.recordDotsAndBoxesResult(player2.getUsername(),true);
+        }
+        return input.inputYesOrExit("To play a new game type y/Y, to exit press any key >>> \n To go back to main menu type m/M to \n any other input will end the game.");
     }
 
      @Override
@@ -104,7 +111,7 @@ public class DotsAndBoxesGameManager extends GameManager{
         currentPlayer = player1;
     }
 
-    public void showResult() {
+    public String showResult() {
         board.display();
         int score1 = player1.getScore();
         int score2 = player2.getScore();
@@ -115,10 +122,13 @@ public class DotsAndBoxesGameManager extends GameManager{
 
         if (score1 > score2) {
             System.out.println(player1.getUsername() + " wins!");
+            return "player1";
         } else if (score2 > score1) {
             System.out.println(player2.getUsername() + " wins!");
+            return "player2";
         } else {
             System.out.println("It's a tie!");
+            return "draw";
         }
     }
 

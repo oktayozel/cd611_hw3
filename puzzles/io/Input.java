@@ -126,9 +126,11 @@ public class Input{
         if (input.equals("Y") ) {
             return true;
         }
+        if (input.equals("M")){
+            return false;
+        }
         System.out.println("Exiting game. Goodbye!");
         System.exit(0);
-
         return false;
     }
 

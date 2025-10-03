@@ -28,28 +28,29 @@ public class GameSelectionManager {
 
 
     public void runSelectedGame() {
-
-        output.displaySupportedGames(settings.getSupportedGames());
-        int _selected_game = input.readIntOrExit("Which game would you like to play? \n >>> ", 1, 2);
-  
-        if (_selected_game == 1) {
-            boolean gameFirstOpen = true;
-            while (true) {
-                slidingPuzzleGameManager.initGame(gameFirstOpen);
-                gameFirstOpen = false;
-                if (!slidingPuzzleGameManager.runGame()) {
-                    break;
+        while(true){
+            output.displaySupportedGames(settings.getSupportedGames());
+            int _selected_game = input.readIntOrExit("Which game would you like to play? \nYou can simply type exit to finish the game  >>> ", 1, 2);
+            
+            if (_selected_game == 1) {
+                boolean gameFirstOpen = true;
+                while (true) {
+                    slidingPuzzleGameManager.initGame(gameFirstOpen);
+                    gameFirstOpen = false;
+                    if (!slidingPuzzleGameManager.runGame()) {
+                        break;
+                    }
                 }
             }
-        }
 
-        if (_selected_game == 2) {
-            boolean gameFirstOpen = true;
-            while (true) {
-                dotsAndBoxesGameManager.initGame(gameFirstOpen);
-                gameFirstOpen = false;
-                if (!dotsAndBoxesGameManager.runGame()) {
-                    break;
+            if (_selected_game == 2) {
+                boolean gameFirstOpen = true;
+                while (true) {
+                    dotsAndBoxesGameManager.initGame(gameFirstOpen);
+                    gameFirstOpen = false;
+                    if (!dotsAndBoxesGameManager.runGame()) {
+                        break;
+                    }
                 }
             }
         }

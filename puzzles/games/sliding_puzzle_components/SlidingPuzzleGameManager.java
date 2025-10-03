@@ -67,11 +67,11 @@ public class SlidingPuzzleGameManager extends GameManager {
             board.swapCells(cellsToSwap[0], cellsToSwap[1]);
             user.incrementMoveCount();
         }
-        leaderBoard.incrementTotal(user.getUsername());
-        leaderBoard.saveLeaderBoard();
+        leaderBoard.incrementSlidingPuzzlesPlayed(user.getUsername());
+
         output.displayCongratulations(user.getMoveCount(),leaderBoard);
         user.resetMoveCount();
-        return input.inputYesOrExit("To play a new game type y/Y, to exit press any key >>> ");
+        return input.inputYesOrExit("To play a new game type y/Y, to exit press any key >>> \nTo go back to main menu type m/M to\n any other input will end the game.");
     }
 
     // Check if the game has ended by verifying if the board is in the solved state.
