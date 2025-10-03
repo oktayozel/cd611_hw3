@@ -2,11 +2,10 @@ package puzzles.games.dots_and_boxes_components;
 
 
 import puzzles.core.GameManager;
+import puzzles.core.LeaderBoard;
 import puzzles.core.Settings;
-import puzzles.core.User;
 import puzzles.io.Input;
 import puzzles.io.Output;
-import puzzles.core.LeaderBoard;
 
 
 public class DotsAndBoxesGameManager extends GameManager{
@@ -41,6 +40,7 @@ public class DotsAndBoxesGameManager extends GameManager{
     @Override
     public boolean runGame() {
         while (!board.isFull()) {
+            output.clearScreen();
             board.display();
             if (currentPlayer == player1){
                 System.out.println("Player1 " + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
