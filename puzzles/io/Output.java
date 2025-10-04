@@ -23,6 +23,70 @@ public class Output{
         this.gameName = gameName.toLowerCase();
     }
 
+    public void displayAnimation(){
+        String[] animation = {
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "              ,---------------------------,",
+        "              |  /---------------------\\  |",
+        "              | |                       | |",
+        "              | |     Welcome to        | |",
+        "              | |      CS-611           | |",
+        "              | |       Games           | |",
+        "              | |                       | |",
+        "              |  \\_____________________/  |",
+        "              |___________________________|",
+        "            ,---\\_____     []     _______/------,",
+        "          /         /______________\\           /|",
+        "        /___________________________________ /  | ___",
+        "        |                                   |   |    )",
+        "        |  _ _ _                 [-------]  |   |   (",
+        "        |  o o o                 [-------]  |  /    _)_",
+        "        |__________________________________ |/     /  /",
+        "    /-------------------------------------/|      ( )/",
+        "  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /",
+        "/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /",
+        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ",    
+        "                                             ", 
+        };
+        for(String line : animation){
+            System.out.println(line);
+            try {
+                Thread.sleep(100); 
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+
+
+
+
 
     // Helper method to print a line separator based on column count and spacing.
     private void printLineHelper(int colCount, int spacing){
@@ -88,11 +152,6 @@ public class Output{
             input.readLineOrExit(" Press enter to start...");
         }
     }
-    // Method to print the prompt asking which cell to move.
-
-
-
-
 
     
     // Method to display the next scene after a move, showing the updated board and move count.
@@ -114,29 +173,54 @@ public class Output{
     }
 
     // Method to display the congratulations message upon solving the puzzle and show the leaderboard.
-    public void displayCongratulations(int moveCount, LeaderBoard leaderBoard){
+    public void displayCongratulations(int moveCount){
         clearScreen();
         System.out.printf("!!!!!               Congratulations             !!!!!\n\n You solved the puzzle in %d moves!\n\n", moveCount); 
         for(int i = 0 ; i < 10 ; i++){
             System.out.printf("\n");
             try {
-                Thread.sleep(1000);
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        printLeaderBoard(leaderBoard);
-        
     }
+
+    public String displayCongratulations(DotsAndBoxesBoard board, DotsAndBoxesUser player1, DotsAndBoxesUser player2){
+        board.display();
+        int score1 = player1.getScore();
+        int score2 = player2.getScore();
+
+        System.out.println("\nGame is Over!");
+        System.out.println(player1.getUsername() + ": " + score1 + " points");
+        System.out.println(player2.getUsername() + ": " + score2 + " points");
+
+        if (score1 > score2) {
+            System.out.println(player1.getUsername() + " wins!");
+            return "player1";
+        } else if (score2 > score1) {
+            System.out.println(player2.getUsername() + " wins!");
+            return "player2";
+        } else {
+            System.out.println("It's a tie!");
+            return "draw";
+        }
+
+    }
+
+    public void displayNEmptyLines(int N){
+        for(int i = 0 ; i < N ; i++){
+            System.out.printf("\n");
+        }
+    }
+
     // Static method to clear the console screen by printing new lines and a decorative header.
     public void clearScreen(){
-        for(int i = 0 ; i < 100 ; i++){
-            System.out.printf("\n");
-        }
+
+        displayNEmptyLines(100);
         System.out.printf("----------------------------------------Adjust your window size till it you don't see the this line------------------------------------------------");
-        for(int i = 0 ; i < 10 ; i++){
-            System.out.printf("\n");
-        }
+        displayNEmptyLines(10);
+
 
         if (gameName.equals("sliding_puzzle")) {
             System.out.printf("############################################################################################################################################\n");
@@ -155,27 +239,26 @@ public class Output{
         }
 
         else if(gameName.equals("dots_and_boxes")) {
-            System.out.printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+            System.out.printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
             System.out.printf("X                                                                                                     X\n");
-            System.out.printf("X   XXXX                                             X     XXXXXX                                     X\n");
-            System.out.printf("X   X   X                                            X     X    XX                                    X\n");
-            System.out.printf("X   X    X          X    XXX                         X     X    XX                             XXX    X\n");
-            System.out.printf("X   X     X  XXX  XXXXX X   X      XXXX   X XXX    XXX     XXXXXXXX    XXX   X    X   XXXXX   X   X   X\n");
-            System.out.printf("X   X     X X   X   X   X         X   x   XX  XX XX  X     XX     XX  X   X   X  X   X     X  X       X\n");
-            System.out.printf("X   X     X X   X   X   XXXXX     X   X   X    X X   X     X      XX  X   X    XX    XXXXXXX  XXXXX   X\n");
-            System.out.printf("X   X    X  X   X   X       X     X   XX  X    X X   X     X     XX   X   X   X  X   X            X   X\n");
-            System.out.printf("X   XXXXX    XXX    X   X   X      XXX XX X    X  XXXX     XXXXXXX     XXX   X    X   XXXXX   X   X   X\n");
-            System.out.printf("X                        XXX                                                                   XXX    X\n");
+            System.out.printf("X   XXXXX                                             X     XXXXXXX                                     X\n");
+            System.out.printf("X   XX   X                                            X     XX    XX                                    X\n");
+            System.out.printf("X   XX    X          X                                X     XX    XX                                    X\n");
+            System.out.printf("X   XX     X  XXX  XXXXX XXXXX      XXXX   X XXX    XXX     XXXXXXXXX    XXX   X    X   XXXXX   XXXXX   X\n");
+            System.out.printf("X   XX     X X   X   X   X         X   x   XX  XX XX  X     XXX     XX  X   X   X  X   X     X  X       X\n");
+            System.out.printf("X   XX     X X   X   X   XXXXX     X   X   X    X X   X     XX      XX  X   X    XX    XXXXXXX  XXXXX   X\n");
+            System.out.printf("X   XX    X  X   X   X       X     X   XX  X    X X   X     XX     XX   X   X   X  X   X            X   X\n");
+            System.out.printf("X   XXXXXX    XXX    X   XXXXX      XXX XX X    X  XXXX     XXXXXXXX     XXX   X    X   XXXXX   XXXXX   X\n");
             System.out.printf("X                                                                                                     X\n");
-            System.out.printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");    
+            System.out.printf("X                                                                                                     X\n");
+            System.out.printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");    
         }
         
-        for(int i = 0 ; i < 10 ; i++){
-            System.out.printf("\n");
-        }
+        displayNEmptyLines(20);
+
     }
     // Method to print the leaderboard by loading it and waiting for user input to continue.
-    public void printLeaderBoard(LeaderBoard leaderBoard){
+    public void displayLeaderboard(LeaderBoard leaderBoard){
         clearScreen();
         leaderBoard.printLeaderBoard();
         input.readLineOrExit("Press enter to continue...");

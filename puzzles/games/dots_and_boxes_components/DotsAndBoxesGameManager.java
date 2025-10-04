@@ -50,8 +50,8 @@ public class DotsAndBoxesGameManager extends GameManager{
             }
 
         }
-        
-        String result = showResult();
+
+        String result = output.displayCongratulations(board, player1, player2 );;
         if(result.equals("player1") ){
             leaderBoard.recordDotsAndBoxesResult(player1.getUsername(),true);
             leaderBoard.recordDotsAndBoxesResult(player2.getUsername(),false);
@@ -60,6 +60,7 @@ public class DotsAndBoxesGameManager extends GameManager{
             leaderBoard.recordDotsAndBoxesResult(player1.getUsername(),false);
             leaderBoard.recordDotsAndBoxesResult(player2.getUsername(),true);
         }
+        output.displayLeaderboard(leaderBoard);
         return input.inputYesOrExit("To play a new game type y/Y, to exit press any key >>> \n To go back to main menu type m/M to \n any other input will end the game.");
     }
 
@@ -96,12 +97,13 @@ public class DotsAndBoxesGameManager extends GameManager{
         currentPlayer = player1;
     }
 
+    
     public String showResult() {
         board.display();
         int score1 = player1.getScore();
         int score2 = player2.getScore();
 
-        System.out.println("\nGame Over!");
+        System.out.println("\nGame is Over!");
         System.out.println(player1.getUsername() + ": " + score1 + " points");
         System.out.println(player2.getUsername() + ": " + score2 + " points");
 
@@ -120,6 +122,7 @@ public class DotsAndBoxesGameManager extends GameManager{
     private void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
+    
 
     public void reset() {
         if (player1 != null) player1.resetScore();

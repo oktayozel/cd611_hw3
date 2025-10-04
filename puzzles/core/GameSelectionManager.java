@@ -29,6 +29,7 @@ public class GameSelectionManager {
 
     public void runSelectedGame() {
         while(true){
+            output.displayAnimation();
             output.displaySupportedGames(settings.getSupportedGames());
             int _selected_game = input.readIntOrExit("Which game would you like to play? \nYou can simply type exit to finish the game  >>> ", 1, 2);
             

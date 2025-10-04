@@ -68,7 +68,9 @@ public class SlidingPuzzleGameManager extends GameManager {
         }
         leaderBoard.incrementSlidingPuzzlesPlayed(user.getUsername());
 
-        output.displayCongratulations(user.getMoveCount(),leaderBoard);
+        output.displayCongratulations(user.getMoveCount());
+        output.displayLeaderboard(leaderBoard);
+
         user.resetMoveCount();
         return input.inputYesOrExit("To play a new game type y/Y, to exit press any key >>> \nTo go back to main menu type m/M to\n any other input will end the game.");
     }
