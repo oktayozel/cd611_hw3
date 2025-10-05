@@ -126,7 +126,7 @@ public void readDotsAndBoxesMove(DotsAndBoxesBoard board, DotsAndBoxesUser curre
         int row = readIntOrExit("Enter row: ", 0, board.getRows());
         int col = readIntOrExit("Enter column: ", 0, board.getCols());
 
-        if (row >= board.getRows() || col >= board.getCols()) {
+        if (row >= board.getRows() && col >= board.getCols()) {
             System.out.println("Invalid position. That dot is outside the board.");
             continue;
         }
