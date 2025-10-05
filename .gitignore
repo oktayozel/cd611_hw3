@@ -1,1 +1,4 @@
 /out/puzzles
+/out/config.properties
+.DS_Store
+.idea
