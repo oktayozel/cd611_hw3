@@ -13,6 +13,14 @@ import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
 public class Output{
     private Input input;
     private String gameName;
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_BLUE = "\u001B[34m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+    private static final String ANSI_CYAN = "\u001B[36m";
+    private static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_ORANGE = "\u001B[38;5;208m";
+    private static final String ANSI_BLINK = "\u001B[5m";
 
     public Output(Input input) {
         this.input = input;
@@ -25,6 +33,7 @@ public class Output{
 
     public void displayAnimation(){
         String[] animation = {
+"                                             ",    
         "                                             ",    
         "                                             ",    
         "                                             ",    
@@ -37,28 +46,26 @@ public class Output{
         "                                             ",    
         "                                             ",    
         "                                             ",    
-        "                                             ",    
-        "              ,---------------------------,",
-        "              |  /---------------------\\  |",
-        "              | |                       | |",
-        "              | |     Welcome to        | |",
-        "              | |      CS-611           | |",
-        "              | |       Games           | |",
-        "              | |                       | |",
-        "              |  \\_____________________/  |",
-        "              |___________________________|",
-        "            ,---\\_____     []     _______/------,",
-        "          /         /______________\\           /|",
-        "        /___________________________________ /  | ___",
-        "        |                                   |   |    )",
-        "        |  _ _ _                 [-------]  |   |   (",
-        "        |  o o o                 [-------]  |  /    _)_",
-        "        |__________________________________ |/     /  /",
-        "    /-------------------------------------/|      ( )/",
-        "  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /",
-        "/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /",
-        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-        "                                             ",    
+        ANSI_BLUE + "              ,---------------------------," + ANSI_RESET,
+        ANSI_BLUE + "              |  /---------------------\\  |" + ANSI_RESET,
+        ANSI_BLUE + "              | |                       | |" + ANSI_RESET,
+        ANSI_BLUE + "              | |   " + ANSI_GREEN + "   Welcome to       " + ANSI_BLUE + "| |" + ANSI_RESET,
+        ANSI_BLUE + "              | |    " + ANSI_YELLOW + "    CS-611         " + ANSI_BLUE + "| |" + ANSI_RESET,
+        ANSI_BLUE + "              | |     " + ANSI_CYAN + "   Games          " + ANSI_BLUE + "| |" + ANSI_RESET,
+        ANSI_BLUE + "              | |                       | |" + ANSI_RESET,
+        ANSI_BLUE + "              |  \\_____________________/  |" + ANSI_RESET,
+        ANSI_BLUE + "              |___________________________|" + ANSI_RESET,
+        ANSI_CYAN + "            ,---\\_____     []     _______/------," + ANSI_RESET,
+        ANSI_CYAN + "          /         /______________\\           /|" + ANSI_RESET,
+        ANSI_CYAN + "        /___________________________________ /  | ___" + ANSI_RESET,
+        ANSI_CYAN + "        |                                   |   |    )" + ANSI_RESET,
+        ANSI_CYAN + "        |  _ _ _                 [-------]  |   |   (" + ANSI_RESET,
+        ANSI_CYAN + "        |  o o o                 [-------]  |  /    _)_"+ ANSI_RESET,
+        ANSI_CYAN + "        |__________________________________ |/     /  /" + ANSI_RESET,
+        ANSI_CYAN + "    /-------------------------------------/|      ( )/" + ANSI_RESET,
+        ANSI_CYAN + "  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /" + ANSI_RESET,
+        ANSI_CYAN + "/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /" + ANSI_RESET,
+        ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET,
         "                                             ",    
         "                                             ",    
         "                                             ",    
@@ -69,7 +76,8 @@ public class Output{
         "                                             ",    
         "                                             ",    
         "                                             ",    
-        "                                             ", 
+        "                                             ",    
+        "                                             ",
         };
         for(String line : animation){
             System.out.println(line);
@@ -165,17 +173,17 @@ public class Output{
         clearScreen();
         board.display();
         if (turn.equals("player1")){
-                System.out.println("Player1 " + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
+                System.out.println(ANSI_YELLOW + "Player1 "+ ANSI_RESET + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
         }
         else{
-            System.out.println("Player2 " + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
+            System.out.println(ANSI_YELLOW + "Player2 " + ANSI_RESET + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
         }
     }
 
     // Method to display the congratulations message upon solving the puzzle and show the leaderboard.
     public void displayCongratulations(int moveCount){
         clearScreen();
-        System.out.printf("!!!!!               Congratulations             !!!!!\n\n You solved the puzzle in %d moves!\n\n", moveCount); 
+        System.out.printf("!!!!!     " + ANSI_YELLOW + "Congratulations" + ANSI_RESET + "     !!!!!\n\n You solved the puzzle in %d moves!\n\n", moveCount);
         for(int i = 0 ; i < 10 ; i++){
             System.out.printf("\n");
             try {
@@ -223,35 +231,35 @@ public class Output{
 
 
         if (gameName.equals("sliding_puzzle")) {
-            System.out.printf("############################################################################################################################################\n");
-            System.out.printf("#                                                                                                                                          #\n");
-            System.out.printf("#                                                                                                                                          #\n");
-            System.out.printf("#     ######    #        #####       ####    #####  #    #    ######         ######    #     #   #######   #######   #         #######     #\n"); 
-            System.out.printf("#     #         #          #         #    #    #    ##   #   #               #     #   #     #        #          #   #         #           #\n"); 
-            System.out.printf("#     #         #          #         #    #    #    # #  #   #               #     #   #     #       #          #    #         #           #\n"); 
-            System.out.printf("#     #####     #          #         #    #    #    #  # #   #   ###         ######    #     #      #          #     #         #####       #\n"); 
-            System.out.printf("#          #    #          #         #    #    #    #   ##   #     #         #         #     #     #          #      #         #           #\n"); 
-            System.out.printf("#          #    #          #         #    #    #    #    #   #     #         #         #     #    #          #       #         #           #\n"); 
-            System.out.printf("#     ######    #######   ###        ####     ###   #    #    #####          #          #####    #######    #######  ######    #######     #\n"); 
-            System.out.printf("#                                                                                                                                          #\n");
-            System.out.printf("#                                                                                                                                          #\n");
-            System.out.printf("############################################################################################################################################\n");
+            System.out.printf(ANSI_ORANGE + "###########################################################################################################################################\n");
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "                                                                                                                                         " + ANSI_ORANGE + "#\n");
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "                                                                                                                                         " + ANSI_ORANGE + "#\n");
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "     ######    #        #####      ####    #####  #    #    ######         ######    #     #   #######   #######   #         #######     " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "     #         #          #        #    #    #    ##   #   #               #     #   #     #        #          #   #         #           " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "     #         #          #        #    #    #    # #  #   #               #     #   #     #       #          #    #         #           " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "     #####     #          #        #    #    #    #  # #   #   ###         ######    #     #      #          #     #         #####       " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "          #    #          #        #    #    #    #   ##   #     #         #         #     #     #          #      #         #           " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "          #    #          #        #    #    #    #    #   #     #         #         #     #    #          #       #         #           " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "     ######    #######   ###       ####     ###   #    #    #####          #          #####    #######    #######  ######    #######     " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "                                                                                                                                         " + ANSI_ORANGE + "#\n");
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "                                                                                                                                         " + ANSI_ORANGE + "#\n");
+            System.out.printf(ANSI_ORANGE + "###########################################################################################################################################\n"+ ANSI_RESET);
         }
 
         else if(gameName.equals("dots_and_boxes")) {
-            System.out.printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
-            System.out.printf("X                                                                                                     X\n");
-            System.out.printf("X   XXXXX                                             X     XXXXXXX                                     X\n");
-            System.out.printf("X   XX   X                                            X     XX    XX                                    X\n");
-            System.out.printf("X   XX    X          X                                X     XX    XX                                    X\n");
-            System.out.printf("X   XX     X  XXX  XXXXX XXXXX      XXXX   X XXX    XXX     XXXXXXXXX    XXX   X    X   XXXXX   XXXXX   X\n");
-            System.out.printf("X   XX     X X   X   X   X         X   x   XX  XX XX  X     XXX     XX  X   X   X  X   X     X  X       X\n");
-            System.out.printf("X   XX     X X   X   X   XXXXX     X   X   X    X X   X     XX      XX  X   X    XX    XXXXXXX  XXXXX   X\n");
-            System.out.printf("X   XX    X  X   X   X       X     X   XX  X    X X   X     XX     XX   X   X   X  X   X            X   X\n");
-            System.out.printf("X   XXXXXX    XXX    X   XXXXX      XXX XX X    X  XXXX     XXXXXXXX     XXX   X    X   XXXXX   XXXXX   X\n");
-            System.out.printf("X                                                                                                     X\n");
-            System.out.printf("X                                                                                                     X\n");
-            System.out.printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");    
+            System.out.printf(ANSI_ORANGE + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "                                                                                                       " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XXXXX                                             X     XXXXXXX                                     " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX   X                                            X     XX    XX                                    " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX    X          X                                X     XX    XX                                    " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX     X  XXX  XXXXX XXXXX      XXXX   X XXX    XXX     XXXXXXXXX    XXX   X    X   XXXXX   XXXXX   " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX     X X   X   X   X         X   x   XX  XX XX  X     XXX     XX  X   X   X  X   X     X  X       " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX     X X   X   X   XXXXX     X   X   X    X X   X     XX      XX  X   X    XX    XXXXXXX  XXXXX   " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX    X  X   X   X       X     X   XX  X    X X   X     XX     XX   X   X   X  X   X            X   " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XXXXXX    XXX    X   XXXXX      XXX XX X    X  XXXX     XXXXXXXX     XXX   X    X   XXXXX   XXXXX   " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "                                                                                                       " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "                                                                                                       " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"+ ANSI_RESET);    
         }
         
         displayNEmptyLines(20);
