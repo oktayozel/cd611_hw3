@@ -60,7 +60,6 @@ public class LeaderBoard {
         try (BufferedReader br = new BufferedReader(new FileReader(f))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // expect: username,total,dnbPlayed,slidingPlayed,dnbWins,dnbLoses
                 String[] p = line.split(",", -1);
                 if (p.length != 6) continue;
                 Stats s = new Stats(p[0].trim());
@@ -104,7 +103,7 @@ public class LeaderBoard {
         System.out.println("Username   Total   D&B   SlidingP   D&B_Win   D&B_Loss");
         System.out.println("--------------------------------------------------------------");
         for (Stats s : list) {
-            System.out.printf("%s           %d     %d       %d     %d      %d \n", s.username, s.total, s.dnbPlayed, s.slidingPlayed, s.dnbWins, s.dnbLoses);
+            System.out.printf("%-8s     %d     %d       %d     %d      %d \n", s.username, s.total, s.dnbPlayed, s.slidingPlayed, s.dnbWins, s.dnbLoses);
         }
     }
 
