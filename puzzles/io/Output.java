@@ -20,7 +20,6 @@ public class Output{
     private static final String ANSI_CYAN = "\u001B[36m";
     private static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_ORANGE = "\u001B[38;5;208m";
-    private static final String ANSI_BLINK = "\u001B[5m";
 
     public Output(Input input) {
         this.input = input;
@@ -173,10 +172,10 @@ public class Output{
         clearScreen();
         board.display();
         if (turn.equals("player1")){
-                System.out.println(ANSI_YELLOW + "Player1 "+ ANSI_RESET + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
+                System.out.println(ANSI_BLUE + "Player1 "+ ANSI_RESET + currentPlayer.getUsername() + "'s turn(Blue Line). Score: " + currentPlayer.getScore());
         }
         else{
-            System.out.println(ANSI_YELLOW + "Player2 " + ANSI_RESET + currentPlayer.getUsername() + "'s turn. Score: " + currentPlayer.getScore());
+            System.out.println(ANSI_RED + "Player2 " + ANSI_RESET + currentPlayer.getUsername() + "'s turn(Red Line). Score: " + currentPlayer.getScore());
         }
     }
 
