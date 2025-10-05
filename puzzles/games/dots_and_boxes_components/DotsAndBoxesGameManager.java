@@ -39,6 +39,7 @@ public class DotsAndBoxesGameManager extends GameManager{
 
     @Override
     public boolean runGame() {
+        super.startTimer();
         while (!board.isFull()) {
             output.displayNextScene(board ,currentPlayer,(currentPlayer == player1) ? "player1" : "player2");
 
@@ -50,8 +51,9 @@ public class DotsAndBoxesGameManager extends GameManager{
             }
 
         }
-
-        String result = output.displayCongratulations(board, player1, player2 );;
+        super.stopTimer();
+        int elapsedTime = super.getElapsedTime();
+        String result = output.displayCongratulations(board, player1, player2, elapsedTime );;
         if(result.equals("player1") ){
             leaderBoard.recordDotsAndBoxesResult(player1.getUsername(),true);
             leaderBoard.recordDotsAndBoxesResult(player2.getUsername(),false);
@@ -61,7 +63,7 @@ public class DotsAndBoxesGameManager extends GameManager{
             leaderBoard.recordDotsAndBoxesResult(player2.getUsername(),true);
         }
         output.displayLeaderboard(leaderBoard);
-        return input.inputYesOrExit("To play a new game type y/Y, to exit press any key >>> \n To go back to main menu type m/M to \n any other input will end the game.");
+        return input.inputYesOrExit("\n\n\n\nTo play a new game type y/Y, to exit press any key >>> \n To go back to main menu type m/M to \n any other input will end the game.");
     }
 
      @Override
@@ -97,27 +99,7 @@ public class DotsAndBoxesGameManager extends GameManager{
         currentPlayer = player1;
     }
 
-    
-    public String showResult() {
-        board.display();
-        int score1 = player1.getScore();
-        int score2 = player2.getScore();
 
-        System.out.println("\nGame is Over!");
-        System.out.println(player1.getUsername() + ": " + score1 + " points");
-        System.out.println(player2.getUsername() + ": " + score2 + " points");
-
-        if (score1 > score2) {
-            System.out.println(player1.getUsername() + " wins!");
-            return "player1";
-        } else if (score2 > score1) {
-            System.out.println(player2.getUsername() + " wins!");
-            return "player2";
-        } else {
-            System.out.println("It's a tie!");
-            return "draw";
-        }
-    }
 
     private void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;

@@ -156,6 +156,11 @@ public class Output{
         if (gameName.equals("dots_and_boxes")) {
             System.out.println("Welcome to the Dots and Boxes Game!");
             System.out.println("Be the one who puts the last piece to conquer as much boxes as you can. Enjoy! ");
+            System.out.println("You are going to see the row and column numbers for each dot. ");
+            System.out.println("To put an edge you need to pick the dot on the left of the edge, if the edge is horizontal. ");
+            System.out.println("To put an edge you need to pick the dot on the top of the edge, if the edge is vertical.");
+
+
             input.readLineOrExit(" Press enter to start...");
         }
     }
@@ -180,9 +185,11 @@ public class Output{
     }
 
     // Method to display the congratulations message upon solving the puzzle and show the leaderboard.
-    public void displayCongratulations(int moveCount){
+    public void displayCongratulations(int moveCount ,int elapsedTime){
         clearScreen();
         System.out.printf("!!!!!     " + ANSI_YELLOW + "Congratulations" + ANSI_RESET + "     !!!!!\n\n You solved the puzzle in %d moves!\n\n", moveCount);
+        System.out.printf("Game Duration : %d seconds\n",elapsedTime);
+
         for(int i = 0 ; i < 10 ; i++){
             System.out.printf("\n");
             try {
@@ -193,14 +200,27 @@ public class Output{
         }
     }
 
-    public String displayCongratulations(DotsAndBoxesBoard board, DotsAndBoxesUser player1, DotsAndBoxesUser player2){
+    public String displayCongratulations(DotsAndBoxesBoard board, DotsAndBoxesUser player1, DotsAndBoxesUser player2, int elapsedTime){
         board.display();
         int score1 = player1.getScore();
         int score2 = player2.getScore();
 
-        System.out.println("\nGame is Over!");
-        System.out.println(player1.getUsername() + ": " + score1 + " points");
-        System.out.println(player2.getUsername() + ": " + score2 + " points");
+        System.out.printf("\n");
+        for(int i = 0 ; i < 10 ; i++){
+            System.out.printf("\n");
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("\nWHAT A GAME!!!\n");
+        System.out.println(player1.getUsername() + ": " + score1 + " points\n");
+        System.out.println(player2.getUsername() + ": " + score2 + " points\n");
+        System.out.printf("Game Duration : %d seconds\n",elapsedTime);
+
+        input.readLineOrExit("Press enter to continue...");
 
         if (score1 > score2) {
             System.out.println(player1.getUsername() + " wins!");
@@ -214,6 +234,8 @@ public class Output{
         }
 
     }
+
+
 
     public void displayNEmptyLines(int N){
         for(int i = 0 ; i < N ; i++){

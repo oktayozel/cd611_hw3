@@ -6,9 +6,14 @@ package puzzles.core;
  */
 public abstract class GameManager{
     private int moveCount;
+    private boolean timerRunning;
+    private long startTime;
+    private long endTime;
     // Constructor to initialize the game manager with a move count of zero.
     public GameManager(){
         this.moveCount = 0;
+        this.timerRunning = false;
+
     }
     // Method to return the current move count.
     public int getMoveCount(){
@@ -23,4 +28,25 @@ public abstract class GameManager{
     public abstract boolean runGame();
     public abstract boolean isGameEnd();
 
+
+    public void startTimer() {
+        startTime = System.currentTimeMillis();
+        timerRunning = true;
+    }
+
+    public void stopTimer() {
+        if (timerRunning) {
+            endTime = System.currentTimeMillis();
+            timerRunning = false;
+        }
+    }
+
+    public int getElapsedTime() {
+        if (timerRunning) {
+            return (int)(System.currentTimeMillis() - startTime)/1000;
+        } else {
+            return (int)(endTime - startTime)/1000;
+        }
+    }
+    
 }

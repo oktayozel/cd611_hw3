@@ -103,7 +103,7 @@ public class LeaderBoard {
         System.out.println("Username   Total   D&B   SlidingP   D&B_Win   D&B_Loss");
         System.out.println("--------------------------------------------------------------");
         for (Stats s : list) {
-            System.out.printf("%-8s     %d     %d       %d     %d      %d \n", s.username, s.total, s.dnbPlayed, s.slidingPlayed, s.dnbWins, s.dnbLoses);
+            System.out.printf("%-8s     %d       %d         %d       %d        %d \n", s.username, s.total, s.dnbPlayed, s.slidingPlayed, s.dnbWins, s.dnbLoses);
         }
     }
 
