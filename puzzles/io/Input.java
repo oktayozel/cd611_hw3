@@ -1,12 +1,9 @@
 package puzzles.io;
 import java.util.Scanner;
-
 import puzzles.games.dots_and_boxes_components.DotsAndBoxesBoard;
 import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
 import puzzles.games.sliding_puzzle_components.SlidingPuzzleBoard;
 import puzzles.games.sliding_puzzle_components.SlidingPuzzleCell;
-import puzzles.games.dots_and_boxes_components.DotsAndBoxesBoard;
-import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
 
 
 /*
@@ -123,20 +120,25 @@ public class Input{
         }
 
     }
-    public void  readDotsAndBoxesMove(DotsAndBoxesBoard board, DotsAndBoxesUser currentPlayer ){
-        boolean validMove = false;
-        while (!validMove) {
-            int row = readIntOrExit( "Enter row: ",0,board.getRows() );
-            int col = readIntOrExit( "Enter column: ",0,board.getCols());
-            
-            String dir = readDirectionOrExit("Enter direction (H for horizontal right line, V for vertical down line): ");
+public void readDotsAndBoxesMove(DotsAndBoxesBoard board, DotsAndBoxesUser currentPlayer) {
+    boolean validMove = false;
+    while (!validMove) {
+        int row = readIntOrExit("Enter row: ", 0, board.getRows());
+        int col = readIntOrExit("Enter column: ", 0, board.getCols());
 
-            validMove = board.claimEdge(row, col, dir, currentPlayer);
-            if (!validMove) {
-                System.out.println("Invalid move. Try again.");
-            }
+        if (row >= board.getRows() || col >= board.getCols()) {
+            System.out.println("Invalid position. That dot is outside the board.");
+            continue;
+        }
+
+        String dir = readDirectionOrExit("Enter direction (H for horizontal right line, V for vertical down line): ");
+
+        validMove = board.claimEdge(row, col, dir, currentPlayer);
+        if (!validMove) {
+            System.out.println("Invalid move. Try again.");
         }
     }
+}
     
     // Method to prompt the user for starting a new game or exiting.
     public boolean inputYesOrExit(String prompt){

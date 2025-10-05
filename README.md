@@ -1,57 +1,53 @@
-# CS611-Assignment 1
-## Sliding Puzzle
+# CS611-Assignment 2
+## Sliding Puzzle & Dots and Boxes
 ---------------------------------------------------------------------------
 - Name: Oktay Ozel
 - Email: oozel@bu.edu
 - Student ID: U93822204
 
 
-- Andrew
--
--
+- Name: Liang Yu Lin
+- Email: lin0326@bu.edu
+- Student ID: U55834159
 
 
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
-!!!!! CHANGE BELOW!!!!! IT BELONGS TO THE OLD PUZZLE!!!!
 
 ## Files 
 ---------------------------------------------------------------------------
-assignment_1/ 
-├── out/ (Compiled class files are going into this folder.)  
-├── data/
-│   └── leaderboard.txt (Serves as a database for the leaderboard.)                        
-├── sliding_puzzle/
-│   ├── app/ (Entry point of the program)
-│   │   └── Main.java (Initializes the game and starts the program)
-│   ├── components/ (Specialized versions of the core classes is in this dir.)
-│   │   ├── SlidingPuzzleBoard.java (This class is responsible for holding the board and board operations.)
-│   │   ├── SlidingPuzzleCell.java (This class is reponsible for operations in the Cell level and denotes each cell in a board.)
-│   │   └── SlidingPuzzleGameManager.java (Manages all the game, basically holds one instance from other classes and orchestrates them.)
-│   ├── core/ (This is the directory where core game classes are being hold. Classes that ensures extendibility sit here.)
-│   │   ├── Board.java (This is an interface defining the must have functions of a board.)
-│   │   ├── Cell.java (This is an abstract class which has the basic methods and fields that a board game would have.)
-│   │   ├── GameManager.java (This is an abstract class defining the basic methods of a game manager like initialize the game, run the game.x)
-│   │   ├── LeaderBoard.java (This class has been placed to hold the leaderboard storing the data in leaderboard.txt. Helps keeping track of the leaderboard)
-│   │   └── User.java (This class holds the user details like username and move count.)
-│   └── io/
-│        ├── Input.java (This class handles all input operations in the game.)
-│        └── Output.java (This class handles all output operations in the game. )
-├──run.sh (Running script for the game.)
-├──compile.sh (Compilation script for the game.)
-├──README.md
+assignment_2/  
+├── out/                                        (Compiled class files are going into this folder.)   
+│   └── puzzles/                                (Main game module)  
+│       ├── app/                                (Entry point of the program)  
+│       │   └── Main.java                       (Initializes the game and starts the program)
+│       ├── core/                               (This is the directory where core game classes are being hold. Classes that ensures extendibility sit here.)  
+│       │   ├── Board.java                      (This is an interface defining the must have functions of a board.)
+│       │   ├── Cell.java                       (This is an abstract class which has the basic methods and fields that a board game would have.)
+│       │   ├── GameManager.java                (This is an abstract class defining the basic methods of a game manager like initialize the game, run the game.x)
+│       │   ├── GameSelectionManager.java  
+│       │   ├── LeaderBoard.java                (This class has been placed to hold the leaderboard storing the data in leaderboard.txt. Helps keeping track of the leaderboard)
+│       │   ├── Settings.java  
+│       │   └── User.java                       (This class holds the user details like username and move count.)
+│       ├── games/                               
+│       │   ├── dots_and_boxes_components/          (dots_and_boxes module)
+│       │   │   ├── DotsAndBoxesBoard.java          (Represents the game board; manages cells, edge claiming, and scoring logic)
+│       │   │   ├── DotsAndBoxesCell.java           (Represents a single cell (box) on the board also tracks edge status and ownership)
+│       │   │   ├── DotsAndBoxesGameManager.java    (Orchestrates the game flow; handles turns, win conditions, and board updates)
+│       │   │   └── DotsAndBoxesUser.java           (Stores player information such as username, score, and identity (P1, P2))
+│       │   └── sliding_puzzle_components/          (sliding_puzzle module)
+│       │       ├── SlidingPuzzleBoard.java         (This class is responsible for holding the board and board operations.)
+│       │       ├── SlidingPuzzleCell.java          (This class is reponsible for operations in the Cell level and denotes each cell in a board.)
+│       │       ├── SlidingPuzzleGameManager.java   (Manages all the game, basically holds one instance from other classes and orchestrates them.)
+│       │       └── SlidingPuzzleUser.java  
+│       ├── io/                                 
+│       │   ├── Input.java                          (This class handles all input operations in the game.)
+│       └── └── Output.java                         (This class handles all output operations in the game. )  
+├── resources/                     
+│   └── config.properties        (The settings of the game)  
+├── data/                         
+│   └── leaderboard.txt          (Record players' leardeboard)  
+├── compile.sh                   (Compilation script for the game.)  
+├── run.sh                       (Running script for the game.)  
+├── README.md                      
 
 
 
@@ -59,12 +55,22 @@ assignment_1/
 ---------------------------------------------------------------------------
 Please explain the cool features of your program. Anything that you feel like you did a good job at or were creative about, explain it in bullets here. Additionally, any design decisions should be made here.
 
-Example.
-1. I have implement a Leaderboard and a mock database in a txt file which keeps track of how many games played by users.
-2. I have implemented the movecount feature which holds the move count of the user and displays it real time.
-3. I have implemeted a UI like visual so that game screen clears after every move.
-4. Input and Output are completely seperated from the program flow.
-5. I did a nice job seperating the components into subdirectories app, components, core, data, io. 
+Overall:
+- Implement a Leaderboard and a mock database in a txt file which keeps track of how many games played by users.
+- Seperating the components into subdirectories app, components, core, data, io. 
+
+Sliding Puzzle:
+- Tracks and displays move count in real time.
+- Clears screen after each move for a clean UI experience.
+- Input and Output are modular and separated from game logic.
+- Organized into app, components, core, data, and io directories.
+
+Dots and Boxes:
+- Each player’s moves are shown in distinct colors (red vs blue).
+- Supports dynamic board sizes and edge claiming logic.
+- Displays real-time ownership of boxes and scores.
+- Includes animated welcome screen and stylized victory messages.
+
 
 
 ## Source and Citations
@@ -78,17 +84,17 @@ I have used the "build it (by randomly moving tiles from a known solvable config
 ---------------------------------------------------------------------------
 Your directions on how to run the code. Make sure to be as thorough as possible! Ideally should resemble the lines below
 
-1. Navigate to the directory "assignment_1" after unzipping the files
+1. Navigate to the directory "assignment_2" after unzipping the files
 2. Run the following instructions:
 
-javac -d out sliding_puzzle/app/*.java sliding_puzzle/core/*.java sliding_puzzle/io/*.java sliding_puzzle/components/*.java
-java -cp out sliding_puzzle.app.Main        
-
-NOTE: You need to create an empty directory /out next to /sliding_puzzle
+javac -d out puzzles/app/*.java puzzles/core/*.java puzzles/io/*.java puzzles/games/sliding_puzzle_components/*.java \
+java -cp out puzzles.app.Main
 
 NOTE: Instead you can simply run ./compile.sh and then ./run.sh
 
 If you get a permission error you can simply give permission to those scripts with chmod +x compile.sh and  chmod +x run.sh 
+
+
 
 ## Input/Output Example
 ---------------------------------------------------------------------------
@@ -97,108 +103,134 @@ Please give us a full execution of what we should see on the screen. Label each 
 ```
 Output:
 
-Welcome to the Sliding Puzzle Game!
-You can swap adjacent cells to solve the puzzle. Press any key to start...
+Available games:
+[1] SlidingPuzzle
+[2] DotsAndBoxes
+Which game would you like to play?
+You can simply type exit to finish the game  >>> 
 
 Input:
-x
+1
+
+Output:
+Welcome to the Sliding Puzzle Game!
+Swap adjacent cells to order them.
+ Press enter to start... 
+
+Input:
+(Press "Enter")
 
 Output:
 Enter a username >>> 
 
 Input:
-oktay
+Jason
 
 Output:
-
-Alright oktay, let's customize your puzzle
-Prompt your puzzle size.(example: 3 4 creates a 3 row 4 column puzzle for you.)
->>> 
+Hey Jason Enter number of rows: 
 
 Input:
-
-2 2
-
-Output:
-
- - -  
-|2| |
- - -  
-|1|3|
- - -                                      move count = 0
-
-
-Which cell do you want to move?
->>> 
-Input:
-
 2
 
 Output:
+Hey Jason Enter number of columns:
 
- - -  
-| |2|
- - -  
-|1|3|
+Input:
+2
+
+Output:
+ - -
+| |3|
+ - -
+|2|1|
+ - -                                      move count = 0
+
+
+Which cell do you want to move?(example : 2)
+Enter cell to move (1 to 3) >>>
+
+Input:
+2
+
+Output:
+ - -
+|2|3|
+ - -
+| |1|
  - -                                      move count = 1
 
 
-Which cell do you want to move?
->>> 
+Which cell do you want to move?(example : 2)
+Enter cell to move (1 to 3) >>>
+
 
 Input:
-
 1
 
 Output:
 
- - -  
-|1|2|
- - -  
-| |3|
+ - -
+|2|3|
+ - -
+|1| |
  - -                                      move count = 2
 
 
-Which cell do you want to move?
->>> 
+Which cell do you want to move?(example : 2)
+Enter cell to move (1 to 3) >>>
 
 Input:
+2
 
+Output:
+Invalid input. Please enter a valid number.
+Enter cell to move (1 to 3) >>>
+
+...
+
+
+Input:
 3
 
 Output:
 
-!!!!!               Congratulations             !!!!!
+!!!!!     Congratulations     !!!!!
 
- You solved the puzzle in 3 moves!
+You solved the puzzle in 6 moves!
 
+Leaderboard:
+Username   Total   D&B   SlidingP   D&B_Win   D&B_Loss
+--------------------------------------------------------------
+aaaaa           3     2       0     0      1
+bbbbb           3     2       0     1      0
+oktay           3     1       1     1      1
+2           1     0       1     0      0
+gsd           1     0       1     0      0
+hakan           1     0       1     0      0
+jaon           1     0       1     0      0
+Jason           1     0       1     0      0
+sdf           1     0       0     0      0
+tarik           1     0       1     0      0
+trump           1     0       1     0      0
+Press enter to continue...
+
+Input:
+(Press "Enter")
+
+Output:
 To play a new game type y/Y, to exit press any key >>> 
+To go back to main menu type m/M to
+ any other input will end the game.
 
 Input:
-
-y
-
-Output:
-
-Good to see you again oktay. Let's customize your new puzzle
-Prompt your puzzle size.(example 3 4 creates a 3 row 4 column puzzle for you.)
->>> 
-
-Input:
-1 1 
-Output:
-Invalid input!
-The dimensions of the puzzle must be at least 2 x 2.
->>> 
-Input:
-
-10 11
+M
 
 Output:
-
-Invalid input!
-The puzzle size must not exceed 10 rows and 10 columns.
->>> 
+Available games:
+[1] SlidingPuzzle
+[2] DotsAndBoxes
+Which game would you like to play?
+You can simply type exit to finish the game  >>>
 
 Input:
 2 2 
