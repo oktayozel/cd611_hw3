@@ -110,7 +110,7 @@ javac -encoding UTF-8 -d out puzzles/app/*.java puzzles/core/*.java puzzles/io/*
 && cp puzzles/resources/config.properties out/
 
 
-java -cp out puzzles.app.Main
+java -cp out -Dfile.encoding=UTF-8 puzzles.app.Main
 
 NOTE: Instead you can simply run ./compile.sh and then ./run.sh
 
