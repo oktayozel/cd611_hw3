@@ -5,17 +5,22 @@ public class DotsAndBoxesBoard {
     private int rows, cols;
     private DotsAndBoxesCell[][] boxes;
     private boolean lastMoveCompletedBox;
+
+
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_BLUE = "\u001B[34m";
 
+
+
+    //  colors the line according the which player has picked the line.
     private String getColoredLine(boolean claimed, DotsAndBoxesUser owner, String direction) {
         if (!claimed) return direction.equals("H") ? "  " : " ";
         String line = direction.equals("H") ? "──" : "│";
         String color = (owner != null && "P1".equals(owner.getShortName())) ? ANSI_BLUE : ANSI_RED;
         return String.format("%s%s%s", color, line, ANSI_RESET);
     }
-
+    // constructor for a rows x cols board 
     public DotsAndBoxesBoard(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
@@ -27,7 +32,7 @@ public class DotsAndBoxesBoard {
             }
         }
     }
-
+    // displays the board by denoting which user has picked which edge.
     public void display() {
         System.out.print("    ");
         for (int c = 0; c <= cols; c++) {
@@ -64,7 +69,7 @@ public class DotsAndBoxesBoard {
         System.out.println("○");
     }
 
-
+    // sets the edge to the user and then checks if the game is over or not 
     public boolean claimEdge(int row, int col, String direction, DotsAndBoxesUser player) {
         lastMoveCompletedBox = false;
 
@@ -124,6 +129,8 @@ public class DotsAndBoxesBoard {
         return valid;
     }
 
+
+    // method to check if board has been completed or not
     public boolean isFull() {
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
@@ -133,12 +140,16 @@ public class DotsAndBoxesBoard {
         return true;
     }
 
+
+    // getter method to check if the game is over or not
     public boolean lastMoveCompletedBox() {
         return lastMoveCompletedBox;
     }
+    // getter method for rows.
     public int getRows(){
         return this.rows;
     }
+    //getter method for cols
     public int getCols(){
         return this.cols;
     }
