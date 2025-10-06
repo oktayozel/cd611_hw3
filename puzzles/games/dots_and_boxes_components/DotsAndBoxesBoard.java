@@ -11,18 +11,22 @@ public class DotsAndBoxesBoard {
     private int rows, cols;
     private DotsAndBoxesCell[][] boxes;
     private boolean lastMoveCompletedBox;
+
+
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_BLUE = "\u001B[34m";
 
-    // Helper method to get colored line based on ownership so that users can see easily which lines they own.
+
+
+    //  colors the line according the which player has picked the line.
     private String getColoredLine(boolean claimed, DotsAndBoxesUser owner, String direction) {
         if (!claimed) return direction.equals("H") ? "  " : " ";
         String line = direction.equals("H") ? "──" : "│";
         String color = (owner != null && "P1".equals(owner.getShortName())) ? ANSI_BLUE : ANSI_RED;
         return String.format("%s%s%s", color, line, ANSI_RESET);
     }
-    // constructor to initialize the board with given rows and columns.
+    // constructor for a rows x cols board 
     public DotsAndBoxesBoard(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
@@ -34,7 +38,7 @@ public class DotsAndBoxesBoard {
             }
         }
     }
-    // prints out the current state of the board to the console.
+    // displays the board by denoting which user has picked which edge.
     public void display() {
         System.out.print("    ");
         for (int c = 0; c <= cols; c++) {
@@ -71,7 +75,7 @@ public class DotsAndBoxesBoard {
         System.out.println("○");
     }
 
-    // method to claim an edge for a user on the board returns true if the claim was successful false otherwise.
+    // sets the edge to the user and then checks if the game is over or not 
     public boolean claimEdge(int row, int col, String direction, DotsAndBoxesUser player) {
         lastMoveCompletedBox = false;
         
@@ -131,7 +135,9 @@ public class DotsAndBoxesBoard {
 
         return valid;
     }
-    // checks if all boxes on the board are complete.
+
+
+    // method to check if board has been completed or not
     public boolean isFull() {
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
@@ -140,15 +146,17 @@ public class DotsAndBoxesBoard {
         }
         return true;
     }
-    // returns true if the last move completed a box false otherwise.
+
+
+    // getter method to check if the game is over or not
     public boolean lastMoveCompletedBox() {
         return lastMoveCompletedBox;
     }
-    //getter methods for rows and columns
-    
+    // getter method for rows.
     public int getRows(){
         return this.rows;
     }
+    //getter method for cols
     public int getCols(){
         return this.cols;
     }

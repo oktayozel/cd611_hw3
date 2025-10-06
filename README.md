@@ -56,27 +56,46 @@ assignment_2/
 Please explain the cool features of your program. Anything that you feel like you did a good job at or were creative about, explain it in bullets here. Additionally, any design decisions should be made here.
 
 Overall:
-- Implement a Leaderboard and a mock database in a txt file which keeps track of how many games played by users.
+- Implemented a Leaderboard and a mock database in a txt file which keeps track of how many games played by users.
+- In the leaderboard we can display numerous stats.
+- We have an .properties file where we manage our config so that we don't have to modify the code each time. No hard coding.\
+- We have a timer implemented in the game manager which holds the duration of the game.
+- We have a cool main menu.
+- You can type exit at any moment in the game and can gracefully.
+- We have a colorful UI experience and even an opening animation.
 - Seperating the components into subdirectories app, components, core, data, io. 
+- We implememt the GameSelectionManager then we can add more gemes in it in the future.
+- In the Settings class, it enables dynamic configuration by loading properties like board size and supported games from an external file.
+
 
 Sliding Puzzle:
 - Tracks and displays move count in real time.
 - Clears screen after each move for a clean UI experience.
 - Input and Output are modular and separated from game logic.
 - Organized into app, components, core, data, and io directories.
+- Supports dynamic board sizes and edge claiming logic.
+- Includes animated welcome screen and stylized victory messages.
+- Have leaderboard feature.
+- Displays the leaderboard and game stats after each game, allows for a new game or going back to main menu.
 
 Dots and Boxes:
 - Each player’s moves are shown in distinct colors (red vs blue).
+- Tracks and displays score in real time.
 - Supports dynamic board sizes and edge claiming logic.
 - Displays real-time ownership of boxes and scores.
 - Includes animated welcome screen and stylized victory messages.
-
+- Have leaderboard feature.
+- Displays the leaderboard and game stats after each game, allows for a
+new game or going back to main menu.
 
 
 ## Source and Citations
+We have used the following website for our opening animation.
+https://www.asciiart.eu/
+I have used the "build it (by randomly moving tiles from a known solvable configuration)"approach and got this idea from this blog.
+
 https://datawookie.dev/blog/2019/04/sliding-puzzle-solvable/
 
-I have used the "build it (by randomly moving tiles from a known solvable configuration)"approach and got this idea from this blog.
 
 
 
@@ -102,6 +121,26 @@ Please give us a full execution of what we should see on the screen. Label each 
 
 ```
 Output:
+              ,---------------------------,
+              |  /---------------------\  |
+              | |                       | |
+              | |      Welcome to       | |
+              | |        CS-611         | |
+              | |        Games          | |
+              | |                       | |
+              |  \_____________________/  |
+              |___________________________|
+            ,---\_____     []     _______/------,
+          /         /______________\           /|
+        /___________________________________ /  | ___
+        |                                   |   |    )
+        |  _ _ _                 [-------]  |   |   (
+        |  o o o                 [-------]  |  /    _)_
+        |__________________________________ |/     /  /
+    /-------------------------------------/|      ( )/
+  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
+/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Available games:
 [1] SlidingPuzzle
@@ -113,6 +152,20 @@ Input:
 1
 
 Output:
+###########################################################################################################################################
+#                                                                                                                                         #
+#                                                                                                                                         #
+#     ######    #        #####      ####    #####  #    #    ######         ######    #     #   #######   #######   #         #######     #
+#     #         #          #        #    #    #    ##   #   #               #     #   #     #        #          #   #         #           #
+#     #         #          #        #    #    #    # #  #   #               #     #   #     #       #          #    #         #           #
+#     #####     #          #        #    #    #    #  # #   #   ###         ######    #     #      #          #     #         #####       #
+#          #    #          #        #    #    #    #   ##   #     #         #         #     #     #          #      #         #           #
+#          #    #          #        #    #    #    #    #   #     #         #         #     #    #          #       #         #           #
+#     ######    #######   ###       ####     ###   #    #    #####          #          #####    #######    #######  ######    #######     #
+#                                                                                                                                         #
+#                                                                                                                                         #
+###########################################################################################################################################
+
 Welcome to the Sliding Puzzle Game!
 Swap adjacent cells to order them.
  Press enter to start... 
@@ -204,14 +257,14 @@ Username   Total   D&B   SlidingP   D&B_Win   D&B_Loss
 aaaaa           3     2       0     0      1
 bbbbb           3     2       0     1      0
 oktay           3     1       1     1      1
-2           1     0       1     0      0
-gsd           1     0       1     0      0
+2               1     0       1     0      0
+gsd             1     0       1     0      0
 hakan           1     0       1     0      0
-jaon           1     0       1     0      0
+jaon            1     0       1     0      0
 Jason           1     0       1     0      0
-sdf           1     0       0     0      0
+sdf             1     0       0     0      0
 tarik           1     0       1     0      0
-trump           1     0       1     0      0
+lin             1     0       1     0      0
 Press enter to continue...
 
 Input:
@@ -233,117 +286,302 @@ Which game would you like to play?
 You can simply type exit to finish the game  >>>
 
 Input:
-2 2 
-Output:
-
- - -  
-|2|3|
- - -  
-| |1|
- - -                                      move count = 0
-
-
-Which cell do you want to move?
->>> 
-
-Input:
-
-1
-
-Output:
-
- - -  
-|2|3|
- - -  
-|1| |
- - -                                      move count = 1
-
-
-Which cell do you want to move?
->>> 
-
-Input:
-3
-Output:
-
- - -  
-|2| |
- - -  
-|1|3|
- - -                                      move count = 2
-
-Input:
-
 2
 
 Output:
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X                                                                                                       X
+X   XXXXX                                             X     XXXXXXX                                     X
+X   XX   X                                            X     XX    XX                                    X
+X   XX    X          X                                X     XX    XX                                    X
+X   XX     X  XXX  XXXXX XXXXX      XXXX   X XXX    XXX     XXXXXXXXX    XXX   X    X   XXXXX   XXXXX   X
+X   XX     X X   X   X   X         X   x   XX  XX XX  X     XXX     XX  X   X   X  X   X     X  X       X
+X   XX     X X   X   X   XXXXX     X   X   X    X X   X     XX      XX  X   X    XX    XXXXXXX  XXXXX   X
+X   XX    X  X   X   X       X     X   XX  X    X X   X     XX     XX   X   X   X  X   X            X   X
+X   XXXXXX    XXX    X   XXXXX      XXX XX X    X  XXXX     XXXXXXXX     XXX   X    X   XXXXX   XXXXX   X
+X                                                                                                       X
+X                                                                                                       X
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
+Welcome to the Dots and Boxes Game!
+Be the one who puts the last piece to conquer as much boxes as you can. Enjoy!
+You are going to see the row and column numbers for each dot.
+To put an edge you need to pick the dot on the left of the edge, if the edge is horizontal.
+To put an edge you need to pick the dot on the top of the edge, if the edge is vertical.
+ Press enter to start...
 
-Which cell do you want to move?
->>> 
+Input:
+(Press "Enter")
 
+Output:
+To put an edge you need to pick the dot on the top of the edge, if the edge is vertical.
+ Press enter to start...
+Enter Player 1 name: 
 
+Input:
+oktay
 
- - -  
-| |2|
- - -  
-|1|3|
- - -                                      move count = 3
+Output:
+Enter Player 2 name:
 
+Input:
+lin
 
-Which cell do you want to move?
->>> 
+Output:
+Enter number of rows:
+
+Input:
+2
+
+Output:
+Enter number of columns:
+
+Input:
+abc
+
+Output:
+Invalid input. Please enter a valid number.
+Enter number of columns:
+
+Input:
+15
+
+Output:
+Invalid input!
+The input should be between 2 and 10.
+Enter number of columns:
+
+Input:
+2
+
+Output:
+    0  1  2
+0   ○  ○  ○
+
+1   ○  ○  ○
+
+2   ○  ○  ○
+Player1 oktay's turn(Blue Line). Score: 0
+Enter row:
+
+Input:
+0
+
+Output:
+Enter column:
+
+Input:
+0
+
+Output:
+Enter direction (H for horizontal right line, V for vertical down line):
+
+Input:
+H
+
+Output:
+    0  1  2
+0   ○──○  ○
+
+1   ○  ○  ○
+
+2   ○  ○  ○
+Player2 lin's turn(Red Line). Score: 0
+Enter row:
+
 Input:
 1
 
 Output:
-
- - -  
-|1|2|
- - -  
-| |3|
- - -                                      move count = 4
-
-
-Which cell do you want to move?
->>> 
-
+Enter column:
 
 Input:
-
-3
-
+5
 
 Output:
+The input should be between 0 and 2.
+Enter column:
 
-!!!!!               Congratulations             !!!!!
+Input:
+1
 
- You solved the puzzle in 5 moves!
+Output:
+Enter direction (H for horizontal right line, V for vertical down line): 
 
-Leaderboard:
-Username |  Games Played
----------------------
-jackson         5
-oktay           5
-sengun          3
-michael         2
-john            2
-okt             1
-alperen         1
+Input:
+S
 
+Output:
+Invalid direction. Please enter H or V.
+Enter direction (H for horizontal right line, V for vertical down line):
+
+Input:
+V
+
+Output:
+    0  1  2
+0   ○──○  ○
+
+1   ○  ○  ○
+       │
+2   ○  ○  ○
+Player1 oktay's turn(Blue Line). Score: 0
+Enter row:
+
+...
+
+Output:
+    0  1  2
+0   ○──○──○
+    │  │
+1   ○  ○  ○
+
+2   ○  ○  ○
+Player1 cc's turn(Blue Line). Score: 0
+Enter row:
+
+Input:
+1
+
+Output:
+Enter column: 
+
+Input:
+0
+
+Output:
+Enter direction (H for horizontal right line, V for vertical down line):
+
+Input:
+H
+
+Output:
+    0  1  2
+0   ○──○──○
+    │P1│
+1   ○──○  ○
+
+2   ○  ○  ○
+Player1 cc's turn(Blue Line). Score: 1
+Enter row:
+
+...
+
+Output:
+    0  1  2
+0   ○──○──○
+    │P1│P1│
+1   ○──○──○
+    │  │P2│
+2   ○  ○──○
+Player1 oktay's turn(Blue Line). Score: 2
+Enter row:
+
+Input:
+2
+
+Output:
+Enter column:
+
+Input:
+0
+
+Output:
+Enter direction (H for horizontal right line, V for vertical down line): 
+
+Input:
+V
+
+Output:
+Invalid move. Try again.
+Enter row:
+
+Input:
+2
+
+Output:
+Enter column:
+
+Input:
+0
+
+Output:
+Enter direction (H for horizontal right line, V for vertical down line):
+
+Input:
+H
+
+Output:
+    0  1  2  
+0   ○──○──○
+    │P1│P1│
+1   ○──○──○
+    │P1│P2│
+2   ○──○──○
+
+
+WHAT A GAME!!!
+
+oktay: 3 points
+
+lin: 1 points
+
+Game Duration : 281 seconds
 Press enter to continue...
 
 Input:
-\n
-Output:
+(Press "Enter")
 
-To play a new game type y/Y, to exit press any key >>> 
+Output:
+Leaderboard:
+Username   Total   D&B   SlidingP   D&B_Win   D&B_Loss
+--------------------------------------------------------------
+oktay        5       2         2       2        1
+aaaaa        3       2         0       0        1 
+bbbbb        3       2         0       1        0
+oansd        2       2         0       0        2
+2            1       0         1       0        0
+aihsd        1       1         0       1        0
+aisdjnl      1       1         0       1        0
+aodsn        1       1         0       0        1
+asd          1       1         0       1        0
+asfva        1       1         0       0        1
+asifvn       1       1         0       1        0
+asihvd       1       1         0       1        0 
+ffff         1       0         1       0        0
+hakan        1       0         1       0        0
+jaon         1       0         1       0        0
+lin          1       1         0       0        1
+oas          1       1         0       0        1
+ok           1       0         1       0        0
+sdf          1       0         0       0        0
+sp           1       0         1       0        0
+tarik        1       0         1       0        0
+Press enter to continue...
 
 Input:
-q
+(Press "Enter")
 
 Output:
+To play a new game type y/Y, to exit press any key >>>
+ To go back to main menu type m/M to
+ any other input will end the game.
+
+Input:
+y
+
+Output:
+Enter number of rows: 
+
+Input:
+exit
+
+Output:
+Exiting game. Goodbye!
+
+...
+
 end of program
 
-```
+...
 

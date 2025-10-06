@@ -12,73 +12,80 @@ public class DotsAndBoxesCell extends Cell {
     private Edge bottom = new Edge();
     private Edge left = new Edge();
     private Edge right = new Edge();
-
+    // constructor for dots and boxes cell
     public DotsAndBoxesCell(int rowIndex, int colIndex) {
         super(rowIndex, colIndex, null); 
     }
-
-    //check finish the box
+    // checks if the cell has been surrounded or not
     public boolean isComplete() {
         return top.isClaimed() && bottom.isClaimed() && left.isClaimed() && right.isClaimed();
     }
-    // check if the there is top line
+    // checks if the top edge is claimed.
     public boolean hasTop() {
         return top.isClaimed();
     }
-    // set the top line
+    // sets the top edge to the player
     public void setTop(DotsAndBoxesUser player) {
         top.claim(player);
     }
-    // check if the there is bottom line
+    // checks if the bottom edge is claimed.
     public boolean hasBottom() {
         return bottom.isClaimed();
     }
-    // set the bottom line
+    // sets the bottom edge to the player
     public void setBottom(DotsAndBoxesUser player) {
         bottom.claim(player);
     }
-    // check if the there is left line
+
+    // checks if the left edge is claimed.
     public boolean hasLeft() {
         return left.isClaimed();
     }
-    // set the left line
+    // sets the left edge to the player
+
     public void setLeft(DotsAndBoxesUser player) {
         left.claim(player);
     }
-    // check if the there is right line
+
+    // checks if the right edge is claimed.
     public boolean hasRight() {
         return right.isClaimed();
     }
-    // set the right line
+    // sets the right edge to the player
     public void setRight(DotsAndBoxesUser player) {
         right.claim(player);
     }
-
-    // returns the owner of the top edge of the cell.
+    // gets the user who claimed the top edge
     public DotsAndBoxesUser getTopOwner() {
         return top.getOwner();
     }
-    //returns the owner of the bottom edge of the cell.
+    // gets the user who claimed the bottom edge
+
     public DotsAndBoxesUser getBottomOwner() {
         return bottom.getOwner();
     }
-    //returns the owner of the left edge of the cell.
+    // gets the user who claimed the left edge
+
     public DotsAndBoxesUser getLeftOwner() {
         return left.getOwner();
     }
-    //returns the owner of the right edge of the cell.
+    // gets the user who claimed the right edge
+
     public DotsAndBoxesUser getRightOwner() {
         return right.getOwner();
     }
-    // Inner class to represent an edge of the cell.
+
+
+    // a helper class in order to keep edge for the dots and boxes user.
     private static class Edge {
         private boolean claimed = false;
         private DotsAndBoxesUser owner = null;
 
+        // checks if it is claimed or not
         public boolean isClaimed() {
             return claimed;
         }
-
+        // helper function to claim an edge
         public void claim(DotsAndBoxesUser player) {
             if (!claimed) {
                 claimed = true;

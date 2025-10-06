@@ -4,19 +4,25 @@ import java.io.*;
 import java.util.*;
 
 /*
- * 
- * This class manages the common leaderboard for the games.
+ * This is a leaderboard class which holds the data and stats of the so far played games.
+ * Saves the data to data/leaderboard.txt which mocks a database basically and allows 
+ * for the retrieval of the data for the upcoming runs.
  */
+
+
 public class LeaderBoard {
     // holds the hashmap after loading from the file. a username and a stats object.
     private Map<String, Stats> leaderboard = new HashMap<>();
     private final String fileName = "data/leaderboard.txt";
-    
-    // constructor to load the leaderboard from the file.
+
+    // constructor
     public LeaderBoard() { 
         loadLeaderBoard();
     }
-    // helper to get the stats object for a user creating it if it doesn't exist
+
+
+
+    // return the stats that is related to that username. if a record does not exist creates an empty record in the hashmap and saves to the db.
     private Stats get(String user) {
         Stats s = leaderboard.get(user);
         if (s == null) {
@@ -25,27 +31,29 @@ public class LeaderBoard {
         }
         return s;
     }
-    // increments the total games played for a user and saves the leaderboard.
+    // increments the total games played by 1
     public void incrementTotal(String user) {
         Stats s = get(user);
         s.total++;
         saveLeaderBoard();
     }
-    // increments the sliding puzzles played for a user and saves the leaderboard.
+
+    // increments sliding puzzles played by 1 and total puzzles played .
     public void incrementSlidingPuzzlesPlayed(String user) {
         Stats s = get(user);
         s.total++;
         s.slidingPlayed++;
         saveLeaderBoard();
     }
-    // increments the dots and boxes played for a user and saves the leaderboard.
+    // increments sliding puzzles played by 1 and total puzzles played .
     public void incrementDotsAndBoxesPlayed(String user) {
         Stats s = get(user);
         s.total++;
         s.dnbPlayed++;
         saveLeaderBoard();
     }
-    // records the result of a dots and boxes game for a user, updating wins or losses accordingly and saves the leaderboard.
+
+    // saves the game as a win or loss for multiplayer games.
     public void recordDotsAndBoxesResult(String user, boolean win) {
         Stats s = get(user);
         s.total++;
@@ -55,16 +63,15 @@ public class LeaderBoard {
         saveLeaderBoard();
     }
 
-    // helper to load the leaderboard from the file into the hashmap
+    // loads the leaderboard from the mock database.
     public void loadLeaderBoard() {
         leaderboard.clear();
         File f = new File(fileName);
-        if (!f.exists()) return;
 
         try (BufferedReader br = new BufferedReader(new FileReader(f))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] p = line.split(",", -1);
+                String[] p = line.split(",");
                 if (p.length != 6) continue;
                 Stats s = new Stats(p[0].trim());
                 s.total        = Integer.parseInt(p[1].trim());
@@ -76,7 +83,7 @@ public class LeaderBoard {
             }
         } catch (IOException ignored) { }
     }
-    // helper to save the current hashmap into the file
+    // writes the leaderboard to the mock database.
     public void saveLeaderBoard() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
             for (Stats s : leaderboard.values()) {
@@ -93,13 +100,14 @@ public class LeaderBoard {
         } catch (IOException ignored) { }
     }
 
-    // prints out the leaderboard to the console sorted by total games played in descending order
+    // displays the leaderboard values ordere by the total number of games played in descending order.
     public void printLeaderBoard() {
         List<Stats> list = new ArrayList<>(leaderboard.values());
+
         Collections.sort(list, new Comparator<Stats>() {
             @Override public int compare(Stats a, Stats b) {
                 if (b.total != a.total) return b.total - a.total; // desc by total
-                return a.username.compareToIgnoreCase(b.username);
+                return 1;
             }
         });
 
@@ -111,7 +119,7 @@ public class LeaderBoard {
         }
     }
 
-    // small class to hold stats for a user
+    // a helper class in order to hold the statistics.
     private static class Stats {
         String username;
         int total;

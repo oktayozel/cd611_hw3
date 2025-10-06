@@ -122,5 +122,4 @@ public class DotsAndBoxesGameManager extends GameManager{
         cols = 0;
     }
 
-    
 }

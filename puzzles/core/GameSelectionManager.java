@@ -26,16 +26,16 @@ public class GameSelectionManager {
         this.input = new Input();
         this.output = new Output(this.input);
     }
-    //getter for dots and boxes game manager
+    // returns the game manager object of Dots and Boxes puzzle.
     public DotsAndBoxesGameManager getDotsAndBoxesGameManager(){
         return this.dotsAndBoxesGameManager;
     }
-    //getter for sliding puzzle game manager
+    // returns the game manager object of Sliding puzzle.
     public SlidingPuzzleGameManager getSlidingPuzzleGameManager(){
         return this.slidingPuzzleGameManager;
     }
 
-    // displays the available games and prompts the user to select one. It then runs the selected game.
+    //Displays the games looking to the config file and allows for a number selection and then depending on the game selection calls the related game.
     public void runSelectedGame() {
         while(true){
             output.displayAnimation();
