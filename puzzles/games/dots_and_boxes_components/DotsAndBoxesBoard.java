@@ -1,6 +1,12 @@
 package puzzles.games.dots_and_boxes_components;
 
-// Board.java
+
+
+/*
+ * this class represents the game board for the dots and boxes game.
+ * it manages the grid of boxes handles edge claims checks for completed boxes
+ * and displays the current state of the board. Basically holds everything related to the board.
+ */
 public class DotsAndBoxesBoard {
     private int rows, cols;
     private DotsAndBoxesCell[][] boxes;
@@ -72,7 +78,8 @@ public class DotsAndBoxesBoard {
     // sets the edge to the user and then checks if the game is over or not 
     public boolean claimEdge(int row, int col, String direction, DotsAndBoxesUser player) {
         lastMoveCompletedBox = false;
-
+        
+        //outside the board
         if(direction.equals("H")) {
             if (row < 0 || row > rows || col < 0 || col >= cols) return false;
         } else if (direction.equals("V")) {
@@ -84,7 +91,7 @@ public class DotsAndBoxesBoard {
         boolean valid = false;
 
         switch (direction) {
-            case "H": // right line
+            case "H": // horizontal right line
                 if (row < rows) {
                     if (!boxes[row][col].hasTop()) {
                         boxes[row][col].setTop(player);;
@@ -99,7 +106,7 @@ public class DotsAndBoxesBoard {
                 }
                 break;
 
-            case "V": // down line
+            case "V": // vertical down line
                 if (col < cols) {
                     if (!boxes[row][col].hasLeft()) {
                         boxes[row][col].setLeft(player);

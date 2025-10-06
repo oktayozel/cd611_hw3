@@ -11,13 +11,13 @@ import java.util.*;
 
 
 public class LeaderBoard {
-
+    // holds the hashmap after loading from the file. a username and a stats object.
     private Map<String, Stats> leaderboard = new HashMap<>();
     private final String fileName = "data/leaderboard.txt";
 
     // constructor
     public LeaderBoard() { 
-
+        loadLeaderBoard();
     }
 
 

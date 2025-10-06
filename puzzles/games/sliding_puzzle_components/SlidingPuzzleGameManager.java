@@ -40,7 +40,7 @@ public class SlidingPuzzleGameManager extends GameManager {
         initializeBoard();
 
     }
-
+    //initialize the player by prompting for a username if it's the first time opening the game.
     @Override
     protected void initializePlayers(boolean gameFirstOpen) {
         if(gameFirstOpen == true){
@@ -50,6 +50,7 @@ public class SlidingPuzzleGameManager extends GameManager {
         }
     }
 
+    // Initialize the sliding puzzle board by prompting for its dimensions.
     @Override
     protected void initializeBoard(){
         int rows = input.readIntOrExit(String.format("Hey %s Enter number of rows: ", username), settings.getMinBoardSize("SlidingPuzzle"), settings.getMaxBoardSize("SlidingPuzzle"));

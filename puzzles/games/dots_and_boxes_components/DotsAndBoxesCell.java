@@ -2,6 +2,11 @@ package puzzles.games.dots_and_boxes_components;
 
 import puzzles.core.Cell;
 
+/*
+ * This class represents a cell in the Dots and Boxes game.
+ * it extends the abstract Cell class and includes properties for the edges of the cell 
+ * It provides methods to maintain cell operations.
+ */
 public class DotsAndBoxesCell extends Cell {
     private Edge top = new Edge();
     private Edge bottom = new Edge();

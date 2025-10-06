@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.io.InputStream;
 
+/* This class handles the game settings loaded from a properties file. Basically holds all configuration related to the game. */
 public class Settings {
     private Properties props = new Properties();
     // constructor for the properties file.
