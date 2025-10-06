@@ -1,1 +1,1 @@
-java -cp out puzzles.app.Main
+java -cp out -Dfile.encoding=UTF-8 puzzles.app.Main
