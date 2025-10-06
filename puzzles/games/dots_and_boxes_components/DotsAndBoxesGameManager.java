@@ -7,7 +7,9 @@ import puzzles.core.Settings;
 import puzzles.io.Input;
 import puzzles.io.Output;
 
-
+/* This class manages the Dots and Boxes game.
+* It handles game initialization, the main game loop, and checking for game completion.
+*/
 public class DotsAndBoxesGameManager extends GameManager{
     private Input input;
     private Settings settings;
@@ -20,6 +22,7 @@ public class DotsAndBoxesGameManager extends GameManager{
     private int rows;
     private int cols;
 
+    // constructor to initialize the game manager and its components.
     public DotsAndBoxesGameManager(Settings settings) {
         this.input  = new Input();
         this.output = new Output(this.input, "dots_and_boxes");
@@ -28,6 +31,7 @@ public class DotsAndBoxesGameManager extends GameManager{
 
     }
 
+    // game setup function.
     @Override
     public void initGame(boolean gameFirstOpen) {
         leaderBoard.loadLeaderBoard();
@@ -36,13 +40,13 @@ public class DotsAndBoxesGameManager extends GameManager{
         initializeBoard();
     }
 
-
+    // main game loop, runs the necessary function till the game ends. and handles end of game tasks like displayin results saving to the leaderboard etc.
     @Override
     public boolean runGame() {
         super.startTimer();
         while (!board.isFull()) {
+            //check which player every turn and who owns the lines
             output.displayNextScene(board ,currentPlayer,(currentPlayer == player1) ? "player1" : "player2");
-
             input.readDotsAndBoxesMove(board, currentPlayer);
 
             if (!board.lastMoveCompletedBox()) {
@@ -54,6 +58,7 @@ public class DotsAndBoxesGameManager extends GameManager{
         super.stopTimer();
         int elapsedTime = super.getElapsedTime();
         String result = output.displayCongratulations(board, player1, player2, elapsedTime );;
+        // check win function
         if(result.equals("player1") ){
             leaderBoard.recordDotsAndBoxesResult(player1.getUsername(),true);
             leaderBoard.recordDotsAndBoxesResult(player2.getUsername(),false);
@@ -65,12 +70,14 @@ public class DotsAndBoxesGameManager extends GameManager{
         output.displayLeaderboard(leaderBoard);
         return input.inputYesOrExit("\n\n\n\nTo play a new game type y/Y, to exit press any key >>> \n To go back to main menu type m/M to \n any other input will end the game.");
     }
-
+    // checks if the game has ended.
      @Override
     public boolean isGameEnd() {
         return board.isFull(); 
     }
 
+    // Method to prompt for player names and create player objects.
+    @Override
     protected void initializePlayers(boolean gameFirstOpen) {
 
         if(gameFirstOpen == true){
@@ -84,7 +91,7 @@ public class DotsAndBoxesGameManager extends GameManager{
     }
 
 
-
+    // creates a clean game board and informs the user about the game rules.
     @Override
     protected void initializeBoard() {
         int rows = input.readIntOrExit("Enter number of rows: ", settings.getMinBoardSize("DotsAndBoxes"), settings.getMaxBoardSize("DotsAndBoxes"));
@@ -100,12 +107,12 @@ public class DotsAndBoxesGameManager extends GameManager{
     }
 
 
-
+    // changes the current player after each turn.
     private void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
     
-
+    // clears the game state for a new game
     public void reset() {
         if (player1 != null) player1.resetScore();
         if (player2 != null) player2.resetScore();

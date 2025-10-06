@@ -6,6 +6,13 @@ import puzzles.games.sliding_puzzle_components.SlidingPuzzleGameManager;
 import puzzles.io.Input;
 import puzzles.io.Output;
 
+
+/*
+ * This class manages the selection and execution of different games.
+ * It initializes game managers for each supported game and handles user input to select and run a game.
+ * It serves as a bigger manager for the subgames. It is a main menu
+ */
+
 public class GameSelectionManager {
     private DotsAndBoxesGameManager dotsAndBoxesGameManager;
     private SlidingPuzzleGameManager slidingPuzzleGameManager;
@@ -19,14 +26,16 @@ public class GameSelectionManager {
         this.input = new Input();
         this.output = new Output(this.input);
     }
+    //getter for dots and boxes game manager
     public DotsAndBoxesGameManager getDotsAndBoxesGameManager(){
         return this.dotsAndBoxesGameManager;
     }
+    //getter for sliding puzzle game manager
     public SlidingPuzzleGameManager getSlidingPuzzleGameManager(){
         return this.slidingPuzzleGameManager;
     }
 
-
+    // displays the available games and prompts the user to select one. It then runs the selected game.
     public void runSelectedGame() {
         while(true){
             output.displayAnimation();

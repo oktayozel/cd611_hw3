@@ -18,7 +18,7 @@ public class Input{
     public Input() {
         scanner = new Scanner(System.in);
     }
-
+    // helper method to read a line of input and check for "exit" command.
     public  String readLineOrExit() {
         String input = scanner.nextLine().trim();
         if (input.equalsIgnoreCase("exit")) {
@@ -27,7 +27,8 @@ public class Input{
         }
         return input;
     }
-    // function overloading
+
+    // function overloading for readLineOrExit method takes a prompt as argument
     public  String readLineOrExit(String prompt) {
         System.out.print(prompt);
         String input = scanner.nextLine().trim();
@@ -43,6 +44,7 @@ public class Input{
         return readIntOrExit(prompt, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
+    // read an integer within a specified range or exit
     public  int readIntOrExit( String prompt, int min_value, int max_value) {
         int value;
         while (true) {
@@ -64,6 +66,7 @@ public class Input{
         return value;
     }
 
+    // read directions for dots and boxes or exit
     public  String readDirectionOrExit(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -74,7 +77,7 @@ public class Input{
             System.out.println("Invalid direction. Please enter H or V.");
         }
     }
-
+    // Method to read a non-empty string OR exit.
     public String readStringOrExit(String prompt){
             while (true) {
                 System.out.print(prompt);
@@ -120,25 +123,26 @@ public class Input{
         }
 
     }
-public void readDotsAndBoxesMove(DotsAndBoxesBoard board, DotsAndBoxesUser currentPlayer) {
-    boolean validMove = false;
-    while (!validMove) {
-        int row = readIntOrExit("Enter row: ", 0, board.getRows());
-        int col = readIntOrExit("Enter column: ", 0, board.getCols());
+    // Method to read and validate a move in the Dots and Boxes game.
+    public void readDotsAndBoxesMove(DotsAndBoxesBoard board, DotsAndBoxesUser currentPlayer) {
+        boolean validMove = false;
+        while (!validMove) {
+            int row = readIntOrExit("Enter row: ", 0, board.getRows());
+            int col = readIntOrExit("Enter column: ", 0, board.getCols());
 
-        if (row >= board.getRows() && col >= board.getCols()) {
-            System.out.println("Invalid position. That dot is outside the board.");
-            continue;
-        }
+            if (row >= board.getRows() && col >= board.getCols()) {
+                System.out.println("Invalid position. That dot is outside the board.");
+                continue;
+            }
 
-        String dir = readDirectionOrExit("Enter direction (H for horizontal right line, V for vertical down line): ");
+            String dir = readDirectionOrExit("Enter direction (H for horizontal right line, V for vertical down line): ");
 
-        validMove = board.claimEdge(row, col, dir, currentPlayer);
-        if (!validMove) {
-            System.out.println("Invalid move. Try again.");
+            validMove = board.claimEdge(row, col, dir, currentPlayer);
+            if (!validMove) {
+                System.out.println("Invalid move. Try again.");
+            }
         }
     }
-}
     
     // Method to prompt the user for starting a new game or exiting.
     public boolean inputYesOrExit(String prompt){

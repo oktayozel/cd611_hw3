@@ -1,6 +1,12 @@
 package puzzles.games.dots_and_boxes_components;
 
-// Board.java
+
+
+/*
+ * this class represents the game board for the dots and boxes game.
+ * it manages the grid of boxes handles edge claims checks for completed boxes
+ * and displays the current state of the board. Basically holds everything related to the board.
+ */
 public class DotsAndBoxesBoard {
     private int rows, cols;
     private DotsAndBoxesCell[][] boxes;
@@ -9,13 +15,14 @@ public class DotsAndBoxesBoard {
     private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_BLUE = "\u001B[34m";
 
+    // Helper method to get colored line based on ownership so that users can see easily which lines they own.
     private String getColoredLine(boolean claimed, DotsAndBoxesUser owner, String direction) {
         if (!claimed) return direction.equals("H") ? "  " : " ";
         String line = direction.equals("H") ? "──" : "│";
         String color = (owner != null && "P1".equals(owner.getShortName())) ? ANSI_BLUE : ANSI_RED;
         return String.format("%s%s%s", color, line, ANSI_RESET);
     }
-
+    // constructor to initialize the board with given rows and columns.
     public DotsAndBoxesBoard(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
@@ -27,7 +34,7 @@ public class DotsAndBoxesBoard {
             }
         }
     }
-
+    // prints out the current state of the board to the console.
     public void display() {
         System.out.print("    ");
         for (int c = 0; c <= cols; c++) {
@@ -64,10 +71,11 @@ public class DotsAndBoxesBoard {
         System.out.println("○");
     }
 
-
+    // method to claim an edge for a user on the board returns true if the claim was successful false otherwise.
     public boolean claimEdge(int row, int col, String direction, DotsAndBoxesUser player) {
         lastMoveCompletedBox = false;
-
+        
+        //outside the board
         if(direction.equals("H")) {
             if (row < 0 || row > rows || col < 0 || col >= cols) return false;
         } else if (direction.equals("V")) {
@@ -79,7 +87,7 @@ public class DotsAndBoxesBoard {
         boolean valid = false;
 
         switch (direction) {
-            case "H": // right line
+            case "H": // horizontal right line
                 if (row < rows) {
                     if (!boxes[row][col].hasTop()) {
                         boxes[row][col].setTop(player);;
@@ -94,7 +102,7 @@ public class DotsAndBoxesBoard {
                 }
                 break;
 
-            case "V": // down line
+            case "V": // vertical down line
                 if (col < cols) {
                     if (!boxes[row][col].hasLeft()) {
                         boxes[row][col].setLeft(player);
@@ -123,7 +131,7 @@ public class DotsAndBoxesBoard {
 
         return valid;
     }
-
+    // checks if all boxes on the board are complete.
     public boolean isFull() {
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
@@ -132,10 +140,12 @@ public class DotsAndBoxesBoard {
         }
         return true;
     }
-
+    // returns true if the last move completed a box false otherwise.
     public boolean lastMoveCompletedBox() {
         return lastMoveCompletedBox;
     }
+    //getter methods for rows and columns
+    
     public int getRows(){
         return this.rows;
     }

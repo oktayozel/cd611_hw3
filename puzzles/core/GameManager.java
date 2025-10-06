@@ -28,7 +28,7 @@ public abstract class GameManager{
     public abstract boolean runGame();
     public abstract boolean isGameEnd();
 
-
+    // Methods  to start, stop and get elapsed time of the game timer.
     public void startTimer() {
         startTime = System.currentTimeMillis();
         timerRunning = true;

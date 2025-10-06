@@ -19,7 +19,7 @@ public class Output{
     private static final String ANSI_GREEN = "\u001B[32m";
     private static final String ANSI_CYAN = "\u001B[36m";
     private static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_ORANGE = "\u001B[38;5;208m";
+    private static final String ANSI_ORANGE = "\u001B[38;5;208m";
 
     public Output(Input input) {
         this.input = input;
@@ -172,8 +172,8 @@ public class Output{
         printBoard(board,moveCount);
     }
 
-
-    public void displayNextScene(DotsAndBoxesBoard board, DotsAndBoxesUser currentPlayer  , String turn){
+    // method to display the next scene in Dots and Boxes game, showing the updated board and current player's turn.
+    public void displayNextScene(DotsAndBoxesBoard board, DotsAndBoxesUser currentPlayer, String turn){
         clearScreen();
         board.display();
         if (turn.equals("player1")){
@@ -199,7 +199,7 @@ public class Output{
             }
         }
     }
-
+    // display congratulations message for Dots and Boxes game, showing final scores and determining the winner.
     public String displayCongratulations(DotsAndBoxesBoard board, DotsAndBoxesUser player1, DotsAndBoxesUser player2, int elapsedTime){
         board.display();
         int score1 = player1.getScore();
@@ -236,7 +236,7 @@ public class Output{
     }
 
 
-
+    // helper method to print N empty lines for spacing.
     public void displayNEmptyLines(int N){
         for(int i = 0 ; i < N ; i++){
             System.out.printf("\n");
@@ -292,6 +292,8 @@ public class Output{
         leaderBoard.printLeaderBoard();
         input.readLineOrExit("Press enter to continue...");
     }
+
+    // used in the game selection menu to display available games.
     public void displaySupportedGames(List<String> games) {
         System.out.println("Available games:");
         for (int i = 0; i < games.size(); i++) {

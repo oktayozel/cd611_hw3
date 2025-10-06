@@ -3,16 +3,20 @@ package puzzles.core;
 import java.io.*;
 import java.util.*;
 
-
+/*
+ * 
+ * This class manages the common leaderboard for the games.
+ */
 public class LeaderBoard {
-
+    // holds the hashmap after loading from the file. a username and a stats object.
     private Map<String, Stats> leaderboard = new HashMap<>();
     private final String fileName = "data/leaderboard.txt";
-
+    
+    // constructor to load the leaderboard from the file.
     public LeaderBoard() { 
-
+        loadLeaderBoard();
     }
-
+    // helper to get the stats object for a user creating it if it doesn't exist
     private Stats get(String user) {
         Stats s = leaderboard.get(user);
         if (s == null) {
@@ -21,27 +25,27 @@ public class LeaderBoard {
         }
         return s;
     }
-
+    // increments the total games played for a user and saves the leaderboard.
     public void incrementTotal(String user) {
         Stats s = get(user);
         s.total++;
         saveLeaderBoard();
     }
-
+    // increments the sliding puzzles played for a user and saves the leaderboard.
     public void incrementSlidingPuzzlesPlayed(String user) {
         Stats s = get(user);
         s.total++;
         s.slidingPlayed++;
         saveLeaderBoard();
     }
-
+    // increments the dots and boxes played for a user and saves the leaderboard.
     public void incrementDotsAndBoxesPlayed(String user) {
         Stats s = get(user);
         s.total++;
         s.dnbPlayed++;
         saveLeaderBoard();
     }
-
+    // records the result of a dots and boxes game for a user, updating wins or losses accordingly and saves the leaderboard.
     public void recordDotsAndBoxesResult(String user, boolean win) {
         Stats s = get(user);
         s.total++;
@@ -51,7 +55,7 @@ public class LeaderBoard {
         saveLeaderBoard();
     }
 
-
+    // helper to load the leaderboard from the file into the hashmap
     public void loadLeaderBoard() {
         leaderboard.clear();
         File f = new File(fileName);
@@ -72,7 +76,7 @@ public class LeaderBoard {
             }
         } catch (IOException ignored) { }
     }
-
+    // helper to save the current hashmap into the file
     public void saveLeaderBoard() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
             for (Stats s : leaderboard.values()) {
@@ -89,7 +93,7 @@ public class LeaderBoard {
         } catch (IOException ignored) { }
     }
 
-
+    // prints out the leaderboard to the console sorted by total games played in descending order
     public void printLeaderBoard() {
         List<Stats> list = new ArrayList<>(leaderboard.values());
         Collections.sort(list, new Comparator<Stats>() {
@@ -107,7 +111,7 @@ public class LeaderBoard {
         }
     }
 
-
+    // small class to hold stats for a user
     private static class Stats {
         String username;
         int total;

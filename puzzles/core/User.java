@@ -33,6 +33,7 @@ public class User{
     public String getUsername(){
         return username;
     }
+    // Getter and setter methods for score and points.
     public int getScore() {
         return score;
     }
