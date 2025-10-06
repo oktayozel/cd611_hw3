@@ -102,6 +102,26 @@ Please give us a full execution of what we should see on the screen. Label each 
 
 ```
 Output:
+              ,---------------------------,
+              |  /---------------------\  |
+              | |                       | |
+              | |      Welcome to       | |
+              | |        CS-611         | |
+              | |        Games          | |
+              | |                       | |
+              |  \_____________________/  |
+              |___________________________|
+            ,---\_____     []     _______/------,
+          /         /______________\           /|
+        /___________________________________ /  | ___
+        |                                   |   |    )
+        |  _ _ _                 [-------]  |   |   (
+        |  o o o                 [-------]  |  /    _)_
+        |__________________________________ |/     /  /
+    /-------------------------------------/|      ( )/
+  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
+/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Available games:
 [1] SlidingPuzzle
@@ -113,6 +133,20 @@ Input:
 1
 
 Output:
+###########################################################################################################################################
+#                                                                                                                                         #
+#                                                                                                                                         #
+#     ######    #        #####      ####    #####  #    #    ######         ######    #     #   #######   #######   #         #######     #
+#     #         #          #        #    #    #    ##   #   #               #     #   #     #        #          #   #         #           #
+#     #         #          #        #    #    #    # #  #   #               #     #   #     #       #          #    #         #           #
+#     #####     #          #        #    #    #    #  # #   #   ###         ######    #     #      #          #     #         #####       #
+#          #    #          #        #    #    #    #   ##   #     #         #         #     #     #          #      #         #           #
+#          #    #          #        #    #    #    #    #   #     #         #         #     #    #          #       #         #           #
+#     ######    #######   ###       ####     ###   #    #    #####          #          #####    #######    #######  ######    #######     #
+#                                                                                                                                         #
+#                                                                                                                                         #
+###########################################################################################################################################
+
 Welcome to the Sliding Puzzle Game!
 Swap adjacent cells to order them.
  Press enter to start... 
@@ -204,14 +238,14 @@ Username   Total   D&B   SlidingP   D&B_Win   D&B_Loss
 aaaaa           3     2       0     0      1
 bbbbb           3     2       0     1      0
 oktay           3     1       1     1      1
-2           1     0       1     0      0
-gsd           1     0       1     0      0
+2               1     0       1     0      0
+gsd             1     0       1     0      0
 hakan           1     0       1     0      0
-jaon           1     0       1     0      0
+jaon            1     0       1     0      0
 Jason           1     0       1     0      0
-sdf           1     0       0     0      0
+sdf             1     0       0     0      0
 tarik           1     0       1     0      0
-trump           1     0       1     0      0
+lin             1     0       1     0      0
 Press enter to continue...
 
 Input:
@@ -233,116 +267,191 @@ Which game would you like to play?
 You can simply type exit to finish the game  >>>
 
 Input:
-2 2 
-Output:
-
- - -  
-|2|3|
- - -  
-| |1|
- - -                                      move count = 0
-
-
-Which cell do you want to move?
->>> 
-
-Input:
-
-1
-
-Output:
-
- - -  
-|2|3|
- - -  
-|1| |
- - -                                      move count = 1
-
-
-Which cell do you want to move?
->>> 
-
-Input:
-3
-Output:
-
- - -  
-|2| |
- - -  
-|1|3|
- - -                                      move count = 2
-
-Input:
-
 2
 
 Output:
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X                                                                                                       X
+X   XXXXX                                             X     XXXXXXX                                     X
+X   XX   X                                            X     XX    XX                                    X
+X   XX    X          X                                X     XX    XX                                    X
+X   XX     X  XXX  XXXXX XXXXX      XXXX   X XXX    XXX     XXXXXXXXX    XXX   X    X   XXXXX   XXXXX   X
+X   XX     X X   X   X   X         X   x   XX  XX XX  X     XXX     XX  X   X   X  X   X     X  X       X
+X   XX     X X   X   X   XXXXX     X   X   X    X X   X     XX      XX  X   X    XX    XXXXXXX  XXXXX   X
+X   XX    X  X   X   X       X     X   XX  X    X X   X     XX     XX   X   X   X  X   X            X   X
+X   XXXXXX    XXX    X   XXXXX      XXX XX X    X  XXXX     XXXXXXXX     XXX   X    X   XXXXX   XXXXX   X
+X                                                                                                       X
+X                                                                                                       X
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
+Welcome to the Dots and Boxes Game!
+Be the one who puts the last piece to conquer as much boxes as you can. Enjoy!
+You are going to see the row and column numbers for each dot.
+To put an edge you need to pick the dot on the left of the edge, if the edge is horizontal.
+To put an edge you need to pick the dot on the top of the edge, if the edge is vertical.
+ Press enter to start...
 
-Which cell do you want to move?
->>> 
+Input:
+(Press "Enter")
 
+Output:
+To put an edge you need to pick the dot on the top of the edge, if the edge is vertical.
+ Press enter to start...
+Enter Player 1 name: 
 
+Input:
+oktay
 
- - -  
-| |2|
- - -  
-|1|3|
- - -                                      move count = 3
+Output:
+Enter Player 2 name:
 
+Input:
+lin
 
-Which cell do you want to move?
->>> 
+Output:
+Enter number of rows:
+
+Input:
+2
+
+Output:
+Enter number of columns:
+
+Input:
+abc
+
+Output:
+Invalid input. Please enter a valid number.
+Enter number of columns:
+
+Input:
+15
+
+Output:
+Invalid input!
+The input should be between 2 and 10.
+Enter number of columns:
+
+Input:
+2
+
+Output:
+    0  1  2
+0   ○  ○  ○
+
+1   ○  ○  ○
+
+2   ○  ○  ○
+Player1 oktay's turn(Blue Line). Score: 0
+Enter row:
+
+Input:
+0
+
+Output:
+Enter column:
+
+Input:
+0
+
+Output:
+Enter direction (H for horizontal right line, V for vertical down line):
+
+Input:
+H
+
+Output:
+    0  1  2
+0   ○──○  ○
+
+1   ○  ○  ○
+
+2   ○  ○  ○
+Player2 lin's turn(Red Line). Score: 0
+Enter row:
+
 Input:
 1
 
 Output:
-
- - -  
-|1|2|
- - -  
-| |3|
- - -                                      move count = 4
-
-
-Which cell do you want to move?
->>> 
-
+Enter column:
 
 Input:
-
-3
-
+5
 
 Output:
-
-!!!!!               Congratulations             !!!!!
-
- You solved the puzzle in 5 moves!
-
-Leaderboard:
-Username |  Games Played
----------------------
-jackson         5
-oktay           5
-sengun          3
-michael         2
-john            2
-okt             1
-alperen         1
-
-Press enter to continue...
+The input should be between 0 and 2.
+Enter column:
 
 Input:
-\n
-Output:
+1
 
-To play a new game type y/Y, to exit press any key >>> 
+Output:
+Enter direction (H for horizontal right line, V for vertical down line): 
 
 Input:
-q
+S
 
 Output:
+Invalid direction. Please enter H or V.
+Enter direction (H for horizontal right line, V for vertical down line):
+
+Input:
+V
+
+Output:
+    0  1  2
+0   ○──○  ○
+
+1   ○  ○  ○
+       │
+2   ○  ○  ○
+Player1 oktay's turn(Blue Line). Score: 0
+Enter row:
+
+...
+
+Output:
+    0  1  2
+0   ○──○──○
+    │  │
+1   ○  ○  ○
+
+2   ○  ○  ○
+Player1 cc's turn(Blue Line). Score: 0
+Enter row:
+
+Input:
+1
+
+Output:
+Enter column: 
+
+Input:
+0
+
+Output:
+Enter direction (H for horizontal right line, V for vertical down line):
+
+Input:
+H
+
+Output:
+    0  1  2
+0   ○──○──○
+    │P1│
+1   ○──○  ○
+
+2   ○  ○  ○
+Player1 cc's turn(Blue Line). Score: 1
+Enter row:
+
+Input:
+exit
+
+Output:
+Exiting game. Goodbye!
+
 end of program
 
 ```
