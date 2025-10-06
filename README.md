@@ -106,7 +106,10 @@ Your directions on how to run the code. Make sure to be as thorough as possible!
 1. Navigate to the directory "assignment_2" after unzipping the files
 2. Run the following instructions:
 
-javac -d out puzzles/app/*.java puzzles/core/*.java puzzles/io/*.java puzzles/games/sliding_puzzle_components/*.java \
+javac -encoding UTF-8 -d out puzzles/app/*.java puzzles/core/*.java puzzles/io/*.java puzzles/games/sliding_puzzle_components/*.java \
+&& cp puzzles/resources/config.properties out/
+
+
 java -cp out puzzles.app.Main
 
 NOTE: Instead you can simply run ./compile.sh and then ./run.sh
