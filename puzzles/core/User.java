@@ -33,12 +33,15 @@ public class User{
     public String getUsername(){
         return username;
     }
+    // getter method for the score
     public int getScore() {
         return score;
     }
+    //getter method for increasing the score by 1.
     public void addPoint() {
         score++;
     }
+    // sets the score equal to 0
     public void resetScore() {
         score = 0;
     }

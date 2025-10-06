@@ -42,11 +42,12 @@ public abstract class Cell{
     public String toString() {
         return value == null ? " " :value.toString();
     }
+    // Sets the owner of the cell for dots and boxes type of games
     public void setOwner(DotsAndBoxesUser player) {
         this.owner = player;
         setValue(player.getShortName());
     }
-
+    // helper function to get the owner of the cell
     public DotsAndBoxesUser getOwner() {
         return owner;
     }
