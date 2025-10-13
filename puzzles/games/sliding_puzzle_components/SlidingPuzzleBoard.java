@@ -15,10 +15,7 @@ import puzzles.core.Cell;
 public class SlidingPuzzleBoard implements Board{
     private final int rowCount;
     private final int colCount;
-    public static final int MIN_ROWS = 2;
-    public static final int MIN_COLS = 2;
-    public static final int MAX_ROWS = 10;
-    public static final int MAX_COLS = 10;
+
     
     private final SlidingPuzzleCell[][] board;
     private Random rnd = new Random();

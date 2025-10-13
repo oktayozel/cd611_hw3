@@ -1,6 +1,5 @@
 package puzzles.games.dots_and_boxes_components;
 
-import puzzles.core.Board;
 
 
 /*

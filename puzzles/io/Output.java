@@ -282,6 +282,21 @@ public class Output{
             System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "                                                                                                       " + ANSI_ORANGE + "X\n");
             System.out.printf(ANSI_ORANGE + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"+ ANSI_RESET);    
         }
+        else if(gameName.equals("quoridor")) {
+            System.out.printf(ANSI_ORANGE + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "                                                                                                       " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XXXXX                                             X     XXXXXXX                                     " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX   X                                            X     XX    XX                                    " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX    X          X                                X     XX    XX                                    " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX     X  XXX  XXXXX XXXXX      XXXX   X XXX    XXX     XXXXXXXXX    XXX   X    X   XXXXX   XXXXX   " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX     X X   X   X   X         X   x   XX  XX XX  X     XXX     XX  X   X   X  X   X     X  X       " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX     X X   X   X   XXXXX     X   X   X    X X   X     XX      XX  X   X    XX    XXXXXXX  XXXXX   " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX    X  X   X   X       X     X   XX  X    X X   X     XX     XX   X   X   X  X   X            X   " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XXXXXX    XXX    X   XXXXX      XXX XX X    X  XXXX     XXXXXXXX     XXX   X    X   XXXXX   XXXXX   " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "                                                                                                       " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "                                                                                                       " + ANSI_ORANGE + "X\n");
+            System.out.printf(ANSI_ORANGE + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"+ ANSI_RESET);    
+        }
         
         displayNEmptyLines(20);
 
