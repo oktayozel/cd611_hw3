@@ -4,7 +4,7 @@ import puzzles.core.LeaderBoard;
 import puzzles.io.Input;
 import puzzles.io.Output;
 import puzzles.core.Settings;
-import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
+import puzzles.games.quoridor_components.QuoridorUser;;
 
 public class QuoridorGameManager extends GameManager {
     
@@ -13,6 +13,8 @@ public class QuoridorGameManager extends GameManager {
     private Input input;
     private LeaderBoard leaderBoard;
     private Settings settings;
+    private QuoridorUser player1;
+    private QuoridorUser player2;
     
     public QuoridorGameManager((Settings settings) {
         super();
@@ -38,9 +40,9 @@ public class QuoridorGameManager extends GameManager {
         if(gameFirstOpen == true){
             output.printWelcomeMessage();
             String name1 = input.readStringOrExit("Enter Player 1 name: ");
-            player1 = new DotsAndBoxesUser(name1, "P1");
+            player1 = new QuoridorUser(name1, "P1");
             String name2 = input.readStringOrExit("Enter Player 2 name: ");
-            player2 = new DotsAndBoxesUser(name2, "P2");
+            player2 = new QuoridorUser(name2, "P2");
         
         }
     }
@@ -49,12 +51,45 @@ public class QuoridorGameManager extends GameManager {
     protected void initializeBoard(){
         int rows = input.readIntOrExit(String.format("Enter number of rows: "), settings.getMinBoardSize("Quoridor"), settings.getMaxBoardSize("Quoridor"));
         int cols = input.readIntOrExit(String.format("Enter number of columns: "), settings.getMinBoardSize("Quoridor"), settings.getMaxBoardSize("Quoridor"));
-        this.board = new QuoridorBoard(rows, cols, new QuoridorUser("Player 1"), new QuoridorUser("Player 2"));
+        this.board = new QuoridorBoard(rows, cols, player1, player2);
     }
 
     
 
+    @Override
+    public boolean runGame() {
+        super.startTimer();
+        while (!isGameEnd()) {
 
+
+        }
+
+        super.stopTimer();
+        int elapsedTime = super.getElapsedTime();
+
+        // TODO: display results and update leaderboard
+        // TODO: implement congratulations message call in here
+
+
+        output.displayLeaderboard(leaderBoard);
+        return input.inputYesOrExit("\n\n\n\nTo play a new game type y/Y, to exit press any key >>> \n To go back to main menu type m/M to \n any other input will end the game.");
+    }
+
+
+
+
+
+
+
+    public QuoridorBoard getBoard() {
+        return board;
+    }
+    public QuoridorUser getPlayer1() {
+        return player1;
+    }
+    public QuoridorUser getPlayer2() {
+        return player2;
+    }
 
 
     
