@@ -1,5 +1,6 @@
 package puzzles.games.dots_and_boxes_components;
 
+import puzzles.core.Board;
 
 
 /*
@@ -7,7 +8,7 @@ package puzzles.games.dots_and_boxes_components;
  * it manages the grid of boxes handles edge claims checks for completed boxes
  * and displays the current state of the board. Basically holds everything related to the board.
  */
-public class DotsAndBoxesBoard {
+public class DotsAndBoxesBoard implements Board{
     private int rows, cols;
     private DotsAndBoxesCell[][] boxes;
     private boolean lastMoveCompletedBox;
