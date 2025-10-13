@@ -1,13 +1,14 @@
 package puzzles.games.dots_and_boxes_components;
 
-
+import puzzles.core.Cell;
+import puzzles.core.Board;
 
 /*
  * this class represents the game board for the dots and boxes game.
  * it manages the grid of boxes handles edge claims checks for completed boxes
  * and displays the current state of the board. Basically holds everything related to the board.
  */
-public class DotsAndBoxesBoard implements Board{
+public class DotsAndBoxesBoard implements Board {
     private int rows, cols;
     private DotsAndBoxesCell[][] boxes;
     private boolean lastMoveCompletedBox;
@@ -160,4 +161,35 @@ public class DotsAndBoxesBoard implements Board{
     public int getCols(){
         return this.cols;
     }
+
+
+
+
+    // TODO: FIX THIS below part I have implemented it just to satisfy the interface requirements.
+    public DotsAndBoxesCell getCell(int row, int col) {
+        if (row < 0 || row >= rows || col < 0 || col >= cols) {
+            throw new IndexOutOfBoundsException("Cell position out of bounds");
+        }
+        return boxes[row][col];
+    }
+    public int getHeight() {
+        return this.rows;
+    }
+    public int getWidth() {
+        return this.cols;
+    }
+    public Cell[][] getBoard() {
+        return this.boxes;
+    }
+    // Th
+    public boolean areAdjacent(Cell cell1, Cell cell2) {
+        // Not applicable for Dots and Boxes
+        throw new UnsupportedOperationException("areAdjacent is not applicable for Dots and Boxes");
+    }
+    public boolean swapCells(Cell cell1, Cell cell2) {
+        // Not applicable for Dots and Boxes
+        throw new UnsupportedOperationException("swapCells is not applicable for Dots and Boxes");
+    }
+
+
 }

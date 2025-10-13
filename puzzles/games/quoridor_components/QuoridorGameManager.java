@@ -1,10 +1,9 @@
-package puzzles.games.sliding_puzzle_components;
+package puzzles.games.quoridor_components;
 import puzzles.core.GameManager;
 import puzzles.core.LeaderBoard;
 import puzzles.io.Input;
 import puzzles.io.Output;
 import puzzles.core.Settings;
-import puzzles.games.quoridor_components.QuoridorUser;;
 
 public class QuoridorGameManager extends GameManager {
     
@@ -15,8 +14,10 @@ public class QuoridorGameManager extends GameManager {
     private Settings settings;
     private QuoridorUser player1;
     private QuoridorUser player2;
+    private QuoridorUser currentPlayer;
+
     
-    public QuoridorGameManager((Settings settings) {
+    public QuoridorGameManager(Settings settings) {
         super();
         this.input  = new Input();
         this.output = new Output(this.input, "quoridor");
@@ -60,7 +61,7 @@ public class QuoridorGameManager extends GameManager {
     public boolean runGame() {
         super.startTimer();
         while (!isGameEnd()) {
-
+            output.displayNextScene(board ,currentPlayer,(currentPlayer == player1) ? "player1" : "player2");
 
         }
 
@@ -75,6 +76,12 @@ public class QuoridorGameManager extends GameManager {
         return input.inputYesOrExit("\n\n\n\nTo play a new game type y/Y, to exit press any key >>> \n To go back to main menu type m/M to \n any other input will end the game.");
     }
 
+
+    public boolean isGameEnd() {
+        // TODO: implement game end condition
+        System.err.println("!!!!!!!!!!!!!!!!!Game end condition not implemented yet.");
+        return false;
+    }
 
 
 

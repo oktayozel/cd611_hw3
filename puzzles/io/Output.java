@@ -5,7 +5,8 @@ import puzzles.core.Cell;
 import puzzles.core.LeaderBoard;
 import puzzles.games.dots_and_boxes_components.DotsAndBoxesBoard;
 import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
-
+import puzzles.core.Board;
+import puzzles.core.User;
 /*
  * This class handles output for the sliding puzzle game.
  * It provides methods to print the board, welcome message, prompts, and leaderboard.
@@ -173,7 +174,7 @@ public class Output{
     }
 
     // method to display the next scene in Dots and Boxes game, showing the updated board and current player's turn.
-    public void displayNextScene(DotsAndBoxesBoard board, DotsAndBoxesUser currentPlayer, String turn){
+    public void displayNextScene(Board board, User currentPlayer, String turn){
         clearScreen();
         board.display();
         if (turn.equals("player1")){
@@ -283,19 +284,19 @@ public class Output{
             System.out.printf(ANSI_ORANGE + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"+ ANSI_RESET);    
         }
         else if(gameName.equals("quoridor")) {
-            System.out.printf(ANSI_ORANGE + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
-            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "                                                                                                       " + ANSI_ORANGE + "X\n");
-            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XXXXX                                             X     XXXXXXX                                     " + ANSI_ORANGE + "X\n");
-            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX   X                                            X     XX    XX                                    " + ANSI_ORANGE + "X\n");
-            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX    X          X                                X     XX    XX                                    " + ANSI_ORANGE + "X\n");
-            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX     X  XXX  XXXXX XXXXX      XXXX   X XXX    XXX     XXXXXXXXX    XXX   X    X   XXXXX   XXXXX   " + ANSI_ORANGE + "X\n");
-            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX     X X   X   X   X         X   x   XX  XX XX  X     XXX     XX  X   X   X  X   X     X  X       " + ANSI_ORANGE + "X\n");
-            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX     X X   X   X   XXXXX     X   X   X    X X   X     XX      XX  X   X    XX    XXXXXXX  XXXXX   " + ANSI_ORANGE + "X\n");
-            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XX    X  X   X   X       X     X   XX  X    X X   X     XX     XX   X   X   X  X   X            X   " + ANSI_ORANGE + "X\n");
-            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "   XXXXXX    XXX    X   XXXXX      XXX XX X    X  XXXX     XXXXXXXX     XXX   X    X   XXXXX   XXXXX   " + ANSI_ORANGE + "X\n");
-            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "                                                                                                       " + ANSI_ORANGE + "X\n");
-            System.out.printf(ANSI_ORANGE + "X" + ANSI_YELLOW + "                                                                                                       " + ANSI_ORANGE + "X\n");
-            System.out.printf(ANSI_ORANGE + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n"+ ANSI_RESET);    
+            System.out.printf(ANSI_ORANGE + "###########################################################################################################################################\n");
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "                                                                                                                                         " + ANSI_ORANGE + "#\n");
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "                                                                                             #      #   ######     #                             " + ANSI_ORANGE + "#\n");
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "         ####      #      #    #####     ######    #####   ####       #####    ######        #      #   #          #               " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   #     #     #     #    #   ##     ##  #     #       ########   #    #     #               " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   #     #     #     #    #   ##     ##  #     #       #          #    #     #               " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   ######      #     #    #   ##     ##  ######        #   ###################               " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   #   #       #     #    #   ##     ##  #   #         #                     # " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   #    #      #     #    #   ##     ##  #    #        ########   #######    #                " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "         #### ##    ######     #####     #     #    ###    ####       #####    #     #       #          #          #  " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "               ##                                                                            #####  #####     ######                                     " + ANSI_ORANGE + "#\n");
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "                                                                                                                                         " + ANSI_ORANGE + "#\n");
+            System.out.printf(ANSI_ORANGE + "###########################################################################################################################################\n"+ ANSI_RESET);
         }
         
         displayNEmptyLines(20);

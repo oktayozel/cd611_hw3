@@ -3,6 +3,7 @@ package puzzles.core;
 import java.util.Scanner;
 import puzzles.games.dots_and_boxes_components.DotsAndBoxesGameManager;
 import puzzles.games.sliding_puzzle_components.SlidingPuzzleGameManager;
+import puzzles.games.quoridor_components.QuoridorGameManager;
 import puzzles.io.Input;
 import puzzles.io.Output;
 
@@ -16,13 +17,16 @@ import puzzles.io.Output;
 public class GameSelectionManager {
     private DotsAndBoxesGameManager dotsAndBoxesGameManager;
     private SlidingPuzzleGameManager slidingPuzzleGameManager;
+    private QuoridorGameManager quoridorGameManager;
     private Input input;
     private Output output;
     private Settings settings;
+
     public GameSelectionManager(){
         this.settings = new Settings();
         this.dotsAndBoxesGameManager = new DotsAndBoxesGameManager(settings);
         this.slidingPuzzleGameManager = new SlidingPuzzleGameManager(settings);
+        this.quoridorGameManager = new QuoridorGameManager(settings);
         this.input = new Input();
         this.output = new Output(this.input);
     }
@@ -34,16 +38,21 @@ public class GameSelectionManager {
     public SlidingPuzzleGameManager getSlidingPuzzleGameManager(){
         return this.slidingPuzzleGameManager;
     }
+    // returns the game manager object of Quoridor puzzle.
+    public QuoridorGameManager getQuoridorGameManager(){
+        return this.quoridorGameManager;
+    }
 
     //Displays the games looking to the config file and allows for a number selection and then depending on the game selection calls the related game.
     public void runSelectedGame() {
         while(true){
             output.displayAnimation();
             output.displaySupportedGames(settings.getSupportedGames());
+            
             int _selected_game = input.readIntOrExit("Which game would you like to play? \nYou can simply type exit to finish the game  >>> ", 1, 2);
+            boolean gameFirstOpen = true;
             
             if (_selected_game == 1) {
-                boolean gameFirstOpen = true;
                 while (true) {
                     slidingPuzzleGameManager.initGame(gameFirstOpen);
                     gameFirstOpen = false;
@@ -54,7 +63,6 @@ public class GameSelectionManager {
             }
 
             if (_selected_game == 2) {
-                boolean gameFirstOpen = true;
                 while (true) {
                     dotsAndBoxesGameManager.initGame(gameFirstOpen);
                     gameFirstOpen = false;
@@ -63,6 +71,16 @@ public class GameSelectionManager {
                     }
                 }
             }
+            if(_selected_game == 3){
+                while( true){
+                    quoridorGameManager.initGame(gameFirstOpen);
+                    gameFirstOpen = false;
+                    if (!quoridorGameManager.runGame()) {
+                        break;
+                    }
+                }
+            }
+            
         }
 
 

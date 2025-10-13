@@ -28,7 +28,8 @@ public class QuoridorBoard implements Board{
         }
         return board;
     }
-    public void renderBoard(){
+
+    public void display(){
         final int cellWidth = 4; 
         final int cellHeight = 4;
         final int cellInnerWidth = cellWidth - 2;
