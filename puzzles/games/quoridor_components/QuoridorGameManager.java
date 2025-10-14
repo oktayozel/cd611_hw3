@@ -100,7 +100,7 @@ public class QuoridorGameManager extends GameManager {
 }
 
 
-//  Oktay:
+//  Andrew:
 //
 //GameManager
 //User
@@ -109,9 +109,9 @@ public class QuoridorGameManager extends GameManager {
 //
 //
 //
-//Andrew:
-//  Board
-//  Cell
+//Oktay:
+//Board
+//Cell
 //LeaderBoard -> we need to add Quoridor related statistics
 //
 
