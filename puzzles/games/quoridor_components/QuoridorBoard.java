@@ -87,6 +87,23 @@ public class QuoridorBoard implements Board{
         System.out.print("#\n");
     } 
 
+    public boolean isPlayer2inTheFirstRow() {
+        for(int i = 0 ; i < colCount ; i++){
+            if(board[0][i].hasPlayer2()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isPlayer1inTheLastRow() {
+        for(int i = 0 ; i < colCount ; i++){
+            if(board[rowCount-1][i].hasPlayer1()){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     @Override

@@ -1,9 +1,13 @@
 package puzzles.games.quoridor_components;
+import java.util.Objects;
+
+import puzzles.core.Board;
 import puzzles.core.GameManager;
 import puzzles.core.LeaderBoard;
 import puzzles.io.Input;
 import puzzles.io.Output;
 import puzzles.core.Settings;
+import puzzles.games.sliding_puzzle_components.SlidingPuzzleCell;
 
 public class QuoridorGameManager extends GameManager {
     
@@ -76,17 +80,10 @@ public class QuoridorGameManager extends GameManager {
         return input.inputYesOrExit("\n\n\n\nTo play a new game type y/Y, to exit press any key >>> \n To go back to main menu type m/M to \n any other input will end the game.");
     }
 
-
+    @Override
     public boolean isGameEnd() {
-        // TODO: implement game end condition
-        System.err.println("!!!!!!!!!!!!!!!!!Game end condition not implemented yet.");
-        return false;
+        return board.isPlayer2inTheFirstRow() || board.isPlayer1inTheLastRow();
     }
-
-
-
-
-
 
     public QuoridorBoard getBoard() {
         return board;
@@ -101,3 +98,23 @@ public class QuoridorGameManager extends GameManager {
 
     
 }
+
+
+//  Oktay:
+//
+//GameManager
+//User
+//  I will find one other nice funcitonality and implement so that we can get extra points
+//
+//
+//
+//
+//Andrew:
+//  Board
+//  Cell
+//LeaderBoard -> we need to add Quoridor related statistics
+//
+
+
+
+
