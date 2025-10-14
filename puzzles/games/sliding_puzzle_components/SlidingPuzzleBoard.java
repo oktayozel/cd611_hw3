@@ -11,20 +11,24 @@ import java.util.Random;
 
 import puzzles.core.Board;
 import puzzles.core.Cell;
+import puzzles.core.User;
+import puzzles.io.Output;
 
 public class SlidingPuzzleBoard implements Board{
     private final int rowCount;
     private final int colCount;
-
+    private Output output;
+    private User user;
     
     private final SlidingPuzzleCell[][] board;
     private Random rnd = new Random();
 
     // Constructor to initialize the board with given dimensions and shuffle it.
-    public SlidingPuzzleBoard(int rowCount, int colCount) {
+    public SlidingPuzzleBoard(int rowCount, int colCount,Output output, User user) {
         this.rowCount = rowCount;
         this.colCount = colCount;
-
+        this.output = output;
+        this.user = user;
 
         this.board = initializeBoard();
         shuffleBoard();
@@ -86,12 +90,32 @@ public class SlidingPuzzleBoard implements Board{
             emptyCell = neighbor;
         }
     }
+    // Method to print the entire board along with the move count.
+    @Override
+    public void display(){
+        int rowCount = board.length;
+        int colCount = board[0].length;
+        
+        int spacing = (int) Math.log10(rowCount * colCount) + 1;
+
+        output.printLineHelper(colCount,spacing);
+        for(int i = 0 ; i < rowCount ; i++){
+            System.out.printf("\n|");
+            for( int j = 0 ; j < colCount ; j++){
+                output.printCellValue(board[i][j],spacing);
+                System.out.printf("|");
+            }
+            output.printLineHelper(colCount,spacing);
+        }
+        System.out.printf("                                    move count = %d",user.getMoveCount());
+        System.out.printf("\n\n");
+    }
+
     // Get the cell at the specified row and column.
     public SlidingPuzzleCell getCell(int row, int col) {
         return board[row][col];
     }
     // Swap the values of two adjacent cells.
-    @Override
     public boolean swapCells(Cell cell1, Cell cell2) {
         if (!areAdjacent(cell1, cell2)) {
             return false;
@@ -102,7 +126,6 @@ public class SlidingPuzzleBoard implements Board{
         return true;
     }
     // Check if two cells are adjacent (horizontally or vertically).
-    @Override
     public boolean areAdjacent(Cell cell1, Cell cell2){
         int rowDiff = Math.abs(cell1.getRowIndex() - cell2.getRowIndex());
         int colDiff = Math.abs(cell1.getColIndex() - cell2.getColIndex());

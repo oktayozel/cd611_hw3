@@ -49,7 +49,7 @@ public class GameSelectionManager {
             output.displayAnimation();
             output.displaySupportedGames(settings.getSupportedGames());
             
-            int _selected_game = input.readIntOrExit("Which game would you like to play? \nYou can simply type exit to finish the game  >>> ", 1, 2);
+            int _selected_game = input.readIntOrExit("Which game would you like to play? \nYou can simply type exit to finish the game  >>> ", 1, 3);
             boolean gameFirstOpen = true;
             
             if (_selected_game == 1) {
@@ -80,7 +80,7 @@ public class GameSelectionManager {
                     }
                 }
             }
-            
+
         }
 
 

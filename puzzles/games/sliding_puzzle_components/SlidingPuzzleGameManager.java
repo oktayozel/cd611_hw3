@@ -55,7 +55,7 @@ public class SlidingPuzzleGameManager extends GameManager {
     protected void initializeBoard(){
         int rows = input.readIntOrExit(String.format("Hey %s Enter number of rows: ", username), settings.getMinBoardSize("SlidingPuzzle"), settings.getMaxBoardSize("SlidingPuzzle"));
         int cols = input.readIntOrExit(String.format("Hey %s Enter number of columns: ", username), settings.getMinBoardSize("SlidingPuzzle"), settings.getMaxBoardSize("SlidingPuzzle"));
-        this.board = new SlidingPuzzleBoard(rows, cols);
+        this.board = new SlidingPuzzleBoard(rows, cols, output, user);
     }
 
     // Run the main game loop, handling user moves and checking for game completion.
@@ -63,7 +63,7 @@ public class SlidingPuzzleGameManager extends GameManager {
     public boolean runGame() {
         super.startTimer();
         while(!isGameEnd()){
-            output.displayNextScene(board.getBoard(),user.getMoveCount());
+            output.displayNextScene(board,user.getMoveCount());
             SlidingPuzzleCell[] cellsToSwap = input.readSlidingPuzzleMove(board);
             board.swapCells(cellsToSwap[0], cellsToSwap[1]);
             user.incrementMoveCount();

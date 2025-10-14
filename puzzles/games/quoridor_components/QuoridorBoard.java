@@ -1,6 +1,7 @@
 package puzzles.games.quoridor_components;
 
 import puzzles.core.Board;
+import puzzles.core.Cell;
 import puzzles.core.User;
 import puzzles.games.quoridor_components.QuoridorUser;
 public class QuoridorBoard implements Board{
@@ -26,6 +27,8 @@ public class QuoridorBoard implements Board{
                 board[i][j] = new QuoridorCell(i, j, "");
             }
         }
+        board[0][colCount/2].setHasPlayer1(true);
+        board[rowCount-1][colCount/2].setHasPlayer2(true);
         return board;
     }
 
@@ -35,77 +38,76 @@ public class QuoridorBoard implements Board{
         final int cellInnerWidth = cellWidth - 2;
         final int cellInnerHeight = cellHeight - 2;
 
-        for(int i = 0 ; i <= rowCount ; i++){
+
+
+        for(int i = 0 ; i < rowCount ; i++){
             
             // TOP BORDER
-            for(int j = 0 ; j <= colCount ; j++){
-                System.out.printf("#");
-                if( board[i][j].hasTopWall()){
-                    for(int k = 0 ; k < cellInnerWidth ; k++){System.out.printf("#");}
+            for (int j = 0; j < colCount; j++) {
+                System.out.print("#");
+                if (board[i][j].hasTopWall()) {
+                    for (int k = 0; k < cellInnerWidth; k++) System.out.print("#");
+                } else {
+                    for (int k = 0; k < cellInnerWidth; k++) System.out.print(" "); 
                 }
             }
-            System.out.printf("#"); // last corner
+            System.out.printf("#\n"); // last corner
 
             //MIDDLE SEGMENT
-            for(int temp_i = 0 ; temp_i < cellInnerHeight ; temp_i++){
-                for(int j = 0 ; j < colCount ; j++){
-                    if ( board[i][j].hasLeftWall() ){
-                        System.out.printf("#");
+            for (int r = 0; r < cellInnerHeight; r++) {
+                for (int j = 0; j < colCount; j++) {
+                    System.out.print(board[i][j].hasLeftWall() ? "#" : " ");
+
+                    if (board[i][j].hasPlayer1()) {
+                        System.out.print("11");
+                    } else if (board[i][j].hasPlayer2()) {
+                        System.out.print("22");
                     } else {
-                        System.out.printf(" ");
+                        System.out.print("  ");
                     }
+                   
 
-                    // print cell has player 
-                    if(board[i][j].hasPlayer1() && temp_i == cellInnerHeight/2){
-                        System.out.printf("11");
-                    } else if ( board[i][j].hasPlayer2() && temp_i == cellInnerHeight/2){
-                        System.out.printf("22");
-                    } else {
-                        System.out.printf("  ");
-                    }
-
-                    // right wall of the last cell
-
-                    if(j == colCount - 1 && board[i][j].hasRightWall()){
-                        System.out.printf("#");
-                    } else if ( j == colCount - 1 ){
-                        System.out.printf(" ");
+                    if (j == colCount - 1) {
+                        System.out.print(board[i][j].hasRightWall() ? "#" : " ");
                     }
                 }
+                System.out.println();
             }
             
-            // TOP BORDER
-            for(int j = 0 ; j <= colCount ; j++){
-                System.out.printf("#");
-                if( board[i][j].hasTopWall()){
-                    for(int k = 0 ; k < cellInnerWidth ; k++){System.out.printf("#");}
-                }
-            }
-            System.out.printf("#"); // last corner
-
         }
-
-
-
-        
+        // BOTTOM BORDER
+        for (int j = 0; j < colCount; j++) {
+            System.out.print("#");
+            if (board[rowCount-1][j].hasBottomWall()) {
+                for (int k = 0; k < cellInnerWidth; k++) System.out.print("#");
+            } else {
+                for (int k = 0; k < cellInnerWidth; k++) System.out.print(" ");
+            }
+        }
+        System.out.print("#\n");
     } 
 
 
 
+    @Override
+    public Cell[][] getBoard(){
+        return board;
+    }
 
-
-
-
-
-
-
-    
-    public int getRowCount() {
+    @Override
+    public Cell getCell(int row, int col){
+        return board[row][col];
+    }
+    @Override
+    public int getHeight() {
         return rowCount;
     }
-    public int getColCount() {
+
+    @Override
+    public int getWidth() {
         return colCount;
     }
+
 
 
 

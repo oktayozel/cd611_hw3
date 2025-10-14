@@ -10,8 +10,6 @@ public interface Board{
     int getWidth();
     Cell[][] getBoard();
     Cell getCell(int row, int col); 
-    boolean swapCells(Cell c1, Cell c2);
-    boolean areAdjacent(Cell c1, Cell c2);
     void display();
 
 }

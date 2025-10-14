@@ -92,19 +92,14 @@ public class Output{
     }
 
 
-
-
-
-
     // Helper method to print a line separator based on column count and spacing.
-    private void printLineHelper(int colCount, int spacing){
+    public void printLineHelper(int colCount, int spacing){
         System.out.print("\n ");
         for(int i = 0 ; i < colCount  ; i++){
             for(int temp = 0 ; temp < spacing ; temp++){
                 System.out.print("-");
             }
             System.out.print(" ");
-
         }
         System.out.print(" ");
     }
@@ -127,25 +122,7 @@ public class Output{
             System.out.printf(" ");
         }
     }
-    // Method to print the entire board along with the move count.
-    public void printBoard(Cell[][] board, int moveCount){
-        int rowCount = board.length;
-        int colCount = board[0].length;
-        
-        int spacing = (int) Math.log10(rowCount * colCount) + 1;
 
-        printLineHelper(colCount,spacing);
-        for(int i = 0 ; i < rowCount ; i++){
-            System.out.printf("\n|");
-            for( int j = 0 ; j < colCount ; j++){
-                printCellValue(board[i][j],spacing);
-                System.out.printf("|");
-            }
-            printLineHelper(colCount,spacing);
-        }
-        System.out.printf("                                    move count = %d",moveCount);
-        System.out.printf("\n\n");
-    }
     // Method to print the welcome message at the start of the game.
     public void printWelcomeMessage(){
         clearScreen();
@@ -168,9 +145,9 @@ public class Output{
 
     
     // Method to display the next scene after a move, showing the updated board and move count.
-    public void displayNextScene(Cell[][] board, int moveCount){
+    public void displayNextScene(Board board, int moveCount){
         clearScreen();
-        printBoard(board,moveCount);
+        board.display();
     }
 
     // method to display the next scene in Dots and Boxes game, showing the updated board and current player's turn.
@@ -184,6 +161,7 @@ public class Output{
             System.out.println(ANSI_RED + "Player2 " + ANSI_RESET + currentPlayer.getUsername() + "'s turn(Red Line). Score: " + currentPlayer.getScore());
         }
     }
+
 
     // Method to display the congratulations message upon solving the puzzle and show the leaderboard.
     public void displayCongratulations(int moveCount ,int elapsedTime){
