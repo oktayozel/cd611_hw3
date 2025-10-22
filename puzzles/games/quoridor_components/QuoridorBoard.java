@@ -202,6 +202,15 @@ public class QuoridorBoard implements Board{
         return true;
     }
 
+    public boolean hasPlayerReachedGoal(QuoridorUser player) {
+    if (player == player1) {
+        return player.getRow() == 0;
+    } else if (player == player2) {
+        return player.getRow() == rowCount - 1;
+    }
+    return false;
+}
+
 
 
 

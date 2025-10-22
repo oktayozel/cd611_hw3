@@ -64,21 +64,39 @@ public class QuoridorGameManager extends GameManager {
     @Override
     public boolean runGame() {
         super.startTimer();
-        while (!isGameEnd()) {
-            output.displayNextScene(board ,currentPlayer,(currentPlayer == player1) ? "player1" : "player2");
+        currentPlayer = player1;
 
+        while (!isGameEnd()) {
+            output.displayNextScene(board, currentPlayer, currentPlayer == player1 ? "player1" : "player2");
+
+            boolean validMove = false;
+            while (!validMove) {
+                validMove = input.readQuoridorMove(board, currentPlayer); // 你需要實作這個方法
+            }
+
+            currentPlayer = (currentPlayer == player1) ? player2 : player1;
         }
 
         super.stopTimer();
         int elapsedTime = super.getElapsedTime();
 
-        // TODO: display results and update leaderboard
-        // TODO: implement congratulations message call in here
+        //check winner
+        QuoridorUser winner = board.hasPlayerReachedGoal(player1) ? player1 : player2;          //need modify
+        QuoridorUser loser = (winner == player1) ? player2 : player1;
 
+        //winner messages
+        output.displayVictoryMessage(winner.getUsername(), elapsedTime);
 
+        //update leaderboard
+        leaderBoard.recordQuoridorResult(winner.getUsername(), true);
+        leaderBoard.recordQuoridorResult(loser.getUsername(), false);
+        leaderBoard.saveLeaderBoard();
         output.displayLeaderboard(leaderBoard);
+
         return input.inputYesOrExit("\n\n\n\nTo play a new game type y/Y, to exit press any key >>> \n To go back to main menu type m/M to \n any other input will end the game.");
     }
+
+
 
     @Override
     public boolean isGameEnd() {

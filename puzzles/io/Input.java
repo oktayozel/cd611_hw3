@@ -2,8 +2,11 @@ package puzzles.io;
 import java.util.Scanner;
 import puzzles.games.dots_and_boxes_components.DotsAndBoxesBoard;
 import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
+import puzzles.games.quoridor_components.QuoridorBoard;
+import puzzles.games.quoridor_components.QuoridorUser;
 import puzzles.games.sliding_puzzle_components.SlidingPuzzleBoard;
 import puzzles.games.sliding_puzzle_components.SlidingPuzzleCell;
+
 
 
 /*
@@ -143,7 +146,37 @@ public class Input{
             }
         }
     }
-    
+
+    public boolean readQuoridorMove(QuoridorBoard board, QuoridorUser currentPlayer) {
+        System.out.println("Choose your move 1. MOVE U/D/L/R  2. WALL H (x, y). Type 'exit' to quit.");
+
+        while (true) {
+            String inputLine = readLineOrExit(">>> ").toUpperCase();
+            String[] tokens = inputLine.split("\\s+");
+
+            if (tokens.length == 2 && tokens[0].equals("MOVE")) {
+                String direction = tokens[1];
+                boolean success = board.movePlayer(currentPlayer, direction);
+                if (success) return true;
+                System.out.println("Invalid move. Try again.");
+            } else if (tokens.length == 4 && tokens[0].equals("WALL")) {
+                String orientation = tokens[1];
+                try {
+                    int row = Integer.parseInt(tokens[2]);
+                    int col = Integer.parseInt(tokens[3]);
+                    boolean success = board.placeWall(currentPlayer, orientation, row, col);            //will modify
+                    if (success) return true;
+                    System.out.println("Wrong wall.");
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid coordinates. Try again.");
+                }
+            } else {
+                System.out.println("Invalid command. Use 'MOVE U/D/L/R' or 'WALL H/V row col'.");
+            }
+        }
+    }
+
+        
     // Method to prompt the user for starting a new game or exiting.
     public boolean inputYesOrExit(String prompt){
         //scanner.nextLine();

@@ -53,6 +53,23 @@ public class LeaderBoard {
         saveLeaderBoard();
     }
 
+    // increments quoridor played by 1 and total puzzles played
+    public void incrementQuoridorPlayed(String user) {
+        Stats s = get(user);
+        s.total++;
+        s.quoridorPlayed++;
+        saveLeaderBoard();
+    }
+
+    public void recordQuoridorResult(String user, boolean win) {
+        Stats s = get(user);
+        s.total++;
+        s.quoridorPlayed++;
+        if (win) s.quoridorWins++;
+        else s.quoridorLoses++;
+        saveLeaderBoard();
+    }
+
     // saves the game as a win or loss for multiplayer games.
     public void recordDotsAndBoxesResult(String user, boolean win) {
         Stats s = get(user);
@@ -72,13 +89,16 @@ public class LeaderBoard {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] p = line.split(",");
-                if (p.length != 6) continue;
+                if (p.length != 9) continue;
                 Stats s = new Stats(p[0].trim());
                 s.total        = Integer.parseInt(p[1].trim());
                 s.dnbPlayed    = Integer.parseInt(p[2].trim());
                 s.slidingPlayed= Integer.parseInt(p[3].trim());
                 s.dnbWins      = Integer.parseInt(p[4].trim());
                 s.dnbLoses     = Integer.parseInt(p[5].trim());
+                s.quoridorPlayed  = Integer.parseInt(p[6].trim());
+                s.quoridorWins    = Integer.parseInt(p[7].trim());
+                s.quoridorLoses   = Integer.parseInt(p[8].trim());
                 leaderboard.put(s.username, s);
             }
         } catch (IOException ignored) { }
@@ -93,7 +113,10 @@ public class LeaderBoard {
                     s.dnbPlayed + "," +
                     s.slidingPlayed + "," +
                     s.dnbWins + "," +
-                    s.dnbLoses
+                    s.dnbLoses + "," +
+                    s.quoridorPlayed + "," +
+                    s.quoridorWins + "," +
+                    s.quoridorLoses
                 );
                 bw.newLine();
             }
@@ -112,10 +135,10 @@ public class LeaderBoard {
         });
 
         System.out.println("Leaderboard:");
-        System.out.println("Username   Total   D&B   SlidingP   D&B_Win   D&B_Loss");
-        System.out.println("--------------------------------------------------------------");
+        System.out.println("Username   Total   D&B   SlidingP   D&B_Win   D&B_Loss   Quoridor   Q_Win   Q_Loss");
+        System.out.println("---------------------------------------------------------------------------------------------");
         for (Stats s : list) {
-            System.out.printf("%-8s     %d       %d         %d       %d        %d \n", s.username, s.total, s.dnbPlayed, s.slidingPlayed, s.dnbWins, s.dnbLoses);
+            System.out.printf("%-8s     %d       %d         %d       %d        %d       %d        %d      %d\n", s.username, s.total, s.dnbPlayed, s.slidingPlayed, s.dnbWins, s.dnbLoses, s.quoridorPlayed, s.quoridorWins, s.quoridorLoses);
         }
     }
 
@@ -127,6 +150,9 @@ public class LeaderBoard {
         int slidingPlayed;
         int dnbWins;
         int dnbLoses;
+        int quoridorPlayed;
+        int quoridorWins;
+        int quoridorLoses;
 
         Stats(String username) { 
             this.username = username;
