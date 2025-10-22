@@ -2,8 +2,6 @@ package puzzles.games.quoridor_components;
 
 import puzzles.core.Board;
 import puzzles.core.Cell;
-import puzzles.core.User;
-import puzzles.games.quoridor_components.QuoridorUser;
 public class QuoridorBoard implements Board{
     
     private final int rowCount;
@@ -201,15 +199,6 @@ public class QuoridorBoard implements Board{
         }
         return true;
     }
-
-    public boolean hasPlayerReachedGoal(QuoridorUser player) {
-    if (player == player1) {
-        return player.getRow() == 0;
-    } else if (player == player2) {
-        return player.getRow() == rowCount - 1;
-    }
-    return false;
-}
 
 
 
