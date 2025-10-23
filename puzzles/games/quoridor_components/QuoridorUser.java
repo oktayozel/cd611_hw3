@@ -51,6 +51,6 @@ public class QuoridorUser extends User {
 
     @Override
     public String toString() {
-        return getUsername() + " (" + getShortName() + ") at [" + row + "," + col + "] with " + wallsRemaining + " walls left";
+        return getUsername() + " (" + getShortName() + ") at [" + row + "," + col + "] with " + wallsRemaining + " walls left" ;
     }
 }
