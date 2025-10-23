@@ -111,22 +111,20 @@ public class QuoridorBoard implements Board {
     }
 
     public void display() {
-    String horizontalWall = "###";  // when a top wall exists for a cell
-    String verticalWall = "#";     // when a left wall exists for a cell
+    String horizontalWall = "###";  
+    String verticalWall = "#";     
     String emptySpace = "   ";
     String borderCorner = "+";
-    String borderEdge = "───";     // default horizontal edge when no top wall
+    String borderEdge = "───";  
 
-    // Column numbers (aligned to leave space for row labels)
     System.out.print("  ");
     for (int j = 0; j < colCount; j++) {
         System.out.printf("%4d", j);
     }
     System.out.println();
 
-    // For each row: print the top border (with row index), then the content line
     for (int i = 0; i < rowCount; i++) {
-        // Top border of row i with row index on the left
+        //row i
         System.out.printf("%3d ", i);
         System.out.print(borderCorner);
         for (int j = 0; j < colCount; j++) {
@@ -138,13 +136,10 @@ public class QuoridorBoard implements Board {
         }
         System.out.println();
 
-        // Content line for row i (aligned under column numbers)
-        System.out.print("    "); // align with column numbers (no row index on this line)
+        System.out.print("    "); 
         for (int j = 0; j < colCount; j++) {
-            // print left wall: '#' if hasLeftWall() true, otherwise '│'
             System.out.print(board[i][j].hasLeftWall() ? verticalWall : "│");
 
-            // print player or empty space (each cell width = 3 chars)
             if (board[i][j].hasPlayer1()) {
                 System.out.print("P1 ");
             } else if (board[i][j].hasPlayer2()) {
@@ -153,11 +148,9 @@ public class QuoridorBoard implements Board {
                 System.out.print(emptySpace);
             }
         }
-        // close rightmost border (always a vertical)
         System.out.println("│");
     }
 
-    // Bottom border (with index equal to rowCount, optional)
     System.out.printf("%3d ", rowCount);
     System.out.print(borderCorner);
     for (int j = 0; j < colCount; j++) {
@@ -165,13 +158,9 @@ public class QuoridorBoard implements Board {
     }
     System.out.println();
 
-    // Player info
     System.out.println("Player 1: " + player1);
     System.out.println("Player 2: " + player2);
 }
-
-
-
 
     @Override
     public Cell[][] getBoard() {
