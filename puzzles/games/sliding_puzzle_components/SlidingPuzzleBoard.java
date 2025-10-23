@@ -12,6 +12,7 @@ import java.util.Random;
 import puzzles.core.Board;
 import puzzles.core.Cell;
 import puzzles.core.User;
+import puzzles.games.quoridor_components.QuoridorCell;
 import puzzles.io.Output;
 
 public class SlidingPuzzleBoard extends Board{
@@ -25,6 +26,7 @@ public class SlidingPuzzleBoard extends Board{
 
     // Constructor to initialize the board with given dimensions and shuffle it.
     public SlidingPuzzleBoard(int rowCount, int colCount,Output output, User user) {
+        super(new SlidingPuzzleCell[rowCount][colCount]);
         this.rowCount = rowCount;
         this.colCount = colCount;
         this.output = output;

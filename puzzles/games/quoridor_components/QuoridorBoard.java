@@ -14,6 +14,7 @@ public class QuoridorBoard extends Board {
     private QuoridorUser player2;
 
     public QuoridorBoard(int rowCount, int colCount, QuoridorUser player1, QuoridorUser player2) {
+        super(new QuoridorCell[rowCount][colCount]);
         this.rowCount = rowCount;
         this.colCount = colCount;
         this.player1 = player1;

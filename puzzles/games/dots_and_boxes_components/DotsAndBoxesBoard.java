@@ -1,6 +1,7 @@
 package puzzles.games.dots_and_boxes_components;
 
 import puzzles.core.Cell;
+import puzzles.games.quoridor_components.QuoridorCell;
 import puzzles.core.Board;
 
 /*
@@ -29,6 +30,7 @@ public class DotsAndBoxesBoard extends Board {
     }
     // constructor for a rows x cols board 
     public DotsAndBoxesBoard(int rows, int cols) {
+        super(new DotsAndBoxesCell[rows][cols]);
         this.rows = rows;
         this.cols = cols;
         boxes = new DotsAndBoxesCell[rows][cols];
