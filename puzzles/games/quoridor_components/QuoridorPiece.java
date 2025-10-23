@@ -1,12 +1,12 @@
-package puzzles.games.dots_and_boxes_components;
+package puzzles.games.quoridor_components;
 
 import puzzles.core.Piece;
 
-public class DotsAndBoxesPiece extends Piece {
+public class QuoridorPiece extends Piece {
 
     public static final String[] ALLOWED_VALUES = {"P1", "P2", " "};
 
-    public DotsAndBoxesPiece(String value) {
+    public QuoridorPiece(String value) {
         super(value);
     }
 

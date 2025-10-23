@@ -10,15 +10,14 @@ import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
 public abstract class Cell{
     private final int rowIndex;
     private final int colIndex;
-    private String value;
     private DotsAndBoxesUser owner = null;
     private Piece piece;
 
     // Constructor to initialize the cell with row index, column index, and value.
-    public Cell(int rowIndex, int colIndex, String value){
+    public Cell(int rowIndex, int colIndex, Piece piece){
         this.rowIndex = rowIndex;
         this.colIndex = colIndex;
-        this.piece = new Piece(value);
+        this.piece = piece;
     }
     // Getter methods for row index, column index, and value.
     public int getRowIndex(){

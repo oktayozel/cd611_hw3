@@ -14,7 +14,7 @@ public class QuoridorCell extends Cell{
 
 
     public QuoridorCell(int row, int col, String value) {
-        super(row, col, value);
+        super(row, col, new QuoridorPiece(value));
     }
     public boolean hasTopWall() {
         return topWall;

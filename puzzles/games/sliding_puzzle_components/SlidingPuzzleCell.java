@@ -10,15 +10,15 @@ import puzzles.core.Cell;
 public class SlidingPuzzleCell extends Cell {
     // Constructors to initialize the cell with row, column, and optional value.
     public SlidingPuzzleCell(int row, int col, String value) {
-        super(row, col, value);
+        super(row, col, new SlidingPuzzlePiece(value));
     }
     // Constructor to initialize the cell with row and column, defaulting value to a space.
     public SlidingPuzzleCell(int row, int col) {
-        super(row, col, " ");
+        super(row, col, new SlidingPuzzlePiece(" "));
     }
     // Constructor to initialize the cell with a single index for both row and column, defaulting value to a space.
     public SlidingPuzzleCell(int row) {
-        super(row, row, " ");
+        super(row, row, new SlidingPuzzlePiece(" "));
     }
 
 

@@ -1,13 +1,17 @@
-package puzzles.games.dots_and_boxes_components;
+package puzzles.games.sliding_puzzle_components;
 
 import puzzles.core.Piece;
 
-public class DotsAndBoxesPiece extends Piece {
+public class SlidingPuzzlePiece extends Piece {
 
-    public static final String[] ALLOWED_VALUES = {"P1", "P2", " "};
+    public static final String[] ALLOWED_VALUES = new String[1000];
 
-    public DotsAndBoxesPiece(String value) {
+    public SlidingPuzzlePiece(String value) {
         super(value);
+        for(int i = 0 ; i < 1000 ; i++) {
+            ALLOWED_VALUES[i] = String.valueOf(i);
+        }
+        ALLOWED_VALUES[999] = " ";
     }
 
     @Override

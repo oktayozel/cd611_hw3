@@ -12,7 +12,9 @@ public abstract class Piece {
     }
 
     public void setValue(String value) {
-        this.value = value;
+        if (isAllowed(value)) {
+            this.value = value;
+        }
     }
 
     public String toString() {
