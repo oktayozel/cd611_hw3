@@ -20,9 +20,10 @@ assignment_2/
 │       ├── app/                                (Entry point of the program)  
 │       │   └── Main.java                       (Initializes the game and starts the program)
 │       ├── core/                               (This is the directory where core game classes are being hold. Classes that ensures extendibility sit here.)  
-│       │   ├── Board.java                      (This is an interface defining the must have functions of a board.)
+│       │   ├── Board.java                      (This is an abstract class defining the must have functions of a board.)
 │       │   ├── Cell.java                       (This is an abstract class which has the basic methods and fields that a board game would have.)
 │       │   ├── GameManager.java                (This is an abstract class defining the basic methods of a game manager like initialize the game, run the game.x)
+│       │   ├── Multiplayer.java                (This is an abstract class defining the game being multiplayer it is implemented by Dots and Boxes and Quoridor)
 │       │   ├── GameSelectionManager.java  
 │       │   ├── LeaderBoard.java                (This class has been placed to hold the leaderboard storing the data in leaderboard.txt. Helps keeping track of the leaderboard)
 │       │   ├── Settings.java  
@@ -34,10 +35,15 @@ assignment_2/
 │       │   │   ├── DotsAndBoxesGameManager.java    (Orchestrates the game flow; handles turns, win conditions, and board updates)
 │       │   │   └── DotsAndBoxesUser.java           (Stores player information such as username, score, and identity (P1, P2))
 │       │   └── sliding_puzzle_components/          (sliding_puzzle module)
-│       │       ├── SlidingPuzzleBoard.java         (This class is responsible for holding the board and board operations.)
-│       │       ├── SlidingPuzzleCell.java          (This class is reponsible for operations in the Cell level and denotes each cell in a board.)
-│       │       ├── SlidingPuzzleGameManager.java   (Manages all the game, basically holds one instance from other classes and orchestrates them.)
-│       │       └── SlidingPuzzleUser.java  
+│       │   │   ├── SlidingPuzzleBoard.java         (This class is responsible for holding the board and board operations.)
+│       │   │   ├── SlidingPuzzleCell.java          (This class is reponsible for operations in the Cell level and denotes each cell in a board.)
+│       │   │   ├── SlidingPuzzleGameManager.java   (Manages all the game, basically holds one instance from other classes and orchestrates them.)
+│       │   │   └── SlidingPuzzleUser.java          (Stores player information such as username, score, and identity (P1, P2))
+│       │   └── quoridor_components/                (quoridor module)
+│       │       ├── QuoridorBoard.java              (This class is responsible for holding the board and board operations.)
+│       │       ├── QuoridorCell.java               (This class is reponsible for operations in the Cell level and denotes each cell in a board.)
+│       │       ├── QuoridorGameManager.java        (Manages all the game, basically holds one instance from other classes and orchestrates them.)
+│       │       └── QuoridorUser.java               (Stores player information such as username, score, and identity (P1, P2))
 │       ├── io/                                 
 │       │   ├── Input.java                          (This class handles all input operations in the game.)
 │       └── └── Output.java                         (This class handles all output operations in the game. )  
