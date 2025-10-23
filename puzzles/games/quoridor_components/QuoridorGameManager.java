@@ -91,6 +91,21 @@ public class QuoridorGameManager extends GameManager {
         return input.inputYesOrExit("\nPlay again? (y/Y), Main menu (m/M), or any other key to exit >>> ");
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public boolean isGameEnd() {
         return board.hasPlayerReachedGoal(player1) || board.hasPlayerReachedGoal(player2);

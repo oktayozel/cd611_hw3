@@ -1,4 +1,7 @@
 package puzzles.games.quoridor_components;
+import java.util.Queue;
+import java.util.ArrayDeque;
+
 
 import puzzles.core.Board;
 import puzzles.core.Cell;
@@ -148,6 +151,7 @@ public class QuoridorBoard implements Board {
                 System.out.print(emptySpace);
             }
         }
+        
         System.out.println("│");
     }
 
@@ -161,6 +165,90 @@ public class QuoridorBoard implements Board {
     System.out.println("Player 1: " + player1);
     System.out.println("Player 2: " + player2);
 }
+
+
+    public int calculateShortestPathLength(QuoridorUser player){
+        final int goalRow = (player == player1) ? (rowCount-1) : 0;
+
+        final int start_row = player.getRow();
+        final int start_col = player.getCol();
+
+
+        boolean[][] visited = new boolean[rowCount][colCount];
+        int[][] dist = new int[rowCount][colCount];
+
+        Queue<int[]> q = new ArrayDeque<>();
+
+        visited[start_row][start_col] = true;
+        dist[start_row][start_col] = 0;
+        q.add(new int[]{start_row, start_col});
+
+        final int[] row_direction = {-1,1,0,0};
+        final int[] col_direction = {0,0,-1,1};
+
+        while(!q.isEmpty()) {
+            int[] cur = q.poll();
+            int r = cur[0];
+            int c = cur[1];
+            if(r == goalRow) {
+                return dist[r][c];
+            }
+            for (int k = 0 ; k < 4 ; k++){
+                int next_row = r + row_direction[k];
+                int next_col = c + col_direction[k];
+                if (!canStepHelper(r, c, next_row, next_col)) continue;
+                if (visited[next_row][next_col]) continue;
+                visited[next_row][next_col] = true;
+                dist[next_row][next_col] = dist[r][c] + 1;
+                q.add(new int[]{next_row, next_col});
+            }
+
+        }
+        return -1;
+    }
+
+
+    public boolean canStepHelper(int r, int c, int next_row, int next_col) {
+        if(next_row < 0 || next_row >= rowCount || next_col < 0 || next_col >= colCount) {
+            return false;
+        }
+        if(Math.abs(next_row - r) + Math.abs(next_col - c) != 1) {
+            return false;
+        }
+        QuoridorCell currentCell = board[r][c];
+        QuoridorCell nextCell = board[next_row][next_col];
+
+
+        int dr = next_row - r, dc = next_col - c;
+
+        if (dr == -1 && dc == 0) { 
+            if (currentCell.hasTopWall()){
+                return false;
+            }
+        } 
+        else if (dr == 1 && dc == 0) {
+            if (nextCell.hasTopWall()){
+                return false;
+            }
+        } 
+        else if (dr == 0 && dc == -1) {
+            if (currentCell.hasLeftWall()){
+                return false;
+            }
+        } 
+        else if (dr == 0 && dc == 1) {  
+            if (nextCell.hasLeftWall()){
+                return false;
+            }
+        }
+
+        if(nextCell.hasPlayer1() || nextCell.hasPlayer2()) {
+            return false;
+        }
+
+        return true;
+    }
+
 
     @Override
     public Cell[][] getBoard() {
