@@ -26,7 +26,7 @@ public class Input{
         String input = scanner.nextLine().trim();
         if (input.equalsIgnoreCase("exit")) {
             //System.out.println("Exiting game. Goodbye!");
-            Animations.displayAnimationWithSleep100("closing");
+            Animations.displayAnimationWithSleep("closing",100);
             System.exit(0);
         }
         return input;
@@ -38,7 +38,7 @@ public class Input{
         String input = scanner.nextLine().trim();
         if (input.equalsIgnoreCase("exit")) {
             //System.out.println("Exiting game. Goodbye!");
-            Animations.displayAnimationWithSleep100("closing");
+            Animations.displayAnimationWithSleep("closing",100);
             System.exit(0);
         }
         return input;
@@ -93,6 +93,7 @@ public class Input{
                 System.out.printf("Input cannot be empty. Please enter a valid string.");
             }
     }
+
 
     
 
@@ -193,6 +194,8 @@ public class Input{
     }
 }
 
+
+
         
     // Method to prompt the user for starting a new game or exiting.
     public boolean inputYesOrExit(String prompt){
@@ -203,7 +206,7 @@ public class Input{
         if (input.equals("Y") ) {
             return true;
         }
-        if (input.equals("M")){
+        if (input.equals("N")){
             return false;
         }
         System.out.println("Exiting game. Goodbye!");

@@ -105,12 +105,75 @@ public class Animations {
     "                                             ",    
     "                                             ",
     };
+    private static final String[] botThinkingAnimation = {
+    "#                                            ",
+    "##    T                                      ",
+    "###                                          ",
+    "####     H                                   ",
+    "#####                                        ",
+    "######                                       ",
+    "#######      I                               ",
+    "########                                     ",
+    "#########      N                             ",
+    "##########                                   ",
+    "###########                                  ",
+    "############      K                          ",
+    "#############                                ",
+    "##############                               ",
+    "###############       I                      ",
+    "################                             ",
+    "#################                            ",
+    "##################                           ",
+    "###################       N                  ",
+    "####################                         ",
+    "#####################                        ",
+    "######################                       ",
+    "#######################       G    .....     ",
+    "########################                     ",
+    "#########################                    ",
+    };
+
+    
+
+private static final String[] botExecutingAnimation = {
+    "                              #########################",
+    "                   E           ########################",
+    "                                #######################",
+    "                     X           ######################",
+    "                                  #####################",
+    "                       E           ####################",
+    "                                    ###################",
+    "                         C           ##################",
+    "                                      #################",
+    "                           U           ################",
+    "                                        ###############",
+    "                             T           ##############",
+    "                                          #############",
+    "                                           ############",
+    "                                 I          ###########",
+    "                                             ##########",
+    "                                              #########",
+    "                                   N           ########",
+    "                                                #######",
+    "                                                 ######",
+    "                                      G....       #####",
+    "                                                   ####",
+    "                                                    ###",
+    "                                                     ##",
+    "                                                      #",
+};
+
+
+
+
+
+
 
     public Animations(){ 
 
     }
 
-    public static void displayAnimationWithSleep100(String animationType){
+    public static void displayAnimationWithSleep(String animationType, int sleepDuration){
         String[] animation = null;
         if (animationType.equals("opening")) {
             animation = openingAnimation;
@@ -118,11 +181,17 @@ public class Animations {
         if (animationType.equals("closing")) {
             animation = closingAnimation;
         }
+        if (animationType.equals("bot_thinking")) {
+            animation = botThinkingAnimation;
+        }
+        if (animationType.equals("bot_executing")) {
+            animation = botExecutingAnimation;
+        }
 
         for(String line : animation){
             System.out.println(line);
             try {
-                Thread.sleep(100); 
+                Thread.sleep(sleepDuration); 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -14,7 +14,7 @@ public class DotsAndBoxesCell extends Cell {
     private Edge right = new Edge();
     // constructor for dots and boxes cell
     public DotsAndBoxesCell(int rowIndex, int colIndex) {
-        super(rowIndex, colIndex, null); 
+        super(rowIndex, colIndex, new DotsAndBoxesPiece(" "));
     }
     // checks if the cell has been surrounded or not
     public boolean isComplete() {

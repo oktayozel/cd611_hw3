@@ -10,8 +10,8 @@ import puzzles.core.User;
 public class DotsAndBoxesUser extends User {
     private String id;
     // constructor to initialize username and id (like 1, 2)
-    public DotsAndBoxesUser(String username, String id) {
-        super(username);
+    public DotsAndBoxesUser(String username, String id, boolean isThisABot) {
+        super(username, isThisABot);
         this.id = id;
     }
     // helper to get P1 or P2

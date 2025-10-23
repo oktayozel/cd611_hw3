@@ -10,14 +10,14 @@ import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
 public abstract class Cell{
     private final int rowIndex;
     private final int colIndex;
-    private String value;
     private DotsAndBoxesUser owner = null;
+    private Piece piece;
 
     // Constructor to initialize the cell with row index, column index, and value.
-    public Cell(int rowIndex, int colIndex, String value){
+    public Cell(int rowIndex, int colIndex, Piece piece){
         this.rowIndex = rowIndex;
         this.colIndex = colIndex;
-        this.value = value;
+        this.piece = piece;
     }
     // Getter methods for row index, column index, and value.
     public int getRowIndex(){
@@ -30,17 +30,17 @@ public abstract class Cell{
 
     // Getter method for cell value.
     public String getValue() {
-        return value; 
+        return piece.getValue();
     }
 
     // Setter method for cell value.
     public void setValue(String value) {
-        this.value = value;
+        this.piece.setValue(value);
     }
     // Override toString method to return the cell's value as a string and if null, return a space.
     @Override
     public String toString() {
-        return value == null ? " " :value.toString();
+        return piece == null || piece.getValue() == null ? " " : piece.toString();
     }
     // Sets the owner of the cell for dots and boxes type of games
     public void setOwner(DotsAndBoxesUser player) {

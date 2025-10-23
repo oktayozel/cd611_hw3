@@ -8,8 +8,8 @@ public class QuoridorUser extends User {
     private int row, col;          //current position
     private int wallsRemaining;    //walls left
 
-    public QuoridorUser(String username, String id) {
-        super(username);
+    public QuoridorUser(String username, String id, boolean isThisABot) {
+        super(username, isThisABot);
         this.id = id;
         this.wallsRemaining = 10;
         this.row = -1;
