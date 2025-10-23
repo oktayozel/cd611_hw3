@@ -75,14 +75,21 @@ public class Output{
             System.out.println("Swap adjacent cells to order them.");
             input.readLineOrExit(" Press enter to start...");
         }
-        if (gameName.equals("dots_and_boxes")) {
+        else if (gameName.equals("dots_and_boxes")) {
             System.out.println("Welcome to the Dots and Boxes Game!");
             System.out.println("Be the one who puts the last piece to conquer as much boxes as you can. Enjoy! ");
             System.out.println("You are going to see the row and column numbers for each dot. ");
             System.out.println("To put an edge you need to pick the dot on the left of the edge, if the edge is horizontal. ");
             System.out.println("To put an edge you need to pick the dot on the top of the edge, if the edge is vertical.");
-
-
+            input.readLineOrExit(" Press enter to start...");
+        }
+        else if(gameName.equals("quoridor")){
+            System.out.println("Welcome to the Quoridor Game!");
+            System.out.println("Quoridor is a two-player strategy game. Reach the opposite side of the board before your opponent. ");
+            System.out.println("Each turn, move your pawn or place a wall to block. Walls span two cells and must leave a path open.");
+            System.out.println("You can choose 2 option:");
+            System.out.println("1. You can move your pawn one step in the specified direction, if the path is not blocked by a wall.");
+            System.out.println("2. You can place a wall by choosing a point. Type H to build a horizontal wall to the right, or V to build a vertical wall downward.");
             input.readLineOrExit(" Press enter to start...");
         }
     }

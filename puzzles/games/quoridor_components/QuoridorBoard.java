@@ -127,7 +127,6 @@ public class QuoridorBoard extends Board {
         String RED = "\u001B[31m";
         String BLUE = "\u001B[34m";
  
-        String verticalWall = "#";     
         String emptySpace = "   ";
         String borderCorner = PURPLE + "+" + RESET;
         String borderEdge = YELLOW + "───" + RESET;  
