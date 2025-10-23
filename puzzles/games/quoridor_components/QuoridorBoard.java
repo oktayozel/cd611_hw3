@@ -120,6 +120,13 @@ public class QuoridorBoard extends Board {
     String borderCorner = "+";
     String borderEdge = "───";  
 
+    System.out.println("-------------------------------------------------------------------------------------------------");
+    System.out.println("Player 1: " + player1 + " shortest path to target: " + calculateShortestPathLength(player1) + "\n");
+    System.out.println("-------------------------------------------------------------------------------------------------");
+
+
+
+
     System.out.print("  ");
     for (int j = 0; j < colCount; j++) {
         System.out.printf("%4d", j);
@@ -162,8 +169,11 @@ public class QuoridorBoard extends Board {
     }
     System.out.println();
 
-    System.out.println("Player 1: " + player1);
-    System.out.println("Player 2: " + player2);
+    System.out.println("-------------------------------------------------------------------------------------------------");
+    System.out.println("\nPlayer 2: " + player2 + " shortest path to target: " + calculateShortestPathLength(player2));
+    System.out.println("-------------------------------------------------------------------------------------------------");
+
+
 }
 
 
