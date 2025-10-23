@@ -106,6 +106,11 @@ public class Animations {
     "                                             ",
     };
 
+
+
+
+
+
     public Animations(){ 
 
     }
@@ -117,6 +122,9 @@ public class Animations {
         }
         if (animationType.equals("closing")) {
             animation = closingAnimation;
+        }
+        if (animationType.equals("bot_thinking")) {
+            animation = botThinkingAnimation;
         }
 
         for(String line : animation){

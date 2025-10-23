@@ -18,7 +18,7 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
     private QuoridorUser player1;
     private QuoridorUser player2;
     private QuoridorUser currentPlayer;     //track turns
-
+    private boolean playAgainstBot;
     public QuoridorGameManager(Settings settings) {
         super();
         this.input = new Input();
@@ -32,6 +32,8 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
     @Override
     public void initGame(boolean gameFirstOpen) {
         leaderBoard.loadLeaderBoard();
+        output.printWelcomeMessage();
+        playAgainstBot = input.inputYesOrExit("Do you want to play against our AI Bot? (y/n): ");
         initializePlayers(gameFirstOpen);
         initializeBoard();
     }
@@ -40,11 +42,16 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
     @Override
     protected void initializePlayers(boolean gameFirstOpen) {
         if (gameFirstOpen) {
-            output.printWelcomeMessage();
             String name1 = input.readStringOrExit("Enter Player 1 name: ");
-            player1 = new QuoridorUser(name1, "P1");
-            String name2 = input.readStringOrExit("Enter Player 2 name: ");
-            player2 = new QuoridorUser(name2, "P2");
+            player1 = new QuoridorUser(name1, "P1", false);
+            if (!playAgainstBot) {
+                String name2 = input.readStringOrExit("Enter Player 2 name: ");
+                player2 = new QuoridorUser(name2, "P2", false);
+            } 
+            else {
+                System.out.println("Playing against our AI Bot ALFRED.");
+                player2 = new QuoridorBot("AI Bot: Alfred", "P2");
+            }
         }
     }
 
@@ -54,6 +61,9 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
         int rows = input.readIntOrExit("Enter number of rows: ", settings.getMinBoardSize("Quoridor"), settings.getMaxBoardSize("Quoridor"));
         int cols = input.readIntOrExit("Enter number of columns: ", settings.getMinBoardSize("Quoridor"), settings.getMaxBoardSize("Quoridor"));
         this.board = new QuoridorBoard(rows, cols, player1, player2);
+        if(playAgainstBot){
+            ((QuoridorBot)player2).setBoard(this.board);
+        }
     }
 
     //turns, check moves, check win
@@ -66,11 +76,14 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
             output.displayNextScene(board, currentPlayer,
                     currentPlayer == player1 ? "player1" : "player2");
 
-            boolean validMove = false;
-            while (!validMove) {
-                validMove = input.readQuoridorMove(board, currentPlayer);
+            if (playAgainstBot && currentPlayer instanceof QuoridorBot) {
+                ((QuoridorBot) currentPlayer).makeMove();
+            } else {
+                boolean validMove = false;
+                while (!validMove) {
+                    validMove = input.readQuoridorMove(board, currentPlayer);
+                }
             }
-
             switchPlayer();
         }
 
@@ -92,12 +105,6 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
 
         return input.inputYesOrExit("\nPlay again? (y/Y), Main menu (m/M), or any other key to exit >>> ");
     }
-
-
-
-
-
-
 
 
 

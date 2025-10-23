@@ -84,9 +84,9 @@ public class DotsAndBoxesGameManager extends GameManager implements Multiplayer 
         if(gameFirstOpen == true){
             output.printWelcomeMessage();
             String name1 = input.readStringOrExit("Enter Player 1 name: ");
-            player1 = new DotsAndBoxesUser(name1, "P1");
+            player1 = new DotsAndBoxesUser(name1, "P1", false);
             String name2 = input.readStringOrExit("Enter Player 2 name: ");
-            player2 = new DotsAndBoxesUser(name2, "P2");
+            player2 = new DotsAndBoxesUser(name2, "P2", false);
         
         }
     }

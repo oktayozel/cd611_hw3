@@ -35,7 +35,6 @@ public class SlidingPuzzleGameManager extends GameManager {
     @Override
     public void initGame(boolean gameFirstOpen) {
         leaderBoard.loadLeaderBoard();
-
         initializePlayers(gameFirstOpen);
         initializeBoard();
 
@@ -46,7 +45,7 @@ public class SlidingPuzzleGameManager extends GameManager {
         if(gameFirstOpen == true){
             output.printWelcomeMessage();
             username = input.readStringOrExit("Enter a username >>> ");
-            this.user = new User(username);
+            this.user = new User(username,  false);
         }
     }
 

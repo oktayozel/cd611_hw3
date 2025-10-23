@@ -11,10 +11,12 @@ public class User{
     private String surname;
     private int moveCount;
     private int score;
+    private boolean isThisABot;
 
     // Constructor to initialize the user with a username and zero move count.
-    public User(String username){
+    public User(String username, boolean isThisABot){
         this.username = username;
+        this.isThisABot = isThisABot;
         this.moveCount = 0;
     }
     // Method to increment the move count by one.
@@ -45,5 +47,6 @@ public class User{
     public void resetScore() {
         score = 0;
     }
+
 
 }

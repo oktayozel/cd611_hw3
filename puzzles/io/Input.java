@@ -94,6 +94,7 @@ public class Input{
             }
     }
 
+
     
 
 
@@ -187,6 +188,8 @@ public class Input{
     }
 }
 
+
+
         
     // Method to prompt the user for starting a new game or exiting.
     public boolean inputYesOrExit(String prompt){
@@ -197,7 +200,7 @@ public class Input{
         if (input.equals("Y") ) {
             return true;
         }
-        if (input.equals("M")){
+        if (input.equals("N")){
             return false;
         }
         System.out.println("Exiting game. Goodbye!");
