@@ -222,7 +222,7 @@ public class Output{
     //quoridor's congratulation
     public void displayVictoryMessage(String winnerName, int elapsedTime) {
         clearScreen();
-        System.out.println("\n🏁 " + ANSI_GREEN + winnerName + ANSI_RESET + " has reached the goal!");
+        System.out.println("\n" + ANSI_GREEN + winnerName + ANSI_RESET + " has reached the goal!");
         System.out.printf("Game Duration: %d seconds\n", elapsedTime);
         input.readLineOrExit("Press enter to continue...");
     }

@@ -5,8 +5,8 @@ import java.util.ArrayDeque;
 
 import puzzles.core.Board;
 import puzzles.core.Cell;
-public class QuoridorBoard implements Board{
-    
+
+public class QuoridorBoard implements Board {
     private final int rowCount;
     private final int colCount;
     private final QuoridorCell[][] board;
@@ -114,44 +114,57 @@ public class QuoridorBoard implements Board{
     }
 
     public void display() {
-        final int cellWidth = 4;
-        final int cellHeight = 2;
-        final int cellInnerWidth = cellWidth - 2;
+    String horizontalWall = "###";  
+    String verticalWall = "#";     
+    String emptySpace = "   ";
+    String borderCorner = "+";
+    String borderEdge = "───";  
 
-        System.out.println("-------------------------------------------------------------------------------------------------");
-        System.out.println("Player 1: " + player1 + " shortest path to target: " + calculateShortestPathLength(player1) + "\n");
-        System.out.println("-------------------------------------------------------------------------------------------------");
+    System.out.print("  ");
+    for (int j = 0; j < colCount; j++) {
+        System.out.printf("%4d", j);
+    }
+    System.out.println();
 
-        for (int i = 0; i < rowCount; i++) {
-            //top
-            for (int j = 0; j < colCount; j++) {
-                System.out.print("#");
-                System.out.print(board[i][j].hasTopWall() ? "##" : "  ");
-            }
-            System.out.println("#");
-
-            //middle
-            for (int j = 0; j < colCount; j++) {
-                System.out.print(board[i][j].hasLeftWall() ? "#" : " ");
-                if (board[i][j].hasPlayer1()) System.out.print("11");
-                else if (board[i][j].hasPlayer2()) System.out.print("22");
-                else System.out.print("  ");
-            }
-            System.out.println("#");
-        }
-
-        //bottom
+    for (int i = 0; i < rowCount; i++) {
+        //row i
+        System.out.printf("%3d ", i);
+        System.out.print(borderCorner);
         for (int j = 0; j < colCount; j++) {
-            System.out.print("#");
-            System.out.print(board[rowCount - 1][j].hasBottomWall() ? "##" : "  ");
+            if (board[i][j].hasTopWall()) {
+                System.out.print(horizontalWall + borderCorner);
+            } else {
+                System.out.print(borderEdge + borderCorner);
+            }
+        }
+        System.out.println();
+
+        System.out.print("    "); 
+        for (int j = 0; j < colCount; j++) {
+            System.out.print(board[i][j].hasLeftWall() ? verticalWall : "│");
+
+            if (board[i][j].hasPlayer1()) {
+                System.out.print("P1 ");
+            } else if (board[i][j].hasPlayer2()) {
+                System.out.print("P2 ");
+            } else {
+                System.out.print(emptySpace);
+            }
         }
         
-        System.out.println("#");
-        System.out.println("-------------------------------------------------------------------------------------------------");
-        System.out.println("\nPlayer 2: " + player2 + " shortest path to target: " + calculateShortestPathLength(player2));
-        System.out.println("-------------------------------------------------------------------------------------------------");
-
+        System.out.println("│");
     }
+
+    System.out.printf("%3d ", rowCount);
+    System.out.print(borderCorner);
+    for (int j = 0; j < colCount; j++) {
+        System.out.print(borderEdge + borderCorner);
+    }
+    System.out.println();
+
+    System.out.println("Player 1: " + player1);
+    System.out.println("Player 2: " + player2);
+}
 
 
     public int calculateShortestPathLength(QuoridorUser player){
@@ -237,14 +250,6 @@ public class QuoridorBoard implements Board{
     }
 
 
-
-
-
-
-
-
-
-
     @Override
     public Cell[][] getBoard() {
         return board;
@@ -264,11 +269,4 @@ public class QuoridorBoard implements Board{
     public int getWidth() {
         return colCount;
     }
-
-
-
-
-
-
-
 }
