@@ -32,7 +32,7 @@ public class Output{
     }
 
     public void displayAnimation(String animationType){
-        Animations.displayAnimationWithSleep100(animationType);
+        Animations.displayAnimationWithSleep(animationType,100);
     }
 
 

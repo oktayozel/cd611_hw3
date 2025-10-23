@@ -33,8 +33,16 @@ public class QuoridorBot extends QuoridorUser implements ArtificialIntelligence 
 
         for (String d : dirs) {
             if (board.movePlayer(this, d)) {
-                Animations.displayAnimationWithSleep100("bot_thinking");
-                System.out.println(getUsername() + " moves " + d);
+                Animations.displayAnimationWithSleep("bot_thinking",200);
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                System.out.println("            " + getUsername() + " moves " + d);
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                try {
+                    Thread.sleep(1000); 
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Animations.displayAnimationWithSleep("bot_executing",100);
                 return;
             }
         }

@@ -26,7 +26,7 @@ public class Input{
         String input = scanner.nextLine().trim();
         if (input.equalsIgnoreCase("exit")) {
             //System.out.println("Exiting game. Goodbye!");
-            Animations.displayAnimationWithSleep100("closing");
+            Animations.displayAnimationWithSleep("closing",100);
             System.exit(0);
         }
         return input;
@@ -38,7 +38,7 @@ public class Input{
         String input = scanner.nextLine().trim();
         if (input.equalsIgnoreCase("exit")) {
             //System.out.println("Exiting game. Goodbye!");
-            Animations.displayAnimationWithSleep100("closing");
+            Animations.displayAnimationWithSleep("closing",100);
             System.exit(0);
         }
         return input;
