@@ -2,8 +2,8 @@ package puzzles.games.quoridor_components;
 
 import puzzles.core.Board;
 import puzzles.core.Cell;
-
-public class QuoridorBoard implements Board {
+public class QuoridorBoard implements Board{
+    
     private final int rowCount;
     private final int colCount;
     private final QuoridorCell[][] board;
@@ -163,4 +163,11 @@ public class QuoridorBoard implements Board {
     public int getWidth() {
         return colCount;
     }
+
+
+
+
+
+
+
 }

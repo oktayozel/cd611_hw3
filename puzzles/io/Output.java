@@ -1,12 +1,12 @@
 package puzzles.io;
 
 import java.util.List;
+import puzzles.core.Board;
 import puzzles.core.Cell;
 import puzzles.core.LeaderBoard;
+import puzzles.core.User;
 import puzzles.games.dots_and_boxes_components.DotsAndBoxesBoard;
 import puzzles.games.dots_and_boxes_components.DotsAndBoxesUser;
-import puzzles.core.Board;
-import puzzles.core.User;
 /*
  * This class handles output for the sliding puzzle game.
  * It provides methods to print the board, welcome message, prompts, and leaderboard.
@@ -193,6 +193,7 @@ public class Output{
                 e.printStackTrace();
             }
         }
+        
 
         System.out.println("\nWHAT A GAME!!!\n");
         System.out.println(player1.getUsername() + ": " + score1 + " points\n");
@@ -212,6 +213,14 @@ public class Output{
             return "draw";
         }
 
+    }
+
+    //quoridor's congratulation
+    public void displayVictoryMessage(String winnerName, int elapsedTime) {
+        clearScreen();
+        System.out.println("\n🏁 " + ANSI_GREEN + winnerName + ANSI_RESET + " has reached the goal!");
+        System.out.printf("Game Duration: %d seconds\n", elapsedTime);
+        input.readLineOrExit("Press enter to continue...");
     }
 
 
