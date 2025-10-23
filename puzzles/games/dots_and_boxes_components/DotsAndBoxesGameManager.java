@@ -3,6 +3,7 @@ package puzzles.games.dots_and_boxes_components;
 
 import puzzles.core.GameManager;
 import puzzles.core.LeaderBoard;
+import puzzles.core.Multiplayer;
 import puzzles.core.Settings;
 import puzzles.io.Input;
 import puzzles.io.Output;
@@ -10,7 +11,7 @@ import puzzles.io.Output;
 /* This class manages the Dots and Boxes game.
 * It handles game initialization, the main game loop, and checking for game completion.
 */
-public class DotsAndBoxesGameManager extends GameManager{
+public class DotsAndBoxesGameManager extends GameManager {
     private Input input;
     private Settings settings;
     private LeaderBoard leaderBoard ;

@@ -6,7 +6,7 @@ import java.util.ArrayDeque;
 import puzzles.core.Board;
 import puzzles.core.Cell;
 
-public class QuoridorBoard implements Board {
+public class QuoridorBoard extends Board {
     private final int rowCount;
     private final int colCount;
     private final QuoridorCell[][] board;

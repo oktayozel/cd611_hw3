@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 /*
- * This class implements the Board interface for a sliding puzzle game.
+ * This class extends the Board interface for a sliding puzzle game.
  * It initializes a board with numbered cells and one empty cell, and provides methods to manipulate the board.
  */
 
@@ -14,7 +14,7 @@ import puzzles.core.Cell;
 import puzzles.core.User;
 import puzzles.io.Output;
 
-public class SlidingPuzzleBoard implements Board{
+public class SlidingPuzzleBoard extends Board{
     private final int rowCount;
     private final int colCount;
     private Output output;

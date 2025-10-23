@@ -8,7 +8,7 @@ import puzzles.core.Board;
  * it manages the grid of boxes handles edge claims checks for completed boxes
  * and displays the current state of the board. Basically holds everything related to the board.
  */
-public class DotsAndBoxesBoard implements Board {
+public class DotsAndBoxesBoard extends Board {
     private int rows, cols;
     private DotsAndBoxesCell[][] boxes;
     private boolean lastMoveCompletedBox;
