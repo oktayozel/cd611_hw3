@@ -25,7 +25,8 @@ public class Input{
     public  String readLineOrExit() {
         String input = scanner.nextLine().trim();
         if (input.equalsIgnoreCase("exit")) {
-            System.out.println("Exiting game. Goodbye!");
+            //System.out.println("Exiting game. Goodbye!");
+            Animations.displayAnimationWithSleep100("closing");
             System.exit(0);
         }
         return input;
@@ -36,7 +37,8 @@ public class Input{
         System.out.print(prompt);
         String input = scanner.nextLine().trim();
         if (input.equalsIgnoreCase("exit")) {
-            System.out.println("Exiting game. Goodbye!");
+            //System.out.println("Exiting game. Goodbye!");
+            Animations.displayAnimationWithSleep100("closing");
             System.exit(0);
         }
         return input;
