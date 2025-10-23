@@ -53,4 +53,20 @@ public class QuoridorCell extends Cell{
         this.hasPlayer2 = hasPlayer2;
     }
 
+    private String topWallOwner = "";   //check who create the wall
+    private String leftWallOwner = ""; 
+
+    public void setTopWallOwner(String owner) {
+        this.topWallOwner = owner;
+    }
+    public void setLeftWallOwner(String owner) {
+        this.leftWallOwner = owner;
+    }
+    public String getTopWallOwner() {
+        return topWallOwner;
+    }
+    public String getLeftWallOwner() {
+        return leftWallOwner;
+    }
+
 }

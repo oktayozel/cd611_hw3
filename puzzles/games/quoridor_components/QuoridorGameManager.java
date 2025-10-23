@@ -3,7 +3,6 @@ package puzzles.games.quoridor_components;
 import puzzles.core.GameManager;
 import puzzles.core.LeaderBoard;
 import puzzles.core.Multiplayer;
-
 import puzzles.core.Settings;
 import puzzles.io.Input;
 import puzzles.io.Output;
@@ -41,11 +40,15 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
     //player names
     @Override
     protected void initializePlayers(boolean gameFirstOpen) {
+        String RED = "\u001B[31m";
+        String BLUE = "\u001B[34m";
+        String RESET = "\u001B[0m";
+
         if (gameFirstOpen) {
-            String name1 = input.readStringOrExit("Enter Player 1 name: ");
+            String name1 = input.readStringOrExit("Enter" + BLUE + " Player 1 " + RESET + "name:");
             player1 = new QuoridorUser(name1, "P1", false);
             if (!playAgainstBot) {
-                String name2 = input.readStringOrExit("Enter Player 2 name: ");
+                String name2 = input.readStringOrExit("Enter" + RED + " Player 2 " + RESET + "name:");
                 player2 = new QuoridorUser(name2, "P2", false);
             } 
             else {

@@ -53,4 +53,8 @@ public class QuoridorUser extends User {
     public String toString() {
         return getUsername() + " (" + getShortName() + ") at [" + row + "," + col + "] with " + wallsRemaining + " walls left" ;
     }
+
+    public String getId() {
+        return this.id;
+    }
 }
