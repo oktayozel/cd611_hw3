@@ -4,15 +4,53 @@ import puzzles.core.User;
 
 
 public class QuoridorUser extends User {
-    private String id;
-    // constructor to initialize username and id (like 1, 2)
+    private String id;             //p1 and p2
+    private int row, col;          //current position
+    private int wallsRemaining;    //walls left
+
     public QuoridorUser(String username, String id) {
         super(username);
         this.id = id;
+        this.wallsRemaining = 10;
+        this.row = -1;
+        this.col = -1;
     }
-    // helper to get P1 or P2
+
     public String getShortName() {
         return id;
     }
-    
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public int getWallsRemaining() {
+        return wallsRemaining;
+    }
+
+    public void setPosition(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
+
+    public void useWall() {
+        if (wallsRemaining > 0) {
+            wallsRemaining--;
+        }
+    }
+
+    public void reset() {
+        this.wallsRemaining = 10;
+        this.row = -1;
+        this.col = -1;
+    }
+
+    @Override
+    public String toString() {
+        return getUsername() + " (" + getShortName() + ") at [" + row + "," + col + "] with " + wallsRemaining + " walls left";
+    }
 }

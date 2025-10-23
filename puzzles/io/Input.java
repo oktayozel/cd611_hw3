@@ -148,33 +148,42 @@ public class Input{
     }
 
     public boolean readQuoridorMove(QuoridorBoard board, QuoridorUser currentPlayer) {
-        System.out.println("Choose your move 1. MOVE U/D/L/R  2. WALL H (x, y). Type 'exit' to quit.");
+    System.out.println("\nYour options:");
+    System.out.println("  - MOVE <UP|DOWN|LEFT|RIGHT>");
+    System.out.println("  - WALL <H|V> <row> <col>");
+    System.out.println("Type 'exit' to quit.");
 
-        while (true) {
-            String inputLine = readLineOrExit(">>> ").toUpperCase();
-            String[] tokens = inputLine.split("\\s+");
+    while (true) {
+        String inputLine = readLineOrExit(">>> ").toUpperCase().trim();
+        String[] tokens = inputLine.split("\\s+");
 
-            if (tokens.length == 2 && tokens[0].equals("MOVE")) {
-                String direction = tokens[1];
-                boolean success = board.movePlayer(currentPlayer, direction);
-                if (success) return true;
-                System.out.println("Invalid move. Try again.");
-            } else if (tokens.length == 4 && tokens[0].equals("WALL")) {
-                String orientation = tokens[1];
-                try {
-                    int row = Integer.parseInt(tokens[2]);
-                    int col = Integer.parseInt(tokens[3]);
-                    boolean success = board.placeWall(currentPlayer, orientation, row, col);            //will modify
-                    if (success) return true;
-                    System.out.println("Wrong wall.");
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid coordinates. Try again.");
+        if (tokens.length == 2 && tokens[0].equals("MOVE")) {
+            String direction = tokens[1];
+            boolean success = board.movePlayer(currentPlayer, direction);
+            if (success) return true;
+            System.out.println("Invalid move. Either blocked by wall or out of bounds.");
+        } else if (tokens.length == 4 && tokens[0].equals("WALL")) {
+            String orientation = tokens[1];
+            try {
+                int row = Integer.parseInt(tokens[2]);
+                int col = Integer.parseInt(tokens[3]);
+
+                if (currentPlayer.getWallsRemaining() <= 0) {
+                    System.out.println("You have no walls remaining.");
+                    continue;
                 }
-            } else {
-                System.out.println("Invalid command. Use 'MOVE U/D/L/R' or 'WALL H/V row col'.");
+
+                boolean success = board.claimWall(row, col, orientation, currentPlayer);
+                if (success) return true;
+                System.out.println("Invalid wall placement. Either overlaps or out of bounds.");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid coordinates. Please enter numeric row and column.");
             }
+        } else {
+            System.out.println("Invalid command. Use 'MOVE <direction>' or 'WALL <H/V> <row> <col>'.");
         }
     }
+}
 
         
     // Method to prompt the user for starting a new game or exiting.
