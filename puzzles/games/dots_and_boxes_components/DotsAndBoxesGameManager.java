@@ -11,7 +11,7 @@ import puzzles.io.Output;
 /* This class manages the Dots and Boxes game.
 * It handles game initialization, the main game loop, and checking for game completion.
 */
-public class DotsAndBoxesGameManager extends GameManager {
+public class DotsAndBoxesGameManager extends GameManager implements Multiplayer {
     private Input input;
     private Settings settings;
     private LeaderBoard leaderBoard ;
@@ -109,7 +109,7 @@ public class DotsAndBoxesGameManager extends GameManager {
 
 
     // changes the current player after each turn.
-    private void switchPlayer() {
+    public void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
     

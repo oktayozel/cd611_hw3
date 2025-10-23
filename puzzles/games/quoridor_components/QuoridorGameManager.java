@@ -2,11 +2,13 @@ package puzzles.games.quoridor_components;
 
 import puzzles.core.GameManager;
 import puzzles.core.LeaderBoard;
+import puzzles.core.Multiplayer;
+
 import puzzles.core.Settings;
 import puzzles.io.Input;
 import puzzles.io.Output;
 
-public class QuoridorGameManager extends GameManager {
+public class QuoridorGameManager extends GameManager implements Multiplayer{
 
     private QuoridorBoard board;
     private Output output;
@@ -99,19 +101,12 @@ public class QuoridorGameManager extends GameManager {
 
 
 
-
-
-
-
-
-
-
     @Override
     public boolean isGameEnd() {
         return board.hasPlayerReachedGoal(player1) || board.hasPlayerReachedGoal(player2);
     }
 
-    private void switchPlayer() {
+    public void switchPlayer() {
         currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 
