@@ -1,8 +1,6 @@
 package puzzles.games.quoridor_components;
-import java.util.Queue;
 import java.util.ArrayDeque;
-
-
+import java.util.Queue;
 import puzzles.core.Board;
 import puzzles.core.Cell;
 
@@ -75,33 +73,41 @@ public class QuoridorBoard extends Board {
     public boolean claimWall(int row, int col, String direction, QuoridorUser player) {
         if (player.getWallsRemaining() <= 0) return false;
 
-        QuoridorCell cell1, cell2;
         direction = direction.toUpperCase();
+        QuoridorCell cell1, cell2;
 
         if (direction.equals("H")) {
-            if (row < 0 || row >= rowCount || col < 0 || col >= colCount - 1) 
+            if (row < 0 || row >= rowCount || col < 0 || col >= colCount - 1)
                 return false;
+
             cell1 = board[row][col];
             cell2 = board[row][col + 1];
 
-            if (cell1.hasTopWall() || cell2.hasTopWall()) 
+            if (cell1.hasTopWall() || cell2.hasTopWall())
                 return false;
+
             cell1.setTopWall(true);
             cell2.setTopWall(true);
-        } 
+            cell1.setTopWallOwner(player.getId());
+            cell2.setTopWallOwner(player.getId());
+        }
 
         else if (direction.equals("V")) {
             if (row < 0 || row >= rowCount - 1 || col < 0 || col >= colCount)
                 return false;
+
             cell1 = board[row][col];
             cell2 = board[row + 1][col];
 
-            if (cell1.hasLeftWall() || cell2.hasLeftWall()) 
+            if (cell1.hasLeftWall() || cell2.hasLeftWall())
                 return false;
+
             cell1.setLeftWall(true);
             cell2.setLeftWall(true);
-        } 
-        
+            cell1.setLeftWallOwner(player.getId());
+            cell2.setLeftWallOwner(player.getId());
+        }
+
         else {
             return false;
         }
@@ -115,67 +121,101 @@ public class QuoridorBoard extends Board {
     }
 
     public void display() {
-    String horizontalWall = "###";  
-    String verticalWall = "#";     
-    String emptySpace = "   ";
-    String borderCorner = "+";
-    String borderEdge = "───";  
+        String RESET = "\u001B[0m";
+        String PURPLE = "\u001B[35m";
+        String YELLOW = "\u001B[33m";
+        String RED = "\u001B[31m";
+        String BLUE = "\u001B[34m";
+ 
+        String verticalWall = "#";     
+        String emptySpace = "   ";
+        String borderCorner = PURPLE + "+" + RESET;
+        String borderEdge = YELLOW + "───" + RESET;  
+        String borderEdgePlain = "───";
 
-    System.out.println("-------------------------------------------------------------------------------------------------");
-    System.out.println("Player 1: " + player1 + " shortest path to target: " + calculateShortestPathLength(player1) + "\n");
-    System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.println(BLUE + "Player1: " + RESET + player1 + " shortest path to target: " + calculateShortestPathLength(player1) + "\n");
+        System.out.println("-------------------------------------------------------------------------------------------------");
 
 
-
-
-    System.out.print("  ");
-    for (int j = 0; j < colCount; j++) {
-        System.out.printf("%4d", j);
-    }
-    System.out.println();
-
-    for (int i = 0; i < rowCount; i++) {
-        //row i
-        System.out.printf("%3d ", i);
-        System.out.print(borderCorner);
+        System.out.print("  ");
         for (int j = 0; j < colCount; j++) {
-            if (board[i][j].hasTopWall()) {
-                System.out.print(horizontalWall + borderCorner);
-            } else {
-                System.out.print(borderEdge + borderCorner);
-            }
+            System.out.printf("%4d", j);
         }
         System.out.println();
 
-        System.out.print("    "); 
-        for (int j = 0; j < colCount; j++) {
-            System.out.print(board[i][j].hasLeftWall() ? verticalWall : "│");
+        for (int i = 0; i < rowCount; i++) {
+            //row i
+            System.out.printf("%3d ", i);
+            boolean isPlainRow = (i == 0 || i == rowCount);
+            System.out.print(isPlainRow ? borderCorner : borderCorner);
 
-            if (board[i][j].hasPlayer1()) {
-                System.out.print("P1 ");
-            } else if (board[i][j].hasPlayer2()) {
-                System.out.print("P2 ");
+            for (int j = 0; j < colCount; j++) {
+            String edge;
+            if (board[i][j].hasTopWall()) {
+                String owner = board[i][j].getTopWallOwner();
+                if ("P1".equals(owner)) {
+                    edge = BLUE + "###" + RESET;
+                } else if ("P2".equals(owner)) {
+                    edge = RED + "###" + RESET;
+                } else {
+                    edge = "###";
+                }
             } else {
-                System.out.print(emptySpace);
+                edge = isPlainRow ? borderEdgePlain : borderEdge;
             }
+            System.out.print(edge + borderCorner);
+
+            }
+
+            System.out.println();
+            System.out.print("    "); 
+
+            for (int j = 0; j < colCount; j++) {
+
+                boolean isPlainCol = (j == 0);
+                String leftSymbol;
+                if (board[i][j].hasLeftWall()) {
+                String owner = board[i][j].getLeftWallOwner();
+                if ("P1".equals(owner)) {
+                    leftSymbol = isPlainCol ? "#" : BLUE + "#" + RESET;
+                } else if ("P2".equals(owner)) {
+                    leftSymbol = isPlainCol ? "#" : RED + "#" + RESET;
+                } else {
+                    leftSymbol = isPlainCol ? "#" : YELLOW + "#" + RESET;
+                }
+            } else {
+                leftSymbol = isPlainCol ? "│" : YELLOW + "│" + RESET;
+            }
+
+                System.out.print(leftSymbol);
+
+                if (board[i][j].hasPlayer1()) {
+                    System.out.print(BLUE + "P1 " + RESET);
+                } else if (board[i][j].hasPlayer2()) {
+                    System.out.print(RED + "P2 " + RESET);
+                } else {
+                    System.out.print(emptySpace);
+                }
+            }
+            
+            System.out.println("│");
+
         }
-        
-        System.out.println("│");
+
+        System.out.printf("%3d ", rowCount);
+        System.out.print(borderCorner);
+        for (int j = 0; j < colCount; j++) {
+            System.out.print(borderEdgePlain + borderCorner);
+        }
+        System.out.println();
+
+        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.println(RED + "\nPlayer2: "+ RESET + player2 + " shortest path to target: " + calculateShortestPathLength(player2));
+        System.out.println("-------------------------------------------------------------------------------------------------");
+
+
     }
-
-    System.out.printf("%3d ", rowCount);
-    System.out.print(borderCorner);
-    for (int j = 0; j < colCount; j++) {
-        System.out.print(borderEdge + borderCorner);
-    }
-    System.out.println();
-
-    System.out.println("-------------------------------------------------------------------------------------------------");
-    System.out.println("\nPlayer 2: " + player2 + " shortest path to target: " + calculateShortestPathLength(player2));
-    System.out.println("-------------------------------------------------------------------------------------------------");
-
-
-}
 
 
     public int calculateShortestPathLength(QuoridorUser player){

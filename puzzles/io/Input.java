@@ -152,7 +152,7 @@ public class Input{
     public boolean readQuoridorMove(QuoridorBoard board, QuoridorUser currentPlayer) {
     System.out.println("\nYour options:");
     System.out.println("  - MOVE <UP|DOWN|LEFT|RIGHT>");
-    System.out.println("  - WALL <H|V> <row> <col>");
+    System.out.println("  - WALL <H|V> <row> <col> (You can only choose the yellow line to create the wall.)");
     System.out.println("Type 'exit' to quit.");
 
     while (true) {
