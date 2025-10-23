@@ -21,7 +21,53 @@ public class Output{
     private static final String ANSI_CYAN = "\u001B[36m";
     private static final String ANSI_YELLOW = "\u001B[33m";
     private static final String ANSI_ORANGE = "\u001B[38;5;208m";
-
+    String[] openingAnimation = {
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    ANSI_BLUE + "              ,---------------------------," + ANSI_RESET,
+    ANSI_BLUE + "              |  /---------------------\\  |" + ANSI_RESET,
+    ANSI_BLUE + "              | |                       | |" + ANSI_RESET,
+    ANSI_BLUE + "              | |   " + ANSI_GREEN + "   Welcome to       " + ANSI_BLUE + "| |" + ANSI_RESET,
+    ANSI_BLUE + "              | |    " + ANSI_YELLOW + "    CS-611         " + ANSI_BLUE + "| |" + ANSI_RESET,
+    ANSI_BLUE + "              | |     " + ANSI_CYAN + "   Games          " + ANSI_BLUE + "| |" + ANSI_RESET,
+    ANSI_BLUE + "              | |                       | |" + ANSI_RESET,
+    ANSI_BLUE + "              |  \\_____________________/  |" + ANSI_RESET,
+    ANSI_BLUE + "              |___________________________|" + ANSI_RESET,
+    ANSI_CYAN + "            ,---\\_____     []     _______/------," + ANSI_RESET,
+    ANSI_CYAN + "          /         /______________\\           /|" + ANSI_RESET,
+    ANSI_CYAN + "        /___________________________________ /  | ___" + ANSI_RESET,
+    ANSI_CYAN + "        |                                   |   |    )" + ANSI_RESET,
+    ANSI_CYAN + "        |  _ _ _                 [-------]  |   |   (" + ANSI_RESET,
+    ANSI_CYAN + "        |  o o o                 [-------]  |  /    _)_"+ ANSI_RESET,
+    ANSI_CYAN + "        |__________________________________ |/     /  /" + ANSI_RESET,
+    ANSI_CYAN + "    /-------------------------------------/|      ( )/" + ANSI_RESET,
+    ANSI_CYAN + "  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /" + ANSI_RESET,
+    ANSI_CYAN + "/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /" + ANSI_RESET,
+    ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET,
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",    
+    "                                             ",
+    };
     public Output(Input input) {
         this.input = input;
     }
@@ -31,54 +77,12 @@ public class Output{
         this.gameName = gameName.toLowerCase();
     }
 
-    public void displayAnimation(){
-        String[] animation = {
-"                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        ANSI_BLUE + "              ,---------------------------," + ANSI_RESET,
-        ANSI_BLUE + "              |  /---------------------\\  |" + ANSI_RESET,
-        ANSI_BLUE + "              | |                       | |" + ANSI_RESET,
-        ANSI_BLUE + "              | |   " + ANSI_GREEN + "   Welcome to       " + ANSI_BLUE + "| |" + ANSI_RESET,
-        ANSI_BLUE + "              | |    " + ANSI_YELLOW + "    CS-611         " + ANSI_BLUE + "| |" + ANSI_RESET,
-        ANSI_BLUE + "              | |     " + ANSI_CYAN + "   Games          " + ANSI_BLUE + "| |" + ANSI_RESET,
-        ANSI_BLUE + "              | |                       | |" + ANSI_RESET,
-        ANSI_BLUE + "              |  \\_____________________/  |" + ANSI_RESET,
-        ANSI_BLUE + "              |___________________________|" + ANSI_RESET,
-        ANSI_CYAN + "            ,---\\_____     []     _______/------," + ANSI_RESET,
-        ANSI_CYAN + "          /         /______________\\           /|" + ANSI_RESET,
-        ANSI_CYAN + "        /___________________________________ /  | ___" + ANSI_RESET,
-        ANSI_CYAN + "        |                                   |   |    )" + ANSI_RESET,
-        ANSI_CYAN + "        |  _ _ _                 [-------]  |   |   (" + ANSI_RESET,
-        ANSI_CYAN + "        |  o o o                 [-------]  |  /    _)_"+ ANSI_RESET,
-        ANSI_CYAN + "        |__________________________________ |/     /  /" + ANSI_RESET,
-        ANSI_CYAN + "    /-------------------------------------/|      ( )/" + ANSI_RESET,
-        ANSI_CYAN + "  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /" + ANSI_RESET,
-        ANSI_CYAN + "/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /" + ANSI_RESET,
-        ANSI_YELLOW + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ANSI_RESET,
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",    
-        "                                             ",
-        };
+    public void displayAnimation(String animationType){
+        String[] animation = null;
+        if (animationType.equals("opening")) {
+            animation = openingAnimation;
+        }
+
         for(String line : animation){
             System.out.println(line);
             try {
@@ -272,16 +276,16 @@ public class Output{
         }
         else if(gameName.equals("quoridor")) {
             System.out.printf(ANSI_ORANGE + "###########################################################################################################################################\n");
-            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "                                                                                                                     " + ANSI_ORANGE + "#\n");
-            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "                                                                                             #      #   ######     # " + ANSI_ORANGE + "#\n");
-            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "         ####      #      #    #####     ######    #####   ####       #####    ######        #      #   #          # " + ANSI_ORANGE + "#\n"); 
-            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   #     #     #     #    #   ##     ##  #     #       ########   #    #     # " + ANSI_ORANGE + "#\n"); 
-            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   #     #     #     #    #   ##     ##  #     #       #          #    #     # " + ANSI_ORANGE + "#\n"); 
-            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   ######      #     #    #   ##     ##  ######        #   ################### " + ANSI_ORANGE + "#\n"); 
-            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   #   #       #     #    #   ##     ##  #   #         #                     # " + ANSI_ORANGE + "#\n"); 
-            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   #    #      #     #    #   ##     ##  #    #        ########   #######    # " + ANSI_ORANGE + "#\n"); 
-            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "         #### ##    ######     #####     #     #    ###    ####       #####    #     #       #          #          # " + ANSI_ORANGE + "#\n"); 
-            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "               ##                                                                            #####  #####     ######                                     " + ANSI_ORANGE + "#\n");
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "                                                                                                                                         " + ANSI_ORANGE + "#\n");
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "                                                                                                                 #      #   ######     # " + ANSI_ORANGE + "#\n");
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "         ####      #      #    #####     ######    #####   ####       #####    ######                            #      #   #          # " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   #     #     #     #    #   ##     ##  #     #                           ########   #    #     # " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   #     #     #     #    #   ##     ##  #     #                           #          #    #     # " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   ######      #     #    #   ##     ##  ######                            #   ################### " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   #   #       #     #    #   ##     ##  #   #                             #                     # " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "       ##    ##    #      #  ##     ##   #    #      #     #    #   ##     ##  #    #                            ########   #######    # " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "         #### ##    ######     #####     #     #    ###    ####       #####    #     #                           #          #          # " + ANSI_ORANGE + "#\n"); 
+            System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "               ##                                                                                                #####  #####     ###### " + ANSI_ORANGE + "#\n");
             System.out.printf(ANSI_ORANGE + "#" + ANSI_YELLOW + "                                                                                                                                         " + ANSI_ORANGE + "#\n");
             System.out.printf(ANSI_ORANGE + "###########################################################################################################################################\n"+ ANSI_RESET);
         }

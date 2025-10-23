@@ -46,7 +46,7 @@ public class GameSelectionManager {
     //Displays the games looking to the config file and allows for a number selection and then depending on the game selection calls the related game.
     public void runSelectedGame() {
         while(true){
-            output.displayAnimation();
+            output.displayAnimation("opening");
             output.displaySupportedGames(settings.getSupportedGames());
             
             int _selected_game = input.readIntOrExit("Which game would you like to play? \nYou can simply type exit to finish the game  >>> ", 1, 3);
