@@ -16,6 +16,9 @@ import puzzles.games.sliding_puzzle_components.SlidingPuzzleCell;
 public class Input{
 
     private final Scanner scanner;
+    private static final String RESET = "\u001B[0m";
+    private static final String YELLOW = "\u001B[33m";
+    private static final String RED = "\u001B[31m";
 
     // Constructor to initialize the scanner for user input.
     public Input() {
@@ -153,15 +156,15 @@ public class Input{
     // method to read quoridor move and supply info to the user
     public boolean readQuoridorMove(QuoridorBoard board, QuoridorUser currentPlayer) {
     System.out.println("\nYour options:");
-    System.out.println("- MOVE <UP|DOWN|LEFT|RIGHT>");
+    System.out.println(YELLOW + "- MOVE <UP|DOWN|LEFT|RIGHT>" + RESET);
     System.out.println("    For example: move right, move down");
     System.out.println();
-    System.out.println("- WALL <H|V> <row> <col> (You can only choose the yellow line to create the wall.)");
+    System.out.println(YELLOW + "- WALL <H|V> <row> <col> (You can only choose the yellow line to create the wall.)" + RESET);
     System.out.println("    H places a horizontal line to the right of that point. ");
     System.out.println("    V places a vertical line below that point. ");
     System.out.println("    (You can only choose the yellow line to create the wall.)");
     System.out.println("    For example: wall h 3 4, wall v 5 6");
-    System.out.println("Type 'exit' to quit.");
+    System.out.println("Type" + RED +" 'exit' " + RESET + "to quit.");
 
     while (true) {
         String inputLine = readLineOrExit(">>> ").toUpperCase().trim();
