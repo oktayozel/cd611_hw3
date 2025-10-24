@@ -150,6 +150,7 @@ public class Input{
         }
     }
 
+    // method to read quoridor move and supply info to the user
     public boolean readQuoridorMove(QuoridorBoard board, QuoridorUser currentPlayer) {
     System.out.println("\nYour options:");
     System.out.println("- MOVE <UP|DOWN|LEFT|RIGHT>");
