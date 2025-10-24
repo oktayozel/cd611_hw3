@@ -51,7 +51,7 @@ public class GameSelectionManager {
             
             int _selected_game = input.readIntOrExit("Which game would you like to play? \nYou can simply type exit to finish the game  >>> ", 1, 3);
             boolean gameFirstOpen = true;
-            
+            // runs sliding puzzle
             if (_selected_game == 1) {
                 while (true) {
                     slidingPuzzleGameManager.initGame(gameFirstOpen);
@@ -61,7 +61,7 @@ public class GameSelectionManager {
                     }
                 }
             }
-
+            // runs dots and boxes
             if (_selected_game == 2) {
                 while (true) {
                     dotsAndBoxesGameManager.initGame(gameFirstOpen);
@@ -71,6 +71,7 @@ public class GameSelectionManager {
                     }
                 }
             }
+            // runs quoridor
             if(_selected_game == 3){
                 while( true){
                     quoridorGameManager.initGame(gameFirstOpen);

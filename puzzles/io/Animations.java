@@ -1,5 +1,11 @@
 package puzzles.io;
 
+
+/*
+ * 
+ * Animation sequences for the game.
+ * seperated from the output class in order to keep the code organized and maintainable.
+ */
 public class Animations {
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_RED = "\u001B[31m";
@@ -163,16 +169,11 @@ private static final String[] botExecutingAnimation = {
     "                                                      #",
 };
 
-
-
-
-
-
-
+    // constructor
     public Animations(){ 
 
     }
-
+    // prints the input string with a delay between each line, delay is taken as an input via sleepDuration
     public static void displayAnimationWithSleep(String animationType, int sleepDuration){
         String[] animation = null;
         if (animationType.equals("opening")) {

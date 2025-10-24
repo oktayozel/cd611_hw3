@@ -3,19 +3,29 @@ package puzzles.games.quoridor_components;
 import puzzles.core.Cell;
 
 
+/*
+ * This class represents a cell in the Quoridor game.
+ * it extends the abstract Cell class and includes properties for the edges of the cell 
+ * It provides methods to maintain cell operations.
+ */
+
 public class QuoridorCell extends Cell{
 
-    private boolean topWall;
-    private boolean bottomWall;
-    private boolean leftWall;
-    private boolean rightWall;
+    private boolean topWall; // has top wall
+    private boolean bottomWall; // has bottom wall
+    private boolean leftWall; // has left wall
+    private boolean rightWall; // has right wall
     private boolean hasPlayer1;
     private boolean hasPlayer2;
 
-
+    // constructor for the quoridor cell
     public QuoridorCell(int row, int col, String value) {
         super(row, col, new QuoridorPiece(value));
     }
+
+
+
+    // getters and setters for the walls and players
     public boolean hasTopWall() {
         return topWall;
     }
@@ -53,9 +63,11 @@ public class QuoridorCell extends Cell{
         this.hasPlayer2 = hasPlayer2;
     }
 
-    private String topWallOwner = "";   //check who create the wall
-    private String leftWallOwner = ""; 
 
+    private String topWallOwner = "";   //check who created the wall
+    private String leftWallOwner = "";  //check who created the wall
+
+    // setters for the wall owners
     public void setTopWallOwner(String owner) {
         this.topWallOwner = owner;
     }
