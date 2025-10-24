@@ -100,11 +100,16 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
         //display
         output.displayVictoryMessage(winner.getUsername(), elapsedTime);
 
-        //update leaderboard
-        leaderBoard.recordQuoridorResult(winner.getUsername(), true);
-        leaderBoard.recordQuoridorResult(loser.getUsername(), false);
-        leaderBoard.saveLeaderBoard();
-        output.displayLeaderboard(leaderBoard);
+        //update leaderboard (except bot)
+        if (!(player1 instanceof QuoridorBot) && !(player2 instanceof QuoridorBot)) {
+            leaderBoard.recordQuoridorResult(winner.getUsername(), true);
+            leaderBoard.recordQuoridorResult(loser.getUsername(), false);
+            leaderBoard.saveLeaderBoard();
+            output.displayLeaderboard(leaderBoard);
+        } 
+        else {
+            System.out.println("Game played against AI. Leaderboard will not updated.");
+        }
 
         return input.inputYesOrExit("\nPlay again? (y/Y), Main menu (m/M), or any other key to exit >>> ");
     }
