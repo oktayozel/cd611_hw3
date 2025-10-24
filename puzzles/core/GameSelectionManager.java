@@ -1,9 +1,8 @@
 package puzzles.core;
 
-import java.util.Scanner;
 import puzzles.games.dots_and_boxes_components.DotsAndBoxesGameManager;
-import puzzles.games.sliding_puzzle_components.SlidingPuzzleGameManager;
 import puzzles.games.quoridor_components.QuoridorGameManager;
+import puzzles.games.sliding_puzzle_components.SlidingPuzzleGameManager;
 import puzzles.io.Input;
 import puzzles.io.Output;
 
@@ -21,6 +20,8 @@ public class GameSelectionManager {
     private Input input;
     private Output output;
     private Settings settings;
+    private static final String RED = "\u001B[31m";
+    private static final String RESET = "\u001B[0m";
 
     public GameSelectionManager(){
         this.settings = new Settings();
@@ -49,7 +50,7 @@ public class GameSelectionManager {
             output.displayAnimation("opening");
             output.displaySupportedGames(settings.getSupportedGames());
             
-            int _selected_game = input.readIntOrExit("Which game would you like to play? \nYou can simply type exit to finish the game  >>> ", 1, 3);
+            int _selected_game = input.readIntOrExit("Which game would you like to play? \nYou can simply type" + RED + " exit " + RESET + "to finish the game  >>> ", 1, 3);
             boolean gameFirstOpen = true;
             // runs sliding puzzle
             if (_selected_game == 1) {

@@ -18,6 +18,12 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
     private QuoridorUser player2;
     private QuoridorUser currentPlayer;     //track turns
     private boolean playAgainstBot;
+
+    private static final String RED = "\u001B[31m";
+    private static final String BLUE = "\u001B[34m";
+    private static final String RESET = "\u001B[0m";
+    private static final String YELLOW = "\u001B[33m";
+
     public QuoridorGameManager(Settings settings) {
         super();
         this.input = new Input();
@@ -40,9 +46,6 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
     //player names
     @Override
     protected void initializePlayers(boolean gameFirstOpen) {
-        String RED = "\u001B[31m";
-        String BLUE = "\u001B[34m";
-        String RESET = "\u001B[0m";
 
         if (gameFirstOpen) {
             String name1 = input.readStringOrExit("Enter" + BLUE + " Player 1 " + RESET + "name:");
@@ -61,8 +64,8 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
     //create board(dimensions)
     @Override
     protected void initializeBoard() {
-        int rows = input.readIntOrExit("Enter number of rows: ", settings.getMinBoardSize("Quoridor"), settings.getMaxBoardSize("Quoridor"));
-        int cols = input.readIntOrExit("Enter number of columns: ", settings.getMinBoardSize("Quoridor"), settings.getMaxBoardSize("Quoridor"));
+        int rows = input.readIntOrExit("Enter number of" + YELLOW + " rows: " + RESET, settings.getMinBoardSize("Quoridor"), settings.getMaxBoardSize("Quoridor"));
+        int cols = input.readIntOrExit("Enter number of" + YELLOW + " columns: " + RESET, settings.getMinBoardSize("Quoridor"), settings.getMaxBoardSize("Quoridor"));
         this.board = new QuoridorBoard(rows, cols, player1, player2);
         if(playAgainstBot){
             ((QuoridorBot)player2).setBoard(this.board);
