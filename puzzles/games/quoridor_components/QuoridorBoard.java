@@ -77,7 +77,7 @@ public class QuoridorBoard extends Board {
         QuoridorCell cell1, cell2;
 
         if (direction.equals("H")) {
-            if (row < 0 || row >= rowCount || col < 0 || col >= colCount - 1)
+            if (row <= 0 || row >= rowCount || col < 0 || col >= colCount - 1)
                 return false;
 
             cell1 = board[row][col];
@@ -93,7 +93,7 @@ public class QuoridorBoard extends Board {
         }
 
         else if (direction.equals("V")) {
-            if (row < 0 || row >= rowCount - 1 || col < 0 || col >= colCount)
+            if (row < 0 || row >= rowCount - 1 || col <= 0 || col >= colCount - 1)
                 return false;
 
             cell1 = board[row][col];
