@@ -299,6 +299,13 @@ public class QuoridorBoard extends Board {
         return true;
     }
 
+    public int getRowCount() {
+        return rowCount;
+    }
+
+    public int getColCount() {
+        return colCount;
+    }
 
     @Override
     public Cell[][] getBoard() {
