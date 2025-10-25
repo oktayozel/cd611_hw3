@@ -14,7 +14,7 @@
 
 ## Files 
 ---------------------------------------------------------------------------
-assignment_2/  
+assignment_3/  
 ├── out/                                        (Compiled class files are going into this folder.)   
 │   └── puzzles/                                (Main game module)  
 │       ├── app/                                (Entry point of the program)  
@@ -27,7 +27,9 @@ assignment_2/
 │       │   ├── GameSelectionManager.java  
 │       │   ├── LeaderBoard.java                (This class has been placed to hold the leaderboard storing the data in leaderboard.txt. Helps keeping track of the leaderboard)
 │       │   ├── Settings.java  
-│       │   └── User.java                       (This class holds the user details like username and move count.)
+│       │   ├── User.java                       (This class holds the user details like username and move count.)
+│       │   ├── Piece.java                      (Abstract class representing a game piece with value validation)
+│       │   └── ArtificialIntelligence.java     (Interface for AI-controlled players; implemented by QuoridorBot)
 │       ├── games/                               
 │       │   ├── dots_and_boxes_components/          (dots_and_boxes module)
 │       │   │   ├── DotsAndBoxesBoard.java          (Represents the game board; manages cells, edge claiming, and scoring logic)
@@ -40,12 +42,20 @@ assignment_2/
 │       │   │   ├── SlidingPuzzleGameManager.java   (Manages all the game, basically holds one instance from other classes and orchestrates them.)
 │       │   │   └── SlidingPuzzleUser.java          (Stores player information such as username, score, and identity (P1, P2))
 │       │   └── quoridor_components/                (quoridor module)
-│       │       ├── QuoridorBoard.java              (This class is responsible for holding the board and board operations.)
-│       │       ├── QuoridorCell.java               (This class is reponsible for operations in the Cell level and denotes each cell in a board.)
-│       │       ├── QuoridorGameManager.java        (Manages all the game, basically holds one instance from other classes and orchestrates them.)
-│       │       └── QuoridorUser.java               (Stores player information such as username, score, and identity (P1, P2))
+│       │   │   ├── QuoridorBoard.java              (This class is responsible for holding the board and board operations.)
+│       │   │   ├── QuoridorCell.java               (This class is reponsible for operations in the Cell level and denotes each cell in a board.)
+│       │   │   ├── QuoridorGameManager.java        (Manages all the game, basically holds one instance from other classes and orchestrates them.)
+│       │   │   └── QuoridorUser.java               (Stores player information such as username, score, and identity (P1, P2))
+│       │   └── quoridor_components/                (Quoridor module)
+│       │       ├── QuoridorBoard.java              (Handles board layout, movement, and wall placement)
+│       │       ├── QuoridorCell.java               (Represents each cell and wall status)
+│       │       ├── QuoridorGameManager.java        (Manages game flow, turn switching, and win detection)
+│       │       ├── QuoridorUser.java               (Stores player info like position and wall count)
+│       │       ├── QuoridorBot.java                (AI player that makes moves and places walls)
+│       │       └── QuoridorPiece.java              (Validates allowed values for Quoridor pieces)
 │       ├── io/                                 
 │       │   ├── Input.java                          (This class handles all input operations in the game.)
+│       │   ├── Animations.java                     (The game launch with animation.)
 │       └── └── Output.java                         (This class handles all output operations in the game. )  
 ├── resources/                     
 │   └── config.properties        (The settings of the game)  
@@ -53,7 +63,7 @@ assignment_2/
 │   └── leaderboard.txt          (Record players' leardeboard)  
 ├── compile.sh                   (Compilation script for the game.)  
 ├── run.sh                       (Running script for the game.)  
-├── README.md                      
+└── README.md                      
 
 
 
@@ -72,7 +82,9 @@ Overall:
 - Seperating the components into subdirectories app, components, core, data, io. 
 - We implememt the GameSelectionManager then we can add more gemes in it in the future.
 - In the Settings class, it enables dynamic configuration by loading properties like board size and supported games from an external file.
-
+- Introduced a Piece abstraction to standardize how game pieces are represented.
+- Added an ArtificialIntelligence interface to support AI-controlled players like QuoridorBot.\
+- 
 
 Sliding Puzzle:
 - Tracks and displays move count in real time.
@@ -94,6 +106,14 @@ Dots and Boxes:
 - Displays the leaderboard and game stats after each game, allows for a
 new game or going back to main menu.
 
+Quoridor:
+- Supports player movement, wall placement, and shortest path validation using BFS.
+- Implements directional wall claiming with ownership tracking and boundary constraints.
+- Includes QuoridorBot, an AI player that makes random legal moves and places walls.
+- Tracks player position and remaining walls in real time.
+- Integrated with leaderboard and game timer and colorful board.
+- Supports both human vs human and human vs AI gameplay.
+
 
 ## Source and Citations
 We have used the following website for our opening animation.
@@ -109,7 +129,7 @@ https://datawookie.dev/blog/2019/04/sliding-puzzle-solvable/
 ---------------------------------------------------------------------------
 Your directions on how to run the code. Make sure to be as thorough as possible! Ideally should resemble the lines below
 
-1. Navigate to the directory "assignment_2" after unzipping the files
+1. Navigate to the directory "assignment_3" after unzipping the files
 2. Run the following instructions:
 
 javac -encoding UTF-8 -d out puzzles/app/*.java puzzles/core/*.java puzzles/io/*.java puzzles/games/sliding_puzzle_components/*.java \
@@ -154,6 +174,7 @@ Output:
 Available games:
 [1] SlidingPuzzle
 [2] DotsAndBoxes
+[3] Quoridor
 Which game would you like to play?
 You can simply type exit to finish the game  >>> 
 
@@ -543,30 +564,30 @@ Input:
 
 Output:
 Leaderboard:
-Username   Total   D&B   SlidingP   D&B_Win   D&B_Loss
---------------------------------------------------------------
-oktay        5       2         2       2        1
-aaaaa        3       2         0       0        1 
-bbbbb        3       2         0       1        0
-oansd        2       2         0       0        2
-2            1       0         1       0        0
-aihsd        1       1         0       1        0
-aisdjnl      1       1         0       1        0
-aodsn        1       1         0       0        1
-asd          1       1         0       1        0
-asfva        1       1         0       0        1
-asifvn       1       1         0       1        0
-asihvd       1       1         0       1        0 
-ffff         1       0         1       0        0
-hakan        1       0         1       0        0
-jaon         1       0         1       0        0
-lin          1       1         0       0        1
-oas          1       1         0       0        1
-ok           1       0         1       0        0
-sdf          1       0         0       0        0
-sp           1       0         1       0        0
-tarik        1       0         1       0        0
-Press enter to continue...
+Username   Total   D&B   SlidingP   D&B_Win   D&B_Loss   Quoridor   Q_Win   Q_Loss
+---------------------------------------------------------------------------------------------
+oktay        5       1         2       1        1       1        1      0
+aaaaa        3       2         0       0        1       0        0      0
+bbbbb        3       2         0       1        0       0        0      0
+oansd        2       2         0       0        2       0        0      0
+456          2       0         0       0        0       2        1      1
+oas          1       1         0       0        1       0        0      0
+trump        1       0         1       0        0       0        0      0
+aisdjnl      1       1         0       1        0       0        0      0
+jaon         1       0         1       0        0       0        0      0
+asifvn       1       1         0       1        0       0        0      0
+ffff         1       0         1       0        0       0        0      0
+2            1       0         1       0        0       0        0      0
+asfva        1       1         0       0        1       0        0      0
+asd          1       1         0       1        0       0        0      0
+sdf          1       0         0       0        0       0        0      0
+asihvd       1       1         0       1        0       0        0      0
+tarik        1       0         1       0        0       0        0      0
+hakan        1       0         1       0        0       0        0      0
+aihsd        1       1         0       1        0       0        0      0
+asdf         1       0         1       0        0       0        0      0
+aodsn        1       1         0       0        1       0        0      0
+ok           1       0         1       0        0       0        0      0
 
 Input:
 (Press "Enter")
@@ -577,16 +598,647 @@ To play a new game type y/Y, to exit press any key >>>
  any other input will end the game.
 
 Input:
-y
+m
+
+Output:
+Available games:
+[1] SlidingPuzzle
+[2] DotsAndBoxes
+[3] Quoridor
+Which game would you like to play?
+You can simply type exit to finish the game  >>>
+
+Input:
+3
+
+Output:
+###########################################################################################################################################
+#                                                                                                                                         #
+#                                                                                                                 #      #   ######     # #
+#         ####      #      #    #####     ######    #####   ####       #####    ######                            #      #   #          # #
+#       ##    ##    #      #  ##     ##   #     #     #     #    #   ##     ##  #     #                           ########   #    #     # #
+#       ##    ##    #      #  ##     ##   #     #     #     #    #   ##     ##  #     #                           #          #    #     # #
+#       ##    ##    #      #  ##     ##   ######      #     #    #   ##     ##  ######                            #   ################### #
+#       ##    ##    #      #  ##     ##   #   #       #     #    #   ##     ##  #   #                             #                     # #
+#       ##    ##    #      #  ##     ##   #    #      #     #    #   ##     ##  #    #                            ########   #######    # #
+#         #### ##    ######     #####     #     #    ###    ####       #####    #     #                           #          #          # #
+#               ##                                                                                                #####  #####     ###### #
+#                                                                                                                                         #
+###########################################################################################################################################
+
+Welcome to the Quoridor Game!
+Quoridor is a two-player strategy game. Reach the opposite side of the board before your opponent.
+Each turn, move your pawn or place a wall to block. Walls span two cells and must leave a path open.
+You can choose 2 option:
+1. You can move your pawn one step in the specified direction, if the path is not blocked by a wall.
+2. You can place a wall by choosing a point. Type H to build a horizontal wall to the right, or V to build a vertical wall downward.
+ Press enter to start...
+
+Input:
+(Press "Enter")
+
+Output:
+Do you want to play against our AI Bot? (y/n): 
+
+Input:
+n
+
+Output:
+Enter Player 1 name:
+
+Input:
+liang
+
+Output:
+Enter Player 2 name:
+
+Input:
+oktay
 
 Output:
 Enter number of rows: 
+
+
+Input:
+5
+
+Output:
+Enter number of columns: 
+
+Input:
+5
+
+Output:
+-------------------------------------------------------------------------------------------------
+Player1: liang (P1) at [0,2] with 10 walls left shortest path to target: 5
+
+-------------------------------------------------------------------------------------------------
+     0   1   2   3   4
+  0 +───+───+───+───+───+
+    │   │   │P1 │   │   │
+  1 +───+───+───+───+───+
+    │   │   │   │   │   │
+  2 +───+───+───+───+───+
+    │   │   │   │   │   │
+  3 +───+───+───+───+───+
+    │   │   │   │   │   │
+  4 +───+───+───+───+───+
+    │   │   │P2 │   │   │
+  5 +───+───+───+───+───+
+-------------------------------------------------------------------------------------------------
+
+Player2: oktay (P2) at [4,2] with 10 walls left shortest path to target: 5
+-------------------------------------------------------------------------------------------------
+Player1 liang's turn(Blue Line). Score: 0
+
+Your options:
+- MOVE <UP|DOWN|LEFT|RIGHT>
+    For example: move right, move down
+
+- WALL <H|V> <row> <col> (You can only choose the yellow line to create the wall.)
+    H places a horizontal line to the right of that point.
+    V places a vertical line below that point.
+    (You can only choose the yellow line to create the wall.)
+    For example: wall h 3 4, wall v 5 6
+Type 'exit' to quit.
+>>>
+
+Input:
+wall h 3 3
+
+Output:
+-------------------------------------------------------------------------------------------------
+Player1: liang (P1) at [0,2] with 9 walls left shortest path to target: 5
+
+-------------------------------------------------------------------------------------------------
+     0   1   2   3   4
+  0 +───+───+───+───+───+
+    │   │   │P1 │   │   │
+  1 +───+───+───+───+───+
+    │   │   │   │   │   │
+  2 +───+───+───+───+───+
+    │   │   │   │   │   │
+  3 +───+───+───+###+###+
+    │   │   │   │   │   │
+  4 +───+───+───+───+───+
+    │   │   │P2 │   │   │
+  5 +───+───+───+───+───+
+-------------------------------------------------------------------------------------------------
+
+Player2: oktay (P2) at [4,2] with 10 walls left shortest path to target: 5
+-------------------------------------------------------------------------------------------------
+Player2 oktay's turn(Red Line). Score: 0
+
+Your options:
+- MOVE <UP|DOWN|LEFT|RIGHT>
+    For example: move right, move down
+
+- WALL <H|V> <row> <col> (You can only choose the yellow line to create the wall.)
+    H places a horizontal line to the right of that point.
+    V places a vertical line below that point.
+    (You can only choose the yellow line to create the wall.)
+    For example: wall h 3 4, wall v 5 6
+Type 'exit' to quit.
+>>>
+
+Input:
+wall v 1 2
+
+Output:
+-------------------------------------------------------------------------------------------------
+Player1: liang (P1) at [0,2] with 9 walls left shortest path to target: 5
+
+-------------------------------------------------------------------------------------------------
+     0   1   2   3   4
+  0 +───+───+───+───+───+
+    │   │   │P1 │   │   │
+  1 +───+───+───+───+───+
+    │   │   #   │   │   │
+  2 +───+───+───+───+───+
+    │   │   #   │   │   │
+  3 +───+───+───+###+###+
+    │   │   │   │   │   │
+  4 +───+───+───+───+───+
+    │   │   │P2 │   │   │
+  5 +───+───+───+───+───+
+-------------------------------------------------------------------------------------------------
+
+Player2: oktay (P2) at [4,2] with 9 walls left shortest path to target: 5
+-------------------------------------------------------------------------------------------------
+Player1 liang's turn(Blue Line). Score: 0
+
+Your options:
+- MOVE <UP|DOWN|LEFT|RIGHT>
+    For example: move right, move down
+
+- WALL <H|V> <row> <col> (You can only choose the yellow line to create the wall.)
+    H places a horizontal line to the right of that point.
+    V places a vertical line below that point.
+    (You can only choose the yellow line to create the wall.)
+    For example: wall h 3 4, wall v 5 6
+Type 'exit' to quit.
+>>>
+
+Input:
+wall h 4 5
+
+Output:
+Invalid wall placement. Either overlaps or out of bounds.
+
+Input:
+wall v 4 0
+
+Output:
+Invalid wall placement. Either overlaps or out of bounds.
+
+Input:
+move down
+
+Output:
+-------------------------------------------------------------------------------------------------
+Player1: liang (P1) at [1,2] with 9 walls left shortest path to target: 4
+
+-------------------------------------------------------------------------------------------------
+     0   1   2   3   4
+  0 +───+───+───+───+───+
+    │   │   │   │   │   │
+  1 +───+───+───+───+───+
+    │   │   #P1 │   │   │
+  2 +───+───+───+───+───+
+    │   │   #   │   │   │
+  3 +───+───+───+###+###+
+    │   │   │   │   │   │
+  4 +───+───+───+───+───+
+    │   │   │P2 │   │   │
+  5 +───+───+───+───+───+
+-------------------------------------------------------------------------------------------------
+
+Player2: oktay (P2) at [4,2] with 9 walls left shortest path to target: 5
+-------------------------------------------------------------------------------------------------
+Player2 oktay's turn(Red Line). Score: 0
+
+Your options:
+- MOVE <UP|DOWN|LEFT|RIGHT>
+    For example: move right, move down
+
+- WALL <H|V> <row> <col> (You can only choose the yellow line to create the wall.)
+    H places a horizontal line to the right of that point.
+    V places a vertical line below that point.
+    (You can only choose the yellow line to create the wall.)
+    For example: wall h 3 4, wall v 5 6
+Type 'exit' to quit.
+
+Input:
+move up
+
+Output:
+-------------------------------------------------------------------------------------------------
+Player1: liang (P1) at [1,2] with 9 walls left shortest path to target: 6
+
+-------------------------------------------------------------------------------------------------
+     0   1   2   3   4
+  0 +───+───+───+───+───+
+    │   │   │   │   │   │
+  1 +───+───+───+───+───+
+    │   │   #P1 │   │   │
+  2 +───+───+───+───+───+
+    │   │   #   │   │   │
+  3 +───+───+───+###+###+
+    │   │   │P2 │   │   │
+  4 +───+───+───+───+───+
+    │   │   │   │   │   │
+  5 +───+───+───+───+───+
+-------------------------------------------------------------------------------------------------
+
+Player2: oktay (P2) at [3,2] with 9 walls left shortest path to target: 4
+-------------------------------------------------------------------------------------------------
+Player1 liang's turn(Blue Line). Score: 0
+
+Your options:
+- MOVE <UP|DOWN|LEFT|RIGHT>
+    For example: move right, move down
+
+- WALL <H|V> <row> <col> (You can only choose the yellow line to create the wall.)
+    H places a horizontal line to the right of that point.
+    V places a vertical line below that point.
+    (You can only choose the yellow line to create the wall.)
+    For example: wall h 3 4, wall v 5 6
+Type 'exit' to quit.
+
+Input:
+move left
+
+Output:
+Invalid move. Either blocked by wall or out of bounds.
+>>>
+
+Input:
+move down
+
+Output:
+-------------------------------------------------------------------------------------------------
+Player1: liang (P1) at [2,2] with 9 walls left shortest path to target: 7
+
+-------------------------------------------------------------------------------------------------
+     0   1   2   3   4
+  0 +───+───+───+───+───+
+    │   │   │   │   │   │
+  1 +───+───+───+───+───+
+    │   │   #   │   │   │
+  2 +───+───+───+───+───+
+    │   │   #P1 │   │   │
+  3 +───+───+───+###+###+
+    │   │   │P2 │   │   │
+  4 +───+───+───+───+───+
+    │   │   │   │   │   │
+  5 +───+───+───+───+───+
+-------------------------------------------------------------------------------------------------
+
+Player2: oktay (P2) at [3,2] with 9 walls left shortest path to target: 4
+-------------------------------------------------------------------------------------------------
+Player2 oktay's turn(Red Line). Score: 0
+
+Your options:
+- MOVE <UP|DOWN|LEFT|RIGHT>
+    For example: move right, move down
+
+- WALL <H|V> <row> <col> (You can only choose the yellow line to create the wall.)
+    H places a horizontal line to the right of that point.
+    V places a vertical line below that point.
+    (You can only choose the yellow line to create the wall.)
+    For example: wall h 3 4, wall v 5 6
+Type 'exit' to quit.
+>>>
+
+Input:
+move up
+
+Output:
+Invalid move. Either blocked by wall or out of bounds.
+>>>
+
+Input:
+wall v 4 3
+
+Output:
+Invalid wall placement. Either overlaps or out of bounds.
+>>>
+
+...
+
+Output:
+oktay has reached the goal!
+Game Duration: 677 seconds
+Press enter to continue...
+
+Input:
+(Press "Enter")
+
+Output:
+Leaderboard:
+Username   Total   D&B   SlidingP   D&B_Win   D&B_Loss   Quoridor   Q_Win   Q_Loss
+---------------------------------------------------------------------------------------------
+oktay        5       1         2       1        1       1        1      0
+aaaaa        3       2         0       0        1       0        0      0
+bbbbb        3       2         0       1        0       0        0      0
+oansd        2       2         0       0        2       0        0      0
+456          2       0         0       0        0       2        1      1
+oas          1       1         0       0        1       0        0      0
+trump        1       0         1       0        0       0        0      0
+aisdjnl      1       1         0       1        0       0        0      0
+jaon         1       0         1       0        0       0        0      0
+asifvn       1       1         0       1        0       0        0      0
+ffff         1       0         1       0        0       0        0      0
+2            1       0         1       0        0       0        0      0
+asfva        1       1         0       0        1       0        0      0
+asd          1       1         0       1        0       0        0      0
+sdf          1       0         0       0        0       0        0      0
+asihvd       1       1         0       1        0       0        0      0
+tarik        1       0         1       0        0       0        0      0
+hakan        1       0         1       0        0       0        0      0
+aihsd        1       1         0       1        0       0        0      0
+asdf         1       0         1       0        0       0        0      0
+aodsn        1       1         0       0        1       0        0      0
+ok           1       0         1       0        0       0        0      0
+liang        1       0         0       0        0       1        0      1
+Press enter to continue...
+
+Input:
+(Press "Enter")
+
+Output:
+Play again? (y/Y), Main menu (m/M), or any other key to exit >>>
+
+Input:
+m
+
+...
+
+Output:
+Welcome to the Quoridor Game!
+Quoridor is a two-player strategy game. Reach the opposite side of the board before your opponent.
+Each turn, move your pawn or place a wall to block. Walls span two cells and must leave a path open.
+You can choose 2 option:
+1. You can move your pawn one step in the specified direction, if the path is not blocked by a wall.
+2. You can place a wall by choosing a point. Type H to build a horizontal wall to the right, or V to build a vertical wall downward.
+ Press enter to start...
+
+Input:
+(Press "Enter")
+
+Output:
+Do you want to play against our AI Bot? (y/n): 
+
+Enter number of columns: 6
+
+Input:
+y
+
+Output:
+Enter Player 1 name:andrew
+Playing against our AI Bot ALFRED.
+Enter number of rows: 4
+Enter number of columns: 7
+
+Input:
+andrew
+
+Output:
+Playing against our AI Bot ALFRED.
+Enter number of rows: 
+
+Input:
+4
+
+Output:
+Enter number of columns: 
+
+Input:
+7
+
+Output:
+-------------------------------------------------------------------------------------------------
+Player1: andrew (P1) at [0,3] with 10 walls left shortest path to target: 4
+
+-------------------------------------------------------------------------------------------------
+     0   1   2   3   4   5   6
+  0 +───+───+───+───+───+───+───+
+    │   │   │   │P1 │   │   │   │
+  1 +───+───+───+───+───+───+───+
+    │   │   │   │   │   │   │   │
+  2 +───+───+───+───+───+───+───+
+    │   │   │   │   │   │   │   │
+  3 +───+───+───+───+───+───+───+
+    │   │   │   │P2 │   │   │   │
+  4 +───+───+───+───+───+───+───+
+-------------------------------------------------------------------------------------------------
+
+Player2: AI Bot: Alfred (P2) at [3,3] with 10 walls left shortest path to target: 4
+-------------------------------------------------------------------------------------------------
+Player1 andrew's turn(Blue Line). Score: 0
+
+Your options:
+- MOVE <UP|DOWN|LEFT|RIGHT>
+    For example: move right, move down
+
+- WALL <H|V> <row> <col> (You can only choose the yellow line to create the wall.)
+    H places a horizontal line to the right of that point.
+    V places a vertical line below that point.
+    (You can only choose the yellow line to create the wall.)
+    For example: wall h 3 4, wall v 5 6
+Type 'exit' to quit.
+>>>
+
+Input:
+move down
+
+Output:
+-------------------------------------------------------------------------------------------------
+Player1: andrew (P1) at [1,3] with 10 walls left shortest path to target: 3
+
+-------------------------------------------------------------------------------------------------
+     0   1   2   3   4   5   6
+  0 +───+───+───+───+───+───+───+
+    │   │   │   │   │   │   │   │
+  1 +───+───+───+───+───+───+───+
+    │   │   │   │P1 │   │   │   │
+  2 +───+───+───+───+───+───+───+
+    │   │   │   │   │   │   │   │
+  3 +───+───+───+───+───+───+───+
+    │   │   │   │P2 │   │   │   │
+  4 +───+───+───+───+───+───+───+
+-------------------------------------------------------------------------------------------------
+
+Player2: AI Bot: Alfred (P2) at [3,3] with 10 walls left shortest path to target: 4
+-------------------------------------------------------------------------------------------------
+Player2 AI Bot: Alfred's turn(Red Line). Score: 0
+#
+##    T
+###
+####     H
+#####
+######
+#######      I
+########
+#########      N
+##########
+###########
+############      K
+#############
+##############
+###############       I
+################
+#################
+##################
+###################       N
+####################
+#####################
+######################
+#######################       G    .....     
+########################
+#########################
+
+
+
+
+
+            AI Bot: Alfred moves UP
+
+
+
+
+
+                              #########################
+                   E           ########################
+                                #######################
+                     X           ######################
+                                  #####################
+                       E           ####################
+                                    ###################
+                         C           ##################
+                                      #################
+                           U           ################
+                                        ###############
+                             T           ##############
+                                          #############
+                                           ############
+                                 I          ###########
+                                             ##########
+                                              #########
+                                   N           ########
+                                                #######
+                                                 ######
+                                      G....       #####
+                                                   ####
+                                                    ###
+                                                     ##
+                                                      #
+
+-------------------------------------------------------------------------------------------------
+Player1: andrew (P1) at [1,3] with 10 walls left shortest path to target: 3
+
+-------------------------------------------------------------------------------------------------
+     0   1   2   3   4   5   6
+  0 +───+───+───+───+───+───+───+
+    │   │   │   │   │   │   │   │
+  1 +───+───+───+───+───+───+───+
+    │   │   │   │P1 │   │   │   │
+  2 +───+───+───+───+───+───+───+
+    │   │   │   │P2 │   │   │   │
+  3 +───+───+───+───+───+───+───+
+    │   │   │   │   │   │   │   │
+  4 +───+───+───+───+───+───+───+
+-------------------------------------------------------------------------------------------------
+
+Player2: AI Bot: Alfred (P2) at [2,3] with 10 walls left shortest path to target: 3
+-------------------------------------------------------------------------------------------------
+Player1 andrew's turn(Blue Line). Score: 0
+
+Your options:
+- MOVE <UP|DOWN|LEFT|RIGHT>
+    For example: move right, move down
+
+- WALL <H|V> <row> <col> (You can only choose the yellow line to create the wall.)
+    H places a horizontal line to the right of that point.
+    V places a vertical line below that point.
+    (You can only choose the yellow line to create the wall.)
+    For example: wall h 3 4, wall v 5 6
+Type 'exit' to quit.
+>>>
+
+Input:
+move left
+
+Output:
+AI Bot: Alfred moves UP
+
+-------------------------------------------------------------------------------------------------
+     0   1   2   3   4   5   6
+  0 +───+───+───+───+───+───+───+
+    │   │   │   │   │   │   │   │
+  1 +───+───+───+───+───+───+───+
+    │   │   │P1 │P2 │   │   │   │
+  2 +───+───+───+───+───+───+───+
+    │   │   │   │   │   │   │   │
+  3 +───+───+───+───+───+───+───+
+    │   │   │   │   │   │   │   │
+  4 +───+───+───+───+───+───+───+
+-------------------------------------------------------------------------------------------------
+
+Player2: AI Bot: Alfred (P2) at [1,3] with 10 walls left shortest path to target: 1
+-------------------------------------------------------------------------------------------------
+Player1 andrew's turn(Blue Line). Score: 0
+
+Your options:
+- MOVE <UP|DOWN|LEFT|RIGHT>
+    For example: move right, move down
+
+- WALL <H|V> <row> <col> (You can only choose the yellow line to create the wall.)
+    H places a horizontal line to the right of that point.
+    V places a vertical line below that point.
+    (You can only choose the yellow line to create the wall.)
+    For example: wall h 3 4, wall v 5 6
+Type 'exit' to quit.
+>>>
+
+...
+
+Input:
+AI Bot: Alfred moves UP
+
+AI Bot: Alfred has reached the goal!
+Game Duration: 264 seconds
+Press enter to continue...
+
+Output:
+Game played against AI. Leaderboard will not updated.
+Play again? (y/Y), Main menu (m/M), or any other key to exit >>>
 
 Input:
 exit
 
 Output:
-Exiting game. Goodbye!
+
+              ,---------------------------,
+              |  /---------------------\  |
+              | |                       | |
+              | |      See              | |
+              | |         you           | |
+              | |        later!         | |
+              | |                       | |
+              |  \_____________________/  |
+              |___________________________|
+            ,---\_____     []     _______/------,
+          /         /______________\           /|
+        /___________________________________ /  | ___
+        |                                   |   |    )
+        |  _ _ _                 [-------]  |   |   (
+        |  o o o                 [-------]  |  /    _)_
+        |__________________________________ |/     /  /
+    /-------------------------------------/|      ( )/
+  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
+/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ...
 
