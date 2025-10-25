@@ -326,4 +326,18 @@ public class QuoridorBoard extends Board {
     public int getWidth() {
         return colCount;
     }
+
+    // helpers for the bot operations
+    public QuoridorUser getOpponent(QuoridorUser me) {
+        return (me == player1) ? player2 : player1;
+    }
+
+    public int[] getPlayerPosition(QuoridorUser player) {
+        return new int[]{ player.getRow(), player.getCol() };
+    }
+
+    public int getRemainingWalls(QuoridorUser player) {
+        return player.getWallsRemaining();
+    }
+
 }
