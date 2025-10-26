@@ -174,7 +174,7 @@ public class Input{
             String direction = tokens[1];
             boolean success = board.movePlayer(currentPlayer, direction);
             if (success) return true;
-            System.out.println("Invalid move. Either blocked by wall or out of bounds.");
+            System.out.println("Invalid move. Either blocked or out of bounds.");
         } else if (tokens.length == 4 && tokens[0].equals("WALL")) {
             String orientation = tokens[1];
             try {

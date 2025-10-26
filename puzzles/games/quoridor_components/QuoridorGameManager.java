@@ -47,18 +47,17 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
     @Override
     protected void initializePlayers(boolean gameFirstOpen) {
 
-        if (gameFirstOpen) {
-            String name1 = input.readStringOrExit("Enter" + BLUE + " Player 1 " + RESET + "name:");
-            player1 = new QuoridorUser(name1, "P1", false);
-            if (!playAgainstBot) {
-                String name2 = input.readStringOrExit("Enter" + RED + " Player 2 " + RESET + "name:");
-                player2 = new QuoridorUser(name2, "P2", false);
-            } 
-            else {
-                System.out.println("Playing against our AI Bot ALFRED.");
-                player2 = new QuoridorBot("AI Bot: Alfred", "P2");
-            }
+        String name1 = input.readStringOrExit("Enter" + BLUE + " Player 1 " + RESET + "name:");
+        player1 = new QuoridorUser(name1, "P1", false);
+        if (!playAgainstBot) {
+            String name2 = input.readStringOrExit("Enter" + RED + " Player 2 " + RESET + "name:");
+            player2 = new QuoridorUser(name2, "P2", false);
+        } 
+        else {
+            System.out.println("Playing against our AI Bot ALFRED.");
+            player2 = new QuoridorBot("AI Bot: Alfred", "P2");
         }
+        
     }
 
     //create board(dimensions)
