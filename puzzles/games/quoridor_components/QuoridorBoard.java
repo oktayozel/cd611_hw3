@@ -93,7 +93,7 @@ public class QuoridorBoard extends Board {
         }
 
         else if (direction.equals("V")) {
-            if (row < 0 || row >= rowCount - 1 || col <= 0 || col >= colCount - 1)
+            if (row < 0 || row >= rowCount - 1 || col <= 0 || col >= colCount)
                 return false;
 
             cell1 = board[row][col];
@@ -138,7 +138,7 @@ public class QuoridorBoard extends Board {
 
 
         System.out.print("  ");
-        for (int j = 0; j < colCount; j++) {
+        for (int j = 0; j <= colCount; j++) {
             System.out.printf("%4d", j);
         }
         System.out.println();

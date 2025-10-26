@@ -169,6 +169,12 @@ public class Output{
     //quoridor's congratulation
     public void displayVictoryMessage(String winnerName, int elapsedTime) {
         clearScreen();
+        System.out.printf(ORANGE + "#" + YELLOW + "      ###   ###   #   #   ###   ###     #   #####   ###     " + ORANGE + "#\n"); 
+        System.out.printf(ORANGE + "#" + YELLOW + "     #     #   #  ##  #  #      #  #   # #    #    #        " + ORANGE + "#\n"); 
+        System.out.printf(ORANGE + "#" + YELLOW + "     #     #   #  # # #  #  ##  ###   #####   #       #     " + ORANGE + "#\n"); 
+        System.out.printf(ORANGE + "#" + YELLOW + "      ###   ###   #  ##   ## #  #  #  #   #   #    ###      " + ORANGE + "#\n"); 
+
+        System.out.println();
         System.out.println("\n" + GREEN + winnerName + RESET + " has reached the goal!");
         System.out.printf("Game Duration: %d seconds\n", elapsedTime);
         input.readLineOrExit("Press enter to continue...");
