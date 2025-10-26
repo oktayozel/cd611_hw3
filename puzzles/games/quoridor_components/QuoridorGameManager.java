@@ -56,6 +56,7 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
             System.out.println("Playing against our AI Bot ALFRED.");
             player2 = new QuoridorBot("AI Bot: Alfred", "P2");
         }
+        
     }
 
     //create board(dimensions)

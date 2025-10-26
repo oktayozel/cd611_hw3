@@ -88,7 +88,7 @@ public class Output{
             System.out.println("Quoridor is a two-player strategy game. Reach the opposite side of the board before your opponent. ");
             System.out.println("Each turn, move your pawn or place a wall to block. Walls span two cells and must leave a path open.");
             System.out.println("You can choose 2 option:");
-            System.out.println(ORANGE + "1. You can move your pawn one step in the specified direction, if the path is not blocked by a wall." + RESET);
+            System.out.println(ORANGE + "1. You can move your pawn one step in the specified direction, if the path is not blocked." + RESET);
             System.out.println(ORANGE + "2. You can place a wall by choosing a point. Type H to build a horizontal wall to the right, or V to build a vertical wall downward." + RESET);
             input.readLineOrExit(" Press enter to start...");
         }
