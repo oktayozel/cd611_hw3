@@ -47,7 +47,7 @@ public class QuoridorBot extends QuoridorUser implements ArtificialIntelligence 
         opponentCol = pos[1];
     }
 
-    // 2) pick what to do (move:wall = 2:1), with a “no walls left” guard
+    //  pick what to do move:wall = 2:1 ratio meaning gives 2 moves for every wall placed,
     @Override
     public void calculateNextMove() {
         tryMove = (rng.nextInt(3) < 2); // 2/3 probability to move 1/3 probability to place a wall
@@ -56,7 +56,7 @@ public class QuoridorBot extends QuoridorUser implements ArtificialIntelligence 
         }
     }
 
-    // 3) execute: move toward finish; else place a wall just ahead of opponent
+    // execute: move toward finish else place a wall just ahead of opponent
     @Override
     public void makeMove() {
         evaluateBoard();

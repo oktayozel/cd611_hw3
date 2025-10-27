@@ -188,7 +188,7 @@ public class Input{
 
                 boolean success = board.claimWall(row, col, orientation, currentPlayer);
                 if (success) return true;
-                System.out.println("Invalid wall placement. Either overlaps or out of bounds.");
+                System.out.println("Invalid wall placement. Either overlaps or out of bounds or blocks a path.");
             } catch (NumberFormatException e) {
                 System.out.println("Invalid coordinates. Please enter numeric row and column.");
             }

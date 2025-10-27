@@ -79,6 +79,7 @@ public class QuoridorBoard extends Board {
     // claims a wall on the board if the move is valid
     public boolean claimWall(int row, int col, String direction, QuoridorUser player) {
         if (player.getWallsRemaining() <= 0) return false;
+        if (direction == null) return false;// guard
 
         direction = direction.toUpperCase();
         QuoridorCell cell1, cell2;
@@ -97,6 +98,18 @@ public class QuoridorBoard extends Board {
             cell2.setTopWall(true);
             cell1.setTopWallOwner(player.getId());
             cell2.setTopWallOwner(player.getId());
+            
+            boolean ok = (calculateShortestPathLength(player1) != -1) &&
+             (calculateShortestPathLength(player2) != -1);
+
+            if (!ok) {
+                //  Revert
+                cell1.setTopWall(false);
+                cell2.setTopWall(false);
+                cell1.setTopWallOwner("");
+                cell2.setTopWallOwner("");
+                return false;
+            }
         }
 
         else if (direction.equals("V")) {
@@ -113,6 +126,18 @@ public class QuoridorBoard extends Board {
             cell2.setLeftWall(true);
             cell1.setLeftWallOwner(player.getId());
             cell2.setLeftWallOwner(player.getId());
+
+            boolean ok = (calculateShortestPathLength(player1) != -1) &&
+             (calculateShortestPathLength(player2) != -1);
+
+            if (!ok) {
+                //  Revert 
+                cell1.setLeftWall(false);
+                cell2.setLeftWall(false);
+                cell1.setLeftWallOwner("");
+                cell2.setLeftWallOwner("");
+                return false;
+            }
         }
 
         else {
@@ -288,17 +313,19 @@ public class QuoridorBoard extends Board {
                 return false;
             }
         } 
-        // check if we can move up
+        // check if we can move down
         else if (dr == 1 && dc == 0) {
             if (nextCell.hasTopWall()){
                 return false;
             }
         } 
+        // check if we can move left
         else if (dr == 0 && dc == -1) {
             if (currentCell.hasLeftWall()){
                 return false;
             }
         } 
+        // check if we can move right
         else if (dr == 0 && dc == 1) {  
             if (nextCell.hasLeftWall()){
                 return false;
