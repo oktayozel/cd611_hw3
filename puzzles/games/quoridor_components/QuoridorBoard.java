@@ -4,6 +4,11 @@ import java.util.Queue;
 import puzzles.core.Board;
 import puzzles.core.Cell;
 
+/*
+ * this class represents the game board for the quoridor game.
+ * it manages the grid of boxes handles edge claims checks for completed boxes
+ * and displays the current state of the board. Basically holds everything related to the board.
+ */
 public class QuoridorBoard extends Board {
     private final int rowCount;
     private final int colCount;
@@ -11,6 +16,7 @@ public class QuoridorBoard extends Board {
     private QuoridorUser player1;
     private QuoridorUser player2;
 
+    // Constructor
     public QuoridorBoard(int rowCount, int colCount, QuoridorUser player1, QuoridorUser player2) {
         super(new QuoridorCell[rowCount][colCount]);
         this.rowCount = rowCount;
@@ -19,7 +25,7 @@ public class QuoridorBoard extends Board {
         this.player2 = player2;
         this.board = initializeBoard();
     }
-
+    // initializes the board by creating QuoridorCell objects for each position
     private QuoridorCell[][] initializeBoard() {
         QuoridorCell[][] board = new QuoridorCell[rowCount][colCount];
         for (int i = 0; i < rowCount; i++) {
@@ -34,7 +40,7 @@ public class QuoridorBoard extends Board {
         player2.setPosition(rowCount - 1, mid);
         return board;
     }
-
+    // moves the player in the specified direction if the move is valid
     public boolean movePlayer(QuoridorUser player, String direction) {
         direction = direction.trim().toUpperCase();
         int pr = player.getRow();
@@ -70,6 +76,7 @@ public class QuoridorBoard extends Board {
         return true;
     }
 
+    // claims a wall on the board if the move is valid
     public boolean claimWall(int row, int col, String direction, QuoridorUser player) {
         if (player.getWallsRemaining() <= 0) return false;
 
@@ -116,10 +123,11 @@ public class QuoridorBoard extends Board {
         return true;
     }
 
+    // checks if the player has reached their goal row
     public boolean hasPlayerReachedGoal(QuoridorUser player) {
         return (player == player1 && player.getRow() == rowCount - 1) || (player == player2 && player.getRow() == 0);
     }
-
+    // displays the current state of the board
     public void display() {
         String RESET = "\u001B[0m";
         String PURPLE = "\u001B[35m";
@@ -132,17 +140,18 @@ public class QuoridorBoard extends Board {
         String borderEdge = YELLOW + "───" + RESET;  
         String borderEdgePlain = "───";
 
+        // prints player 1 situation
         System.out.println("-------------------------------------------------------------------------------------------------");
         System.out.println(BLUE + "Player1: " + RESET + player1 + " Shortest path to target: " + calculateShortestPathLength(player1) + "\n");
         System.out.println("-------------------------------------------------------------------------------------------------");
 
-
+        // prints column headers
         System.out.print("  ");
         for (int j = 0; j <= colCount; j++) {
             System.out.printf("%4d", j);
         }
         System.out.println();
-
+        // prints rows
         for (int i = 0; i < rowCount; i++) {
             //row i
             System.out.printf("%3d ", i);
@@ -200,7 +209,8 @@ public class QuoridorBoard extends Board {
             
             System.out.println("│");
 
-        }
+        }  
+        // prints bottom border
 
         System.out.printf("%3d ", rowCount);
         System.out.print(borderCorner);
@@ -208,7 +218,7 @@ public class QuoridorBoard extends Board {
             System.out.print(borderEdgePlain + borderCorner);
         }
         System.out.println();
-
+        // prints player 2 situation
         System.out.println("-------------------------------------------------------------------------------------------------");
         System.out.println(RED + "\nPlayer2: "+ RESET + player2 + " Shortest path to target: " + calculateShortestPathLength(player2));
         System.out.println("-------------------------------------------------------------------------------------------------");
@@ -216,7 +226,9 @@ public class QuoridorBoard extends Board {
 
     }
 
-
+    // calculates the shortest path length for the given player if 
+    // such a path does not exist returns -1
+    // uses bfs to do that
     public int calculateShortestPathLength(QuoridorUser player){
         final int goalRow = (player == player1) ? (rowCount-1) : 0;
 
@@ -235,7 +247,7 @@ public class QuoridorBoard extends Board {
 
         final int[] row_direction = {-1,1,0,0};
         final int[] col_direction = {0,0,-1,1};
-
+        // bfs loop
         while(!q.isEmpty()) {
             int[] cur = q.poll();
             int r = cur[0];
@@ -257,7 +269,7 @@ public class QuoridorBoard extends Board {
         return -1;
     }
 
-
+    // checks if the player can move from (r, c) to (next_row, next_col)
     public boolean canStepHelper(int r, int c, int next_row, int next_col) {
         if(next_row < 0 || next_row >= rowCount || next_col < 0 || next_col >= colCount) {
             return false;
@@ -270,12 +282,13 @@ public class QuoridorBoard extends Board {
 
 
         int dr = next_row - r, dc = next_col - c;
-
+        // check if we can move up
         if (dr == -1 && dc == 0) { 
             if (currentCell.hasTopWall()){
                 return false;
             }
         } 
+        // check if we can move up
         else if (dr == 1 && dc == 0) {
             if (nextCell.hasTopWall()){
                 return false;
@@ -299,6 +312,8 @@ public class QuoridorBoard extends Board {
         return true;
     }
 
+
+    // getters for board dimensions and cells
     public int getRowCount() {
         return rowCount;
     }

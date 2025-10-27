@@ -7,6 +7,10 @@ import puzzles.core.Settings;
 import puzzles.io.Input;
 import puzzles.io.Output;
 
+
+/* This class manages the Quoridor game.
+* It handles game initialization, the main game loop, and checking for game completion.
+*/
 public class QuoridorGameManager extends GameManager implements Multiplayer{
 
     private QuoridorBoard board;
@@ -23,7 +27,7 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
     private static final String BLUE = "\u001B[34m";
     private static final String RESET = "\u001B[0m";
     private static final String YELLOW = "\u001B[33m";
-
+    //constructor
     public QuoridorGameManager(Settings settings) {
         super();
         this.input = new Input();
@@ -116,7 +120,7 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
     }
 
 
-
+    // checks if the game has concluded
     @Override
     public boolean isGameEnd() {
         return board.hasPlayerReachedGoal(player1) || board.hasPlayerReachedGoal(player2);
