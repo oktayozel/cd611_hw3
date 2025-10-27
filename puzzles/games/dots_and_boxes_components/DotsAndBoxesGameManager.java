@@ -69,7 +69,7 @@ public class DotsAndBoxesGameManager extends GameManager implements Multiplayer 
             leaderBoard.recordDotsAndBoxesResult(player2.getUsername(),true);
         }
         output.displayLeaderboard(leaderBoard);
-        return input.inputYesOrExit("\n\n\n\nTo play a new game type y/Y, to exit press any key >>> \n To go back to main menu type m/M to \n any other input will end the game.");
+        return input.inputYesOrExit("\n\n\n\nTo play a new game type y/Y, to exit press any key >>> \n To go back to main menu type N/n to \n any other input will end the game.");
     }
     // checks if the game has ended.
      @Override

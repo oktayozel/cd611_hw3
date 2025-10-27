@@ -74,7 +74,7 @@ public class SlidingPuzzleGameManager extends GameManager {
         output.displayLeaderboard(leaderBoard);
 
         user.resetMoveCount();
-        return input.inputYesOrExit("\n\n\nTo play a new game type y/Y, to exit press any key >>> \nTo go back to main menu type m/M to\n any other input will end the game.");
+        return input.inputYesOrExit("\n\n\nTo play a new game type y/Y, to exit press any key >>> \nTo go back to main menu type n/N to\n any other input will end the game.");
     }
 
     // Check if the game has ended by verifying if the board is in the solved state.
