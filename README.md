@@ -68,7 +68,12 @@ assignment_3/
 ├── run.sh                       (Running script for the game.)  
 └── README.md                      
 
-
+## Analysis of Previous Assignment:
+1. Retained core abstractions such as Board, Cell, GameManager, User, and LeaderBoard to ensure consistency and reuse.
+2. Introduced Piece as a new abstract class to unify how game pieces are represented across different games.
+3. Added ArtificialIntelligence interface to support AI-controlled players like QuoridorBot.
+4. Refactored folder structure to group game-specific components under games/, improving organization and maintainability.
+5. Implemented GameSelectionManager to dynamically load and run supported games, making the system extensible for future variants.
 
 ## Notes
 ---------------------------------------------------------------------------
