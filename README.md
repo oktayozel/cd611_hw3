@@ -139,8 +139,7 @@ Your directions on how to run the code. Make sure to be as thorough as possible!
 1. Navigate to the directory "assignment_3" after unzipping the files
 2. Run the following instructions:
 
-javac -encoding UTF-8 -d out puzzles/app/*.java puzzles/core/*.java puzzles/io/*.java puzzles/games/sliding_puzzle_components/*.java \
-&& cp puzzles/resources/config.properties out/
+javac -encoding UTF-8 -d out puzzles/app/*.java puzzles/core/*.java puzzles/io/*.java puzzles/games/sliding_puzzle_components/*.java && cp puzzles/resources/config.properties out/
 
 
 java -cp out -Dfile.encoding=UTF-8 puzzles.app.Main
@@ -309,7 +308,7 @@ Input:
 
 Output:
 To play a new game type y/Y, to exit press any key >>> 
-To go back to main menu type m/M to
+To go back to main menu type n/N to
  any other input will end the game.
 
 Input:
@@ -601,7 +600,7 @@ Input:
 
 Output:
 To play a new game type y/Y, to exit press any key >>>
- To go back to main menu type m/M to
+ To go back to main menu type n/N to
  any other input will end the game.
 
 Input:
@@ -974,7 +973,7 @@ Input:
 (Press "Enter")
 
 Output:
-Play again? (y/Y), Main menu (m/M), or any other key to exit >>>
+Play again? (y/Y), Main menu (n/N), or any other key to exit >>>
 
 Input:
 m
@@ -1219,7 +1218,7 @@ Press enter to continue...
 
 Output:
 Game played against AI. Leaderboard will not updated.
-Play again? (y/Y), Main menu (m/M), or any other key to exit >>>
+Play again? (y/Y), Main menu (n/N), or any other key to exit >>>
 
 Input:
 exit

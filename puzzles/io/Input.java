@@ -213,6 +213,8 @@ public class Input{
         if (input.equals("N")){
             return false;
         }
+        
+
         System.out.println("Exiting game. Goodbye!");
         System.exit(0);
         return false;

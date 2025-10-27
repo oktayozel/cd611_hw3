@@ -129,8 +129,15 @@ public class LeaderBoard {
 
         Collections.sort(list, new Comparator<Stats>() {
             @Override public int compare(Stats a, Stats b) {
-                if (b.total != a.total) return b.total - a.total; // desc by total
-                return 1;
+                int cmp = Integer.compare(b.total, a.total);
+                if (cmp != 0) return cmp;
+
+                int aWins = a.dnbWins + a.quoridorWins;
+                int bWins = b.dnbWins + b.quoridorWins;
+                cmp = Integer.compare(bWins, aWins);
+                if (cmp != 0) return cmp;
+
+                return a.username.compareToIgnoreCase(b.username); // deterministic tie-breaker
             }
         });
 
