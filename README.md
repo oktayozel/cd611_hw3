@@ -114,6 +114,9 @@ Quoridor:
 - Integrated with leaderboard and game timer and colorful board.
 - Supports both human vs human and human vs AI gameplay.
 
+We have changed the Board from interface to abstract class so that it better follows the logical representation in the mind. Also We have added Artificial Intelligence and Multiplayer interface. We have an AI bot which implements the artifical intelligence class. Also our multiplayer games are implementing the Multiplayer class.
+
+Now we have more vivid and advanced UI. You can play against AI and enjoy the advanced leaderboard features.
 
 ## Source and Citations
 We have used the following website for our opening animation.
@@ -122,6 +125,7 @@ I have used the "build it (by randomly moving tiles from a known solvable config
 
 https://datawookie.dev/blog/2019/04/sliding-puzzle-solvable/
 
+https://www.crazygames.com/game/quoridor
 
 
 
