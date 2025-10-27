@@ -116,7 +116,7 @@ public class QuoridorGameManager extends GameManager implements Multiplayer{
             System.out.println("Game played against AI. Leaderboard will not updated.");
         }
 
-        return input.inputYesOrExit("\nPlay again? (y/Y), Main menu (m/M), or any other key to exit >>> ");
+        return input.inputYesOrExit("\nPlay again? (y/Y), Main menu (n/N), or any other key to exit >>> ");
     }
 
 
